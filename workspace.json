@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "synctube-client": "apps/synctube-client",
+    "synctube-client-e2e": "apps/synctube-client-e2e"
+  }
+}
