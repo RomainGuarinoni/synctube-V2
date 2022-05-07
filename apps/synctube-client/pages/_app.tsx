@@ -1,7 +1,8 @@
 import Head from 'next/head';
+import type { AppProps } from 'next/app';
 import '../style/default.css';
 
-import type { AppProps } from 'next/app';
+import { ThemeProvider } from '../context/ThemeContext';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -10,7 +11,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>Synctube V2</title>
       </Head>
       <main className="app">
-        <Component {...pageProps} />
+        <ThemeProvider>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </main>
     </>
   );
