@@ -21,13 +21,14 @@ function ThemeProvider({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
     if (
       window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+      window.matchMedia('(prefers-color-scheme: light)').matches
     ) {
+      // TODO CHANGE THIS
       setTheme('dark');
     }
   }, []);

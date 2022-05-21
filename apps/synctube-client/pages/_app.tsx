@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
-import '../style/default.css';
+import '../style/global.css';
 
 import { ThemeProvider } from '../context/ThemeContext';
+import { AppLayout } from '../layout/App';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,7 +13,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
       </Head>
       <main className="app">
         <ThemeProvider>
-          <Component {...pageProps} />
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
         </ThemeProvider>
       </main>
     </>
