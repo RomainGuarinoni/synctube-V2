@@ -20,7 +20,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "synctube-client:build",
-        "dev": true
+        "dev": true,
+        "proxyConfig": "apps/synctube-client/proxy.conf.json"
       },
       "configurations": {
         "development": {

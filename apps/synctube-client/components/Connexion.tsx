@@ -14,7 +14,7 @@ export function Connexion({ connexions }: ConnexionProps): JSX.Element {
     <div className="min-w-[7em] flex justify-end">
       <p
         className={`font-normal ${
-          theme === 'dark' ? 'text-white' : 'text-zinc-800'
+          theme === 'dark' ? 'text-zinc-400' : 'text-zinc-800'
         }  items-center hidden lg:flex`}
       >
         <span className="font-weight text-red-500 text-lg mx-2">

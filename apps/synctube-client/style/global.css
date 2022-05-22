@@ -3,24 +3,3 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-:root {
-  --red: #ff0001;
-  --light: #ffffff;
-  --dark: #121212;
-}
-
-* {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.dark-background {
-  background: var(--dark);
-}
-
-.light-background {
-  background: var(--light);
-}

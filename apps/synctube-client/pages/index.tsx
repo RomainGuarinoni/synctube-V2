@@ -3,7 +3,6 @@ import { useTheme } from '../context/ThemeContext';
 export default function Index(): JSX.Element {
   const { theme } = useTheme();
 
-  return (
-    <p className="flex items-center justify-center h-full w-full">hello</p>
-  );
+  // TODO update the return if the user is already logged in
+  return <p className="text-zinc-400">INDEDX</p>;
 }

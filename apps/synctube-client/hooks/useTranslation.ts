@@ -17,12 +17,8 @@ export function useTranslation(): translationKeys {
   );
 
   useEffect(() => {
-    console.log('locale', locale);
-
     setTranslation(AppTranslation[locale as typeof LOCALES[number]]);
   }, [locale]);
-
-  console.log(translation);
 
   return translation;
 }
