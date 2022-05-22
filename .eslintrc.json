@@ -22,7 +22,14 @@
           }
         ],
 
-        "import/no-unresolved": "error",
+        "import/no-unresolved": [
+          "error",
+          {
+            "node": {
+              "extensions": [".ts", ".tsx"]
+            }
+          }
+        ],
         "import/order": "error"
       }
     },

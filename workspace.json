@@ -3,6 +3,7 @@
   "projects": {
     "synctube-client": "apps/synctube-client",
     "synctube-client-e2e": "apps/synctube-client-e2e",
-    "synctube-server": "apps/synctube-server"
+    "synctube-server": "apps/synctube-server",
+    "types": "libs/types"
   }
 }

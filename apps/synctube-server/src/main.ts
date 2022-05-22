@@ -1,18 +1,24 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
+import 'dotenv/config';
 import * as express from 'express';
+import * as cors from 'cors';
+
+import { loginRouter } from './routes/login';
+import { log } from './middlewares/log';
 
 const app = express();
 
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to synctube-server!' });
+const PORT = process.env.port || 3333;
+
+app.use(express.json());
+
+app.use(cors({ origin: 'http://localhost:4200' }));
+
+app.use(log);
+
+app.use('/api/login', loginRouter);
+
+const server = app.listen(PORT, () => {
+  console.log(`Listening at http://localhost:${PORT}`);
 });
 
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
 server.on('error', console.error);
