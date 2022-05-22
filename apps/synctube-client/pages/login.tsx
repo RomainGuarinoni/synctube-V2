@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Button } from '../components/Button';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
+import { Button } from '../components/Button';
 import { Loader } from '../components/Loader';
 import { useTranslation } from '../hooks/useTranslation';
 import { API } from '../api';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+
 import { setCookie } from '../utils/setCookie';
-import Cookies from 'js-cookie';
 
 export default function Login() {
   const { login } = useTranslation();

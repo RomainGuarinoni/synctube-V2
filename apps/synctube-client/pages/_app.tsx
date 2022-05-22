@@ -4,6 +4,7 @@ import '../style/global.css';
 
 import { ThemeProvider } from '../context/ThemeContext';
 import { AppLayout } from '../layout/App';
+import { RouteGuard } from '../routes/RouteGuard';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,11 +13,13 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>Synctube V2</title>
       </Head>
       <main className="app">
-        <ThemeProvider>
-          <AppLayout>
-            <Component {...pageProps} />
-          </AppLayout>
-        </ThemeProvider>
+        <AppLayout>
+          <RouteGuard>
+            <ThemeProvider>
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </RouteGuard>
+        </AppLayout>
       </main>
     </>
   );

@@ -8,7 +8,7 @@ export type ThemeContext = {
 };
 
 const ThemeContext = createContext<ThemeContext>({
-  theme: 'light',
+  theme: 'dark',
   setTheme: () => {
     return;
   },
@@ -29,7 +29,7 @@ function ThemeProvider({
       window.matchMedia('(prefers-color-scheme: light)').matches
     ) {
       // TODO CHANGE THIS
-      setTheme('dark');
+      setTheme('light');
     }
   }, []);
 
