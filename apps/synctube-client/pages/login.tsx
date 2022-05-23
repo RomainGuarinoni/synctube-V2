@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 
 import { Button } from '../components/Button';
@@ -22,7 +21,7 @@ export default function Login() {
     setGoogleLoading(true);
 
     try {
-      const redirect_url = await API.login.LoginWithGoogle();
+      const redirect_url = await API.LoginWithGoogle();
 
       window.location.href = redirect_url;
     } catch (err) {
@@ -36,7 +35,7 @@ export default function Login() {
 
     async function getCredentialsFromCode(code: string) {
       try {
-        const tokens = await API.login.GetAuthTokens(code);
+        const tokens = await API.GetAuthTokens(code);
 
         console.log(tokens);
 
@@ -45,13 +44,6 @@ export default function Login() {
           tokens.refresh_token,
           { isSession: false },
         );
-
-        setCookie(
-          process.env.NEXT_PUBLIC_ACCESS_TOKEN_COOKIE as string,
-          tokens.access_token,
-        );
-
-        Cookies.set('coucou', 'o');
 
         router.push('/index');
       } catch (err) {

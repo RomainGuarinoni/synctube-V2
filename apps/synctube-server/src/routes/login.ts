@@ -2,9 +2,9 @@ import * as express from 'express';
 
 import { login, redirectToGoogleAuthPrompt } from '../controllers/login';
 
-const loginRouter = express.Router();
+const router = express.Router();
 
-loginRouter.get('/', redirectToGoogleAuthPrompt);
-loginRouter.post('/', login);
+router.get('/', redirectToGoogleAuthPrompt);
+router.post('/', login);
 
-export { loginRouter };
+export { router as loginRouter };

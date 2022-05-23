@@ -1,22 +1,20 @@
+import {
+  LoginResponse,
+  RedirectToGooglAuthPromptResponse,
+} from '@synctube-v2/types';
+
 import { Axios } from './axios';
 
-interface Credential {
-  access_token: string;
-  scope: string;
-  token_type: string;
-  refresh_token: string;
-}
-
 export async function LoginWithGoogle(): Promise<string> {
-  const res = await Axios.get('/login');
+  const { data } = await Axios.get<RedirectToGooglAuthPromptResponse>('/login');
 
-  return res.data.redirect_url;
+  return data.redirect_url;
 }
 
-export async function GetAuthTokens(code: string): Promise<Credential> {
-  const response = await Axios.post('/login', {
+export async function GetAuthTokens(code: string): Promise<LoginResponse> {
+  const { data } = await Axios.post<LoginResponse>('/login', {
     code,
   });
 
-  return response.data.token.tokens;
+  return data;
 }

@@ -3,6 +3,8 @@ import * as express from 'express';
 import * as cors from 'cors';
 
 import { loginRouter } from './routes/login';
+import { refreshTokenRouter } from './routes/refreshToken';
+
 import { log } from './middlewares/log';
 
 const app = express();
@@ -16,6 +18,7 @@ app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(log);
 
 app.use('/api/login', loginRouter);
+app.use('/api/refreshtoken', refreshTokenRouter);
 
 const server = app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);

@@ -1,49 +1,36 @@
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Loader } from '../components/Loader';
+import { useAuth } from '../context/AuthContext';
 
 interface RouteGuardProps {
   children: React.ReactNode;
 }
 
-type AuthState = 'authenticated' | 'unauthenticated';
-
 const publicPath = ['/login'];
 
 export function RouteGuard({ children }: RouteGuardProps) {
+  const { loading, authenticated } = useAuth();
   const router = useRouter();
-  const [authState, setAuthState] = useState<AuthState>();
-  const [loading, setLoading] = useState(true);
-
-  const checkPath = useCallback(() => {
-    setLoading(true);
-
-    const refreshToken = Cookies.get(
-      process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE as string,
-    );
-
-    setAuthState(refreshToken ? 'authenticated' : 'unauthenticated');
-
-    const path = router.pathname;
-
-    if (authState === 'authenticated' && publicPath.includes(path)) {
-      router.push('/');
-      setLoading(false);
-
-      return;
-    }
-
-    if (authState === 'unauthenticated' && !publicPath.includes(path)) {
-      router.push('/login');
-      setLoading(false);
-
-      return;
-    }
-    setLoading(false);
-  }, [router, authState]);
 
   useEffect(() => {
+    async function checkPath() {
+      if (loading) {
+        return;
+      }
+
+      const path = router.pathname;
+
+      if (authenticated && publicPath.includes(path)) {
+        router.push('/');
+        return;
+      }
+
+      if (!authenticated && !publicPath.includes(path)) {
+        router.push('/login');
+        return;
+      }
+    }
     checkPath();
 
     router.events.on('routeChangeComplete', checkPath);
@@ -51,7 +38,7 @@ export function RouteGuard({ children }: RouteGuardProps) {
     return () => {
       router.events.off('routeChangeComplete', checkPath);
     };
-  }, [checkPath, router.events]);
+  }, [router, authenticated, loading]);
 
   return (
     <>
