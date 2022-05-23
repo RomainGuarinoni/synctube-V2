@@ -6,10 +6,12 @@ import { Loader } from '../components/Loader';
 import { useTranslation } from '../hooks/useTranslation';
 import { API } from '../api';
 
-import { setCookie } from '../utils/setCookie';
+import { setCookie } from '../utils/cookie';
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const { login } = useTranslation();
+  const { setAccessToken, setAuthenticated, setProfil } = useAuth();
 
   const router = useRouter();
 
@@ -37,13 +39,17 @@ export default function Login() {
       try {
         const tokens = await API.GetAuthTokens(code);
 
-        console.log(tokens);
-
         setCookie(
           process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE as string,
           tokens.refresh_token,
           { isSession: false },
         );
+
+        setAccessToken(tokens.access_token);
+
+        setProfil(tokens.profil);
+
+        setAuthenticated(true);
 
         router.push('/index');
       } catch (err) {

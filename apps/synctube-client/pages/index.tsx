@@ -1,8 +1,15 @@
-import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Index(): JSX.Element {
-  const { theme } = useTheme();
-
-  // TODO update the return if the user is already logged in
-  return <p className="text-zinc-400">INDEDX</p>;
+  const { profil } = useAuth();
+  return (
+    <div className="text-zinc-400">
+      {Object.entries(profil).map(([k, v]) => (
+        <p key={k}>
+          {' '}
+          <strong> {k} </strong> : {v}{' '}
+        </p>
+      ))}
+    </div>
+  );
 }

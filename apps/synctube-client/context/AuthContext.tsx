@@ -1,6 +1,8 @@
+import { Profil } from '@synctube-v2/types';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { API } from '../api/index';
+import { removeCookie } from '../utils/cookie';
 
 type CreateContextValue = {
   loading: boolean;
@@ -8,6 +10,8 @@ type CreateContextValue = {
   setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   accessToken: string;
   setAccessToken: React.Dispatch<React.SetStateAction<string>>;
+  profil: Profil;
+  setProfil: React.Dispatch<React.SetStateAction<Profil>>;
 };
 
 const AuthContext = createContext<CreateContextValue>({
@@ -20,6 +24,10 @@ const AuthContext = createContext<CreateContextValue>({
   setAccessToken: () => {
     return;
   },
+  profil: {} as Profil,
+  setProfil: () => {
+    return;
+  },
 });
 
 const { Provider } = AuthContext;
@@ -28,6 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState<string>('');
+  const [profil, setProfil] = useState<Profil>({} as Profil);
 
   useEffect(() => {
     async function verifyUserAuthentification() {
@@ -42,11 +51,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const newAccessToken = await API.refreshAccessToken(refreshToken);
+      try {
+        const newAccessToken = await API.refreshAccessToken(refreshToken);
 
-      setAccessToken(newAccessToken);
-      setLoading(false);
-      setAuthenticated(true);
+        setAccessToken(newAccessToken);
+        setLoading(false);
+        setAuthenticated(true);
+      } catch (err) {
+        removeCookie(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE as string);
+
+        setLoading(false);
+        setAuthenticated(false);
+      }
     }
 
     verifyUserAuthentification();
@@ -60,6 +76,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setAuthenticated,
         accessToken,
         setAccessToken,
+        profil,
+        setProfil,
       }}
     >
       {children}

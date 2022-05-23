@@ -15,3 +15,7 @@ export function setCookie(
     ...(opts.isSession ? {} : { expires: 360 }),
   });
 }
+
+export function removeCookie(name: string) {
+  Cookies.remove(name);
+}
