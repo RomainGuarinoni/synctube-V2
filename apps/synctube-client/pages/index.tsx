@@ -1,15 +1,14 @@
 import { useAuth } from '../context/AuthContext';
 
 export default function Index(): JSX.Element {
-  const { profil } = useAuth();
+  const {
+    authState: { profil },
+  } = useAuth();
+
   return (
     <div className="text-zinc-400">
-      {Object.entries(profil).map(([k, v]) => (
-        <p key={k}>
-          {' '}
-          <strong> {k} </strong> : {v}{' '}
-        </p>
-      ))}
+      <img src={profil?.picture} alt="preofil image" />
+      {profil?.familyName} {profil?.givenName}
     </div>
   );
 }

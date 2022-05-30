@@ -4,12 +4,6 @@ import {
 } from '@synctube-v2/types';
 
 import type { Request, Response } from 'express';
-import { oAuth2Client } from '../auth/OAuthClient';
-
-const SCOPE = [
-  'https://www.googleapis.com/auth/youtube.force-ssl',
-  'https://www.googleapis.com/auth/userinfo.profile',
-];
 
 export const login = async (req: Request, res: Response) => {
   const code = req.body.code as string | undefined;

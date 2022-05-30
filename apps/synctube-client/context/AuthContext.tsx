@@ -1,31 +1,52 @@
 import { Profil } from '@synctube-v2/types';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import Cookies from 'js-cookie';
-import { API } from '../api/index';
-import { removeCookie } from '../utils/cookie';
+import { REFRESH_TOKEN_LOCATION } from '../config/cookie';
+import { PROFIL_LOCATION } from '../config/localStorage';
+import { LoginErrors } from '../errors/LoginErrors';
+import { setCookie } from '../utils/cookie';
+import { OAuthClient } from '../auth/OAuthClient';
+
+type AuthState = {
+  profil: Profil | null;
+  loading: boolean;
+  accessToken: string;
+};
 
 type CreateContextValue = {
-  loading: boolean;
-  authenticated: boolean;
-  setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-  accessToken: string;
-  setAccessToken: React.Dispatch<React.SetStateAction<string>>;
-  profil: Profil;
-  setProfil: React.Dispatch<React.SetStateAction<Profil>>;
+  authState: AuthState;
+  setAuthState: React.Dispatch<React.SetStateAction<AuthState>>;
+  isAuthenticated: () => boolean;
+  isLoading: () => boolean;
+  login: (code: string) => Promise<void>;
+  logout: () => Promise<void>;
+  openOAuthPrompt: () => void;
 };
 
 const AuthContext = createContext<CreateContextValue>({
-  loading: true,
-  authenticated: false,
-  setAuthenticated: () => {
+  authState: {
+    profil: null,
+    loading: true,
+    accessToken: '',
+  },
+  setAuthState: () => {
     return;
   },
-  accessToken: '',
-  setAccessToken: () => {
+  isAuthenticated: () => false,
+  isLoading: () => true,
+  login: async (code: string) => {
     return;
   },
-  profil: {} as Profil,
-  setProfil: () => {
+  logout: async () => {
+    return;
+  },
+  openOAuthPrompt: () => {
     return;
   },
 });
@@ -33,51 +54,122 @@ const AuthContext = createContext<CreateContextValue>({
 const { Provider } = AuthContext;
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [loading, setLoading] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [accessToken, setAccessToken] = useState<string>('');
-  const [profil, setProfil] = useState<Profil>({} as Profil);
+  const oAuthClient = useMemo(() => {
+    return new OAuthClient(
+      process.env.NEXT_PUBLIC_CLIENT_ID as string,
+      process.env.NEXT_PUBLIC_CLIENT_SECRET as string,
+      process.env.NEXT_PUBLIC_REDIRECT_URL as string,
+    );
+  }, []);
+
+  const [authState, setAuthState] = useState<AuthState>({
+    profil: null,
+    loading: true,
+    accessToken: '',
+  });
+
+  const isAuthenticated = () => {
+    return !authState.loading && !!authState.profil;
+  };
+
+  const isLoading = () => {
+    return authState.loading;
+  };
+
+  const openOAuthPrompt = () => {
+    oAuthClient.openOAuthPrompt();
+  };
+
+  const login = async (code: string) => {
+    const tokens = await oAuthClient.getTokens(code);
+
+    if (!tokens.scope) {
+      throw new Error(LoginErrors.scopeMissing);
+    }
+
+    if (tokens.scope.split(' ').length !== oAuthClient.SCOPES.length) {
+      throw new Error(LoginErrors.allScopeNotAccepeted);
+    }
+
+    if (!tokens.access_token || !tokens.id_token || !tokens.refresh_token) {
+      throw new Error(LoginErrors.tokenMissing);
+    }
+
+    const profil = oAuthClient.getProfil(tokens.id_token);
+
+    if (!profil) {
+      throw new Error(LoginErrors.profilMissing);
+    }
+
+    setCookie(REFRESH_TOKEN_LOCATION, tokens.refresh_token as string);
+
+    console.log(profil);
+    localStorage.setItem(PROFIL_LOCATION, JSON.stringify(profil));
+
+    setAuthState({
+      loading: false,
+      profil: profil,
+      accessToken: tokens.access_token,
+    });
+  };
+
+  const logout = async () => {
+    if (!isAuthenticated()) {
+      throw new Error('the user is not authenticated');
+    }
+
+    await oAuthClient.revokeToken(authState.accessToken);
+  };
 
   useEffect(() => {
     async function verifyUserAuthentification() {
-      const refreshToken = Cookies.get(
-        process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE as string,
-      );
-
-      if (!refreshToken) {
-        setLoading(false);
-        setAuthenticated(false);
-
-        return;
-      }
-
+      console.log('USE EFFECT AUTH CONTEXT RUNNING ...');
       try {
-        const newAccessToken = await API.refreshAccessToken(refreshToken);
+        const refreshToken = Cookies.get(REFRESH_TOKEN_LOCATION);
 
-        setAccessToken(newAccessToken);
-        setLoading(false);
-        setAuthenticated(true);
+        if (!refreshToken) {
+          throw new Error('No refresh token in the cookie');
+        }
+
+        const tokens = await oAuthClient.refreshTokens(refreshToken);
+
+        console.log('new access token', tokens);
+        if (!tokens) {
+          throw new Error('Cannot get a new AccessToken');
+        }
+
+        const profil = localStorage.getItem(PROFIL_LOCATION);
+
+        setAuthState({
+          loading: false,
+          profil: profil
+            ? JSON.parse(profil)
+            : oAuthClient.getProfil(tokens.id_token),
+          accessToken: tokens.access_token,
+        });
       } catch (err) {
-        removeCookie(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE as string);
-
-        setLoading(false);
-        setAuthenticated(false);
+        console.error('Error in authContext', (err as Error).message);
+        setAuthState({ profil: null, loading: false, accessToken: '' });
       }
     }
 
     verifyUserAuthentification();
-  }, [setLoading, setAuthenticated]);
+  }, [oAuthClient]);
+
+  useEffect(() => {
+    console.log('loading auth context', authState.loading);
+  }, [authState.loading]);
 
   return (
     <Provider
       value={{
-        loading,
-        authenticated,
-        setAuthenticated,
-        accessToken,
-        setAccessToken,
-        profil,
-        setProfil,
+        authState,
+        setAuthState,
+        isAuthenticated,
+        isLoading,
+        openOAuthPrompt,
+        login,
+        logout,
       }}
     >
       {children}

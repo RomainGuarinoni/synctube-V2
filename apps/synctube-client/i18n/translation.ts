@@ -7,7 +7,10 @@ export type translationKeys = {
     welcome: string;
     explanation: string;
     googleText: string;
-    error: string;
+    errors: {
+      scope: string;
+      internal: string;
+    };
   };
 };
 
@@ -20,8 +23,12 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       explanation:
         "Pour accéder à toutes les fonctionnalités de l'application, veuillez vous connecter avec votre compte Google.",
       googleText: 'Se connecter avec Google',
-      error:
-        "Nous n'avons pas pu nous connecter à votre compte Google. Veuillez vérifier que vous avez accepté les pop-ups et les cookies pour ce site.",
+      errors: {
+        scope:
+          "Tous les champs d'application de l'application synctube n'ont pas été acceptés, veuillez vous connecter à nouveau.",
+        internal:
+          "Une erreur interne s'est produite, veuillez réessayer plus tard.",
+      },
     },
   },
   en: {
@@ -32,8 +39,11 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       explanation:
         'To access all the features of the application, please sign in with your Google account',
       googleText: 'Connect with Google',
-      error:
-        'We were unable to log into your Google Account. Please verify that you have accepted pop-ups and cookies for this site',
+      errors: {
+        scope:
+          'All scopes of the synctube application have not been accepted, please log in again',
+        internal: 'An internal error has occurred, please try again later',
+      },
     },
   },
 };

@@ -8,6 +8,7 @@ export interface LoginResponse {
 
 export interface RefreshTokenResponse {
   access_token: string;
+  profil: Profil;
 }
 
 export interface RedirectToGooglAuthPromptResponse {
@@ -18,5 +19,5 @@ export interface Profil {
   id: string;
   givenName: string;
   familyName: string;
-  email: string;
+  picture: string;
 }

@@ -4,60 +4,52 @@ import { useRouter } from 'next/router';
 import { Button } from '../components/Button';
 import { Loader } from '../components/Loader';
 import { useTranslation } from '../hooks/useTranslation';
-import { API } from '../api';
 
-import { setCookie } from '../utils/cookie';
 import { useAuth } from '../context/AuthContext';
+import { LoginErrors } from '../errors/LoginErrors';
 
 export default function Login() {
-  const { login } = useTranslation();
-  const { setAccessToken, setAuthenticated, setProfil } = useAuth();
+  const { login: loginTranslation } = useTranslation();
+  const { openOAuthPrompt, login, isAuthenticated } = useAuth();
 
   const router = useRouter();
 
-  const [googleError, setGoogleError] = useState(false);
+  const [googleError, setGoogleError] = useState<string>('');
   const [googleLoading, setGoogleLoading] = useState(true);
 
   async function handleLoginGoogle() {
-    setGoogleError(false);
+    setGoogleError('');
     setGoogleLoading(true);
 
     try {
-      const redirect_url = await API.LoginWithGoogle();
-
-      window.location.href = redirect_url;
+      openOAuthPrompt();
     } catch (err) {
-      console.log(err);
-      setGoogleError(true);
+      console.error(err);
+      setGoogleError('Something went wrong, try again later');
     }
   }
 
   useEffect(() => {
     setGoogleLoading(true);
 
-    async function getCredentialsFromCode(code: string) {
+    async function loginUser(code: string) {
       try {
-        const tokens = await API.GetAuthTokens(code);
-
-        setCookie(
-          process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE as string,
-          tokens.refresh_token,
-          { isSession: false },
-        );
-
-        setAccessToken(tokens.access_token);
-
-        setProfil(tokens.profil);
-
-        setAuthenticated(true);
-
-        router.push('/index');
+        await login(code);
+        router.push('/');
       } catch (err) {
-        console.log('error on use Effect login page', err);
+        console.log(err as Error);
+        switch ((err as Error).message) {
+          case LoginErrors.scopeMissing:
+          case LoginErrors.allScopeNotAccepeted:
+            setGoogleError(loginTranslation.errors.scope);
+            break;
+          case LoginErrors.profilMissing:
+          case LoginErrors.tokenMissing:
+          default:
+            setGoogleError(loginTranslation.errors.internal);
+            break;
+        }
         setGoogleLoading(false);
-
-        setGoogleError(true);
-        return;
       }
     }
 
@@ -65,13 +57,13 @@ export default function Login() {
 
     const code = query['code'] as string | undefined;
 
-    if (!code) {
+    if (!code || isAuthenticated()) {
       setGoogleLoading(false);
       return;
     }
 
-    getCredentialsFromCode(code);
-  }, [router]);
+    loginUser(code);
+  }, [router, login, loginTranslation, isAuthenticated]);
 
   return (
     <div className=" w-full h-full flex flex-col items-center justify-center text-zinc-400 text-xl">
@@ -80,18 +72,18 @@ export default function Login() {
       ) : (
         <>
           <h2 className="mb-10">
-            {login.welcome}
+            {loginTranslation.welcome}
             <span className="text-red-500 font-bold text-xl  tracking-[0.4em] mx-2  ">
               SYNCTUBE
             </span>
           </h2>
-          <p className="mb-10">{login.explanation} </p>
+          <p className="mb-10 text-center">{loginTranslation.explanation} </p>
           <Button
-            label={login.googleText}
+            label={loginTranslation.googleText}
             size="medium"
             onClick={handleLoginGoogle}
           />
-          {googleError && <p className="mt-10 text-red-500"> {login.error} </p>}
+          {googleError && <p className="mt-10 text-red-500"> {googleError}</p>}
         </>
       )}
     </div>

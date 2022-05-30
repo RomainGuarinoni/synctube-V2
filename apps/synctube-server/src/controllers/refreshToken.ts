@@ -1,6 +1,6 @@
 import { RefreshTokenResponse } from '@synctube-v2/types';
 import type { Request, Response } from 'express';
-import { oAuth2Client } from '../auth/OAuthClient';
+import { oAuth2Client } from '../../../synctube-client/auth/OAuthClient';
 
 export async function refreshAcessToken(req: Request, res: Response) {
   const refreshToken = req.body.refreshToken;
@@ -12,7 +12,7 @@ export async function refreshAcessToken(req: Request, res: Response) {
   oAuth2Client.setCredentials({ refresh_token: refreshToken });
 
   try {
-    const { token: newAccessToken } = await oAuth2Client.getAccessToken();
+    const { token: newAccessToken } = await oAuth2Client.refreshToken();
 
     const response: RefreshTokenResponse = {
       access_token: newAccessToken,

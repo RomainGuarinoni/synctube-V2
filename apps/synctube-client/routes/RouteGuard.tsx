@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { useAuth } from '../context/AuthContext';
 
@@ -10,44 +10,59 @@ interface RouteGuardProps {
 const publicPath = ['/login'];
 
 export function RouteGuard({ children }: RouteGuardProps) {
-  const { loading, authenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
+
+  const [routeStartLoading, SetRouteStartLoading] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
+    // function routeStartLoading() {
+    //   SetRouteStartLoading(true);
+    // }
+
     async function checkPath() {
-      if (loading) {
+      // console.log('loading', isLoading());
+      // console.log('is auth', isAuthenticated());
+      // console.log('\n -- \n');
+
+      if (isLoading()) {
         return;
       }
 
       const path = router.pathname;
 
-      if (authenticated && publicPath.includes(path)) {
+      if (isAuthenticated() && publicPath.includes(path)) {
+        SetRouteStartLoading(false);
         router.push('/');
         return;
       }
 
-      if (!authenticated && !publicPath.includes(path)) {
+      if (!isAuthenticated() && !publicPath.includes(path)) {
+        SetRouteStartLoading(false);
         router.push('/login');
         return;
       }
     }
     checkPath();
 
+    // router.events.on('routeChangeStart', routeStartLoading);
     router.events.on('routeChangeComplete', checkPath);
 
     return () => {
+      // router.events.off('routeChangeStart', routeStartLoading);
       router.events.off('routeChangeComplete', checkPath);
     };
-  }, [router, authenticated, loading]);
+  }, [router, isAuthenticated, isLoading]);
 
   return (
     <>
-      {loading && (
+      {(isLoading() || routeStartLoading) && (
         <div className="w-full h-full flex justify-center items-center">
           <Loader />
         </div>
       )}
-      {!loading && children}
+      {!isLoading() && children}
     </>
   );
 }
