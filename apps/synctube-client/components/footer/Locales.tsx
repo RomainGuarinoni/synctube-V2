@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { LOCALES } from '../i18n/translation';
+import { LOCALES } from '../../i18n/translation';
 
 export function Locales(): JSX.Element {
   const router = useRouter();

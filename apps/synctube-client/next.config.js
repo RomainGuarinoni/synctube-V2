@@ -14,6 +14,9 @@ const nextConfig = {
     locales: ['en', 'fr'],
     defaultLocale: 'fr',
   },
+  images: {
+    domains: ['lh3.googleusercontent.com'],
+  },
 };
 
 module.exports = withNx(nextConfig);

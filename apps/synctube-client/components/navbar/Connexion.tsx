@@ -1,5 +1,5 @@
-import { useTheme } from '../context/ThemeContext';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTheme } from '../../context/ThemeContext';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface ConnexionProps {
   connexions: number;

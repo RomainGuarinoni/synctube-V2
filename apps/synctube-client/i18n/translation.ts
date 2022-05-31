@@ -3,6 +3,9 @@ export const LOCALES = ['fr', 'en'] as const;
 export type translationKeys = {
   search: string;
   connection: string;
+  profil: {
+    logout: string;
+  };
   login: {
     welcome: string;
     explanation: string;
@@ -18,6 +21,7 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
   fr: {
     search: 'Rechercher une vidéo',
     connection: 'connexions',
+    profil: { logout: 'Se déconnecter' },
     login: {
       welcome: 'Bienvenue sur',
       explanation:
@@ -34,6 +38,7 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
   en: {
     search: 'Search for a video',
     connection: 'connections',
+    profil: { logout: 'Logout' },
     login: {
       welcome: 'Welcome to',
       explanation:

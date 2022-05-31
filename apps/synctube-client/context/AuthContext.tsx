@@ -118,7 +118,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error('the user is not authenticated');
     }
 
+    setAuthState({ profil: null, loading: true, accessToken: '' });
+
     await oAuthClient.revokeToken(authState.accessToken);
+
+    Cookies.remove(REFRESH_TOKEN_LOCATION);
+
+    localStorage.removeItem(PROFIL_LOCATION);
   };
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from '../../hooks/useTranslation';
 
-import { ISearch } from './icons/ISearch';
+import { ISearch } from '../icons/ISearch';
 
 export function Search(): JSX.Element {
   const { search: searchText } = useTranslation();

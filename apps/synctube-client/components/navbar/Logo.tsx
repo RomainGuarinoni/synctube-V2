@@ -1,4 +1,4 @@
-export default function Logo(): JSX.Element {
+export function Logo(): JSX.Element {
   const handleLogoClick = () => {
     console.log('synctube');
   };
