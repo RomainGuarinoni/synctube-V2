@@ -123,7 +123,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     async function verifyUserAuthentification() {
-      console.log('USE EFFECT AUTH CONTEXT RUNNING ...');
       try {
         const refreshToken = Cookies.get(REFRESH_TOKEN_LOCATION);
 
@@ -133,7 +132,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         const tokens = await oAuthClient.refreshTokens(refreshToken);
 
-        console.log('new access token', tokens);
         if (!tokens) {
           throw new Error('Cannot get a new AccessToken');
         }
@@ -155,10 +153,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     verifyUserAuthentification();
   }, [oAuthClient]);
-
-  useEffect(() => {
-    console.log('loading auth context', authState.loading);
-  }, [authState.loading]);
 
   return (
     <Provider

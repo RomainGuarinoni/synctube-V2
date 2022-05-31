@@ -30,8 +30,6 @@ export default function Login() {
   }
 
   useEffect(() => {
-    setGoogleLoading(true);
-
     async function loginUser(code: string) {
       try {
         await login(code);
@@ -57,7 +55,12 @@ export default function Login() {
 
     const code = query['code'] as string | undefined;
 
-    if (!code || isAuthenticated()) {
+    if (isAuthenticated()) {
+      router.push('/');
+      return;
+    }
+
+    if (!code) {
       setGoogleLoading(false);
       return;
     }

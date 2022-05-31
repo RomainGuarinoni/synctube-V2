@@ -7,8 +7,6 @@ import { ThemeProvider } from '../context/ThemeContext';
 
 import { AppLayout } from '../layout/App';
 
-import { RouteGuard } from '../routes/RouteGuard';
-
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -18,11 +16,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <main className="app">
         <AuthProvider>
           <AppLayout>
-            <RouteGuard>
-              <ThemeProvider>
-                <Component {...pageProps} />
-              </ThemeProvider>
-            </RouteGuard>
+            <ThemeProvider>
+              <Component {...pageProps} />
+            </ThemeProvider>
           </AppLayout>
         </AuthProvider>
       </main>

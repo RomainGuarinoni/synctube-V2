@@ -1,6 +1,7 @@
 import { useAuth } from '../context/AuthContext';
+import { authenticatedRoute } from '../guard/authenticatedRoute';
 
-export default function Index(): JSX.Element {
+function Index(): JSX.Element {
   const {
     authState: { profil },
   } = useAuth();
@@ -12,3 +13,5 @@ export default function Index(): JSX.Element {
     </div>
   );
 }
+
+export default authenticatedRoute(Index);
