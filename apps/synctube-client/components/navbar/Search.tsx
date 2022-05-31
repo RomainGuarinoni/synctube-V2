@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 
@@ -6,12 +7,24 @@ import { ISearch } from '../icons/ISearch';
 export function Search(): JSX.Element {
   const { search: searchText } = useTranslation();
 
+  const router = useRouter();
+
   const [searchInput, setSearchInput] = useState('');
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
-    // TODO do smthing with data
-    console.log(searchInput);
+
+    if (!searchInput.trim().length) {
+      console.error('cannot search youtube input');
+      // TODO show error to the end user
+    }
+
+    router.push({
+      pathname: '/search',
+      query: {
+        q: searchInput,
+      },
+    });
   };
 
   return (

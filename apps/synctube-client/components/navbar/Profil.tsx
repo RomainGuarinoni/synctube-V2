@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useState } from 'react';
 
 import { useAuth } from '../../context/AuthContext';
-import { useOnclickOutside } from '../../hooks/useOnClickOutside';
 import { useTranslation } from '../../hooks/useTranslation';
 import { Select } from '../Select';
 
@@ -19,7 +17,11 @@ export function Profil(): JSX.Element {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await logout();
+    try {
+      await logout();
+    } catch (err) {
+      console.error(err);
+    }
     router.push('/login');
   };
 
