@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useAuth } from '../context/AuthContext';
 
 export type useSwrResponse<T> = {
   isError: boolean;

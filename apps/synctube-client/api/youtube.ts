@@ -43,15 +43,19 @@ export function useYoutubeSearch(
   } = useAuth();
 
   const { data, error } = useSwr<YoutubeResponse>(
-    [
-      'https://www.googleapis.com/youtube/v3/search',
-      {
-        part: 'snippet',
-        q: searchInput,
-        ...(pageToken ? { pageToken } : {}),
-      },
-      accessToken,
-    ],
+    searchInput.trim().length
+      ? [
+          'https://www.googleapis.com/youtube/v3/search',
+          {
+            part: 'snippet',
+            q: searchInput,
+            maxResults: 25,
+
+            ...(pageToken ? { pageToken } : {}),
+          },
+          accessToken,
+        ]
+      : null,
     useFetcher,
   );
 

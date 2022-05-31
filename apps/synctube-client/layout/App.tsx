@@ -16,7 +16,9 @@ export function AppLayout({ children }: AppLayoutProps) {
       } w-screen h-screen px-8 flex flex-col`}
     >
       <Navbar />
-      <main className={`bg-zinc-900 flex-1 rounded-2xl`}>{children}</main>
+      <main className={`bg-zinc-900 flex-1 rounded-2xl overflow-auto`}>
+        {children}
+      </main>
       <Footer />
     </div>
   );

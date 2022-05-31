@@ -35,10 +35,12 @@ function Search(): JSX.Element {
     );
   }
 
+  console.log(data.nextPageToken);
+
   return (
-    <div>
+    <div className="flex justify-start items-center flex-wrap">
       {data.items.map((item, key) => (
-        <div key={key}>
+        <div key={key} className="text-zinc-400 m-4">
           <p>{item.snippet.title} </p>
           <p>{item.snippet.description} </p>
         </div>
