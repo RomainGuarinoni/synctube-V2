@@ -12,12 +12,15 @@ The V2 of synctube, faster, more powerfull and nicer !
 - Faire en sorte que quand un user arrive sur synctube, la vidéo est déjà chargé et se lance au bon endroit !
 - Faire de la transcription avec i18next
 - faire un sytème de salle custom
+- page d'acceuil avec la liste de ses salles custom et celles qu'il a visité qui sont pas les siennes
+
 
 ## Server
 
 - lancer la video en meme temps que tout le monde, le user envoie un event , le server re spreaad un event a tout le monde meme le user de base et une fois le nouveau event recu, la video se lance
 - quand le user fait pause, on envoie en plus de l'event le timestamp de la pausee pour requalibrer tout le monde
 - Faire des stats sur l'pp ( nb de user, temps total de video etcc ) et se les envoyer par mail chaque fois en mode newsletter
+- chaque user peut créer jusqu'à 5 salles perso avec un nom custom
 
 ## Stack
 
