@@ -22,6 +22,13 @@ The V2 of synctube, faster, more powerfull and nicer !
 - Faire des stats sur l'pp ( nb de user, temps total de video etcc ) et se les envoyer par mail chaque fois en mode newsletter
 - chaque user peut créer jusqu'à 5 salles perso avec un nom custom
 
+## Stats
+
+- nbre de vidéo en tout sur l'app
+- nbre d'utilisateurs sur l'app
+- nbre de video sur la salle privée
+
+
 ## Stack
 
 - Nextjs
