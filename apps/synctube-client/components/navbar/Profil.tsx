@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../hooks/useTranslation';
-import { Select } from '../Select';
+import { Select } from '../select/Select';
 
 export function Profil(): JSX.Element {
   const {
@@ -32,19 +32,23 @@ export function Profil(): JSX.Element {
       ) : (
         <Select
           items={[{ label: profilTranslation.logout, callback: handleLogout }]}
+          align="right"
+          large
         >
-          <div className="rounded-full w-9 h-9 overflow-hidden relative">
-            <Image
-              src={profil?.picture || 'coucou'}
-              alt="Google profil picture"
-              title="Google profil picture"
-              layout="fill"
-              objectFit="contain"
-            />
-          </div>
-          <p className="ml-2">
-            {profil?.givenName} {profil?.familyName}
-          </p>
+          <>
+            <div className="rounded-full w-9 h-9 overflow-hidden relative">
+              <Image
+                src={profil?.picture || 'coucou'}
+                alt="Google profil picture"
+                title="Google profil picture"
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
+            <p className="ml-2">
+              {profil?.givenName} {profil?.familyName}
+            </p>
+          </>
         </Select>
       )}
     </>

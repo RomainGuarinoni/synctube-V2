@@ -10,7 +10,7 @@ export function SelectItems({
   return (
     <p
       onClick={callback}
-      className="ease-linear duration-100 hover:bg-zinc-700 w-full py-2 flex items-center  justify-center"
+      className="ease-linear duration-100 hover:bg-zinc-700 w-full px-5 py-2 flex items-center justify-center"
     >
       {label}
     </p>

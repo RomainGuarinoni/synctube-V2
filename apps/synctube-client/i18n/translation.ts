@@ -15,6 +15,11 @@ export type translationKeys = {
       internal: string;
     };
   };
+  searchLocation: {
+    youtube: string;
+    history: string;
+    favourite: string;
+  };
 };
 
 export const translation: Record<typeof LOCALES[number], translationKeys> = {
@@ -34,6 +39,11 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
           "Une erreur interne s'est produite, veuillez réessayer plus tard.",
       },
     },
+    searchLocation: {
+      youtube: 'Youtube',
+      history: 'Historique',
+      favourite: 'Favoris',
+    },
   },
   en: {
     search: 'Search for a video',
@@ -49,6 +59,11 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
           'All scopes of the synctube application have not been accepted, please log in again',
         internal: 'An internal error has occurred, please try again later',
       },
+    },
+    searchLocation: {
+      youtube: 'Youtube',
+      history: 'History',
+      favourite: 'Favourite',
     },
   },
 };

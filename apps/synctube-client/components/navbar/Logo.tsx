@@ -1,6 +1,10 @@
+import { useRouter } from 'next/router';
+
 export function Logo(): JSX.Element {
+  const router = useRouter();
+
   const handleLogoClick = () => {
-    console.log('synctube');
+    router.push('/');
   };
 
   return (

@@ -5,7 +5,7 @@ export type useSwrResponse<T> = {
   data: T | undefined;
 };
 
-export async function useFetcher(
+export async function fetcher(
   url: string,
   params?: Record<string, unknown>,
   accessToken?: string,

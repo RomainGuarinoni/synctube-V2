@@ -2,7 +2,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Connexion } from './Connexion';
 import { Logo } from './Logo';
 import { Profil } from './Profil';
-import { Search } from './Search';
+import { SearchBar } from './SearchBar';
 
 export default function Navbar(): JSX.Element {
   const { isAuthenticated } = useAuth();
@@ -19,7 +19,7 @@ export default function Navbar(): JSX.Element {
 
       {isAuthenticated() && (
         <>
-          <Search />
+          <SearchBar />
           <Profil />
         </>
       )}

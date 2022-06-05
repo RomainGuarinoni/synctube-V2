@@ -1,5 +1,5 @@
 import axios from 'axios';
-import querystring from 'query-string';
+import { stringify } from 'query-string';
 import jwtDecode from 'jwt-decode';
 import { Profil } from '@synctube-v2/types';
 
@@ -63,7 +63,7 @@ export class OAuthClient {
       scope: this.SCOPES.join(' '),
     };
 
-    window.location.href = `${rootUrl}?${querystring.stringify(options)}`;
+    window.location.href = `${rootUrl}?${stringify(options)}`;
   }
 
   async getTokens(code: string): Promise<Tokens> {

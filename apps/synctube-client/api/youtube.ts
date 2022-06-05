@@ -1,8 +1,8 @@
 import useSwr from 'swr';
 import { useAuth } from '../context/AuthContext';
-import { useFetcher, useSwrResponse } from './fetcher';
+import { fetcher, useSwrResponse } from './fetcher';
 
-type SearchResult = {
+export type SearchResult = {
   kind: 'youtube#searchResult';
   etag: string;
   id: {
@@ -17,7 +17,7 @@ type SearchResult = {
     title: string;
     description: string;
     thumbnails: {
-      [key: string]: {
+      medium: {
         url: string;
         width: number;
         height: number;
@@ -28,7 +28,7 @@ type SearchResult = {
   };
 };
 
-type YoutubeResponse = {
+export type YoutubeResponse = {
   nextPageToken: string;
   prevPageToken: string;
   items: SearchResult[];
@@ -56,11 +56,11 @@ export function useYoutubeSearch(
           accessToken,
         ]
       : null,
-    useFetcher,
+    fetcher,
   );
 
   return {
-    data: data,
+    data,
     isError: error,
   };
 }

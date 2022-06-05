@@ -11,7 +11,7 @@ export function Connexion({ connexions }: ConnexionProps): JSX.Element {
   const { connection: connectionText } = useTranslation();
 
   return (
-    <div className="min-w-[7em] flex justify-end">
+    <div className="flex w-20 ml-5 justify-end">
       <p
         className={`font-normal ${
           theme === 'dark' ? 'text-zinc-400' : 'text-zinc-800'

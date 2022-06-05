@@ -1,50 +1,118 @@
 import { useRouter } from 'next/router';
+import { Video } from '@synctube-v2/types';
 import { useEffect, useState } from 'react';
-import { useYoutubeSearch } from '../api/youtube';
+import { useFavourite } from '../api/favourite';
+import { useHistory } from '../api/history';
+import { useYoutubeSearch, YoutubeResponse } from '../api/youtube';
 import { Loader } from '../components/Loader';
+import { SearchLocation } from '../components/navbar/SearchBar';
+import { Tab } from '../components/Tabs';
 import { authenticatedRoute } from '../guard/authenticatedRoute';
+import mockYoutubeResponse from '../mock/youtubeResponse.json';
+import { convertYoutubeVideo } from '../utils/video';
+import { VideosList } from '../components/resultPage/VideosList';
 
 function Search(): JSX.Element {
   const { query, push } = useRouter();
 
-  const [searchInput, setSearchInput] = useState('');
+  const searchInput = query.q as string;
+  const [searchLocation, setSearchLocation] = useState<SearchLocation | null>(
+    null,
+  );
 
-  const { data, isError } = useYoutubeSearch(searchInput);
+  // const { data: youtubeData, isError: youtubeError } = useYoutubeSearch(
+  //   searchLocation && searchLocation === SearchLocation.youtube && searchInput
+  //     ? searchInput
+  //     : '',
+  // );
 
+  const { data: youtubeData, isError: youtubeError } = {
+    data: mockYoutubeResponse as unknown as YoutubeResponse,
+    isError: false,
+  };
+
+  const { data: historyData, isError: historyError } = useHistory(
+    searchLocation && searchLocation === SearchLocation.history ? '510' : null,
+  );
+
+  const { data: favouriteData, isError: favouriteError } = useFavourite(
+    searchLocation && searchLocation === SearchLocation.favourite
+      ? '510'
+      : null,
+  );
+
+  const handleChangeSearchLocation = (location: SearchLocation) => {
+    push({ pathname: '/search', query: { ...query, location } }, undefined, {
+      shallow: true,
+    });
+    setSearchLocation(location);
+  };
+
+  const getDataAndErrorOfSelected = (): {
+    data: Video[] | undefined;
+    error: boolean;
+  } => {
+    switch (searchLocation) {
+      case null:
+        return { data: undefined, error: false };
+      case SearchLocation.youtube:
+        return { data: convertYoutubeVideo(youtubeData), error: youtubeError };
+      case SearchLocation.favourite:
+        return { data: favouriteData, error: favouriteError };
+      case SearchLocation.history:
+        return { data: historyData, error: historyError };
+    }
+  };
+
+  // Redirect to index page if there is no query q in the path
+  // TODO update the redirection
   useEffect(() => {
-    if (!query || !query.q) {
+    if (!searchInput) {
       push('/');
     }
+  }, [push, searchInput]);
 
-    setSearchInput(query.q as string);
-  }, [query, push]);
+  // Set the searchLocation based on the query location
+  // If the location is invalid, default location is SearchLocation.youtube
+  useEffect(() => {
+    switch (query.location) {
+      case SearchLocation.favourite:
+        setSearchLocation(SearchLocation.favourite);
+        break;
+      case SearchLocation.history:
+        setSearchLocation(SearchLocation.history);
+        break;
+      case SearchLocation.youtube:
+      default:
+        setSearchLocation(SearchLocation.youtube);
+    }
+  }, [setSearchLocation, query]);
 
-  if (!data || !searchInput) {
+  if (getDataAndErrorOfSelected().error) {
+    return <div className="text-zinc-400 font-bold">Error</div>;
+  }
+
+  if (!getDataAndErrorOfSelected().data) {
     return (
-      <div className="w-full h-full flex items-center justify-center">
+      <div className=" w-full h-full flex flex-col items-center justify-center">
         <Loader />
       </div>
     );
   }
 
-  if (isError) {
-    return (
-      <div className="w-full h-full flex items-center justify-center text-zinc-400">
-        PUTIN D4ERREUR
-      </div>
-    );
-  }
-
-  console.log(data.nextPageToken);
-
   return (
-    <div className="flex justify-start items-center flex-wrap">
-      {data.items.map((item, key) => (
-        <div key={key} className="text-zinc-400 m-4">
-          <p>{item.snippet.title} </p>
-          <p>{item.snippet.description} </p>
-        </div>
-      ))}
+    <div className="flex justify-start items-center flex-wrap text-zinc-400 w-full ">
+      <Tab
+        items={[
+          SearchLocation.youtube,
+          SearchLocation.history,
+          SearchLocation.favourite,
+        ]}
+        onChange={handleChangeSearchLocation}
+        defaultValue={searchLocation || SearchLocation.youtube}
+      />
+
+      <VideosList video={getDataAndErrorOfSelected().data as Video[]} />
     </div>
   );
 }

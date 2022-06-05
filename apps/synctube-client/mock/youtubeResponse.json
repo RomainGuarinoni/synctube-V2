@@ -1,0 +1,784 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "cXG4mdHKDSf3QNQcei-3_c_X3eI",
+  "nextPageToken": "CBkQAA",
+  "regionCode": "FR",
+  "pageInfo": { "totalResults": 1000000, "resultsPerPage": 25 },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "CL-cZ7xs7F6U179htSnt-FMX3Ec",
+      "id": { "kind": "youtube#video", "videoId": "tNDgRCB4gYs" },
+      "snippet": {
+        "publishedAt": "2015-12-14T21:10:26Z",
+        "channelId": "UC-GI5LST5T3Gw93yZxjdFaw",
+        "title": "JUL - COUCOU // D&#39;OR ET DE PLATINE // 2015",
+        "description": "COMMANDE TON ALBUM ICI : iTunes (digital) : https://itunes.apple.com/fr/album/my-world/id1055685497&app=itunes Fnac.com ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/tNDgRCB4gYs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/tNDgRCB4gYs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/tNDgRCB4gYs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "DORETDEPLATINE",
+        "liveBroadcastContent": "none",
+        "publishTime": "2015-12-14T21:10:26Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "9ZkC-91S6Rg8-Esj3nvr4XeWjng",
+      "id": { "kind": "youtube#video", "videoId": "rLe5S1UKPko" },
+      "snippet": {
+        "publishedAt": "2020-02-21T17:16:33Z",
+        "channelId": "UCfK4cZRC1u0cMiepQdLjFDw",
+        "title": "Meryl - Coucou",
+        "description": "Mixtape \"Jour Avant Caviar\" disponible. CD/Digital : http://meryl.ffm.to/jouravantcaviar.oyd Abonne-toi à la chaine de Meryl ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/rLe5S1UKPko/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/rLe5S1UKPko/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/rLe5S1UKPko/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "FIYAH RECORDS",
+        "liveBroadcastContent": "none",
+        "publishTime": "2020-02-21T17:16:33Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "tGuudb4GzdNcdnftmZBMm5cv-5o",
+      "id": { "kind": "youtube#video", "videoId": "EVNT9cReeNc" },
+      "snippet": {
+        "publishedAt": "2019-03-01T12:04:30Z",
+        "channelId": "UCONdt8C5CiEdBPfw3kMbrWw",
+        "title": "Twin N Twice - COUCOU (Prod. by Khalid Bouloe) (Audio)",
+        "description": "TWIN PARADOX ALBUM AVAILABLE ON ALL PLATFORMS We proud to present Our Fresh New album \"Twin Paradox\" SPOTIFY ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/EVNT9cReeNc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/EVNT9cReeNc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/EVNT9cReeNc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Twin N Twice Music",
+        "liveBroadcastContent": "none",
+        "publishTime": "2019-03-01T12:04:30Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "E7nduG8coi7yML4Gc-bDLoy61xY",
+      "id": { "kind": "youtube#video", "videoId": "UiCymCvZDs0" },
+      "snippet": {
+        "publishedAt": "2018-05-26T07:05:00Z",
+        "channelId": "UC8I-UIlXPNS4luC4iV7dRdQ",
+        "title": "Coucou hibou - Dans le forêt lointaine - Comptines pour bébés - Titounis",
+        "description": "Dans la forêt lointaine On entend le coucou Du haut de son grand chêne Il répond au hibou Coucou, coucou, coucou, Hibou, ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/UiCymCvZDs0/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/UiCymCvZDs0/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/UiCymCvZDs0/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Monde des Titounis",
+        "liveBroadcastContent": "none",
+        "publishTime": "2018-05-26T07:05:00Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "7u8SKBVDn9FjxuSKULWgxNeTqz4",
+      "id": { "kind": "youtube#video", "videoId": "yfJ1GDTCNZU" },
+      "snippet": {
+        "publishedAt": "2012-12-19T21:49:58Z",
+        "channelId": "UC8I-UIlXPNS4luC4iV7dRdQ",
+        "title": "Mon petit lapin &quot;Cherchez moi coucou coucou&quot;",
+        "description": "http://www.mondedestitounis.fr/ La comptine \"Mon petit lapin\" pour les enfants Paroles: Mon petit lapin S'est caché dans le jardin ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/yfJ1GDTCNZU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/yfJ1GDTCNZU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/yfJ1GDTCNZU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Monde des Titounis",
+        "liveBroadcastContent": "none",
+        "publishTime": "2012-12-19T21:49:58Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "1JJTa1s0-sh6pId979hbg9RIxO8",
+      "id": { "kind": "youtube#video", "videoId": "D7uAbA5OtPw" },
+      "snippet": {
+        "publishedAt": "2017-03-29T21:44:14Z",
+        "channelId": "UCniG4jn_q5bwLc73uDfr49Q",
+        "title": "Charlotte Dipanda - Coucou (clip officiel)",
+        "description": "Clip officiel du titre Coucou de l'artiste Charlotte Dipanda, tiré de l'album Dube L'am. Télécharger sur Itunes : http://urlz.fr/52Qy ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/D7uAbA5OtPw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/D7uAbA5OtPw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/D7uAbA5OtPw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Charlotte Dipanda Officielle",
+        "liveBroadcastContent": "none",
+        "publishTime": "2017-03-29T21:44:14Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "Qiow_G68SHmR-B3tD3ONxQnpdfw",
+      "id": { "kind": "youtube#video", "videoId": "yW_8HQPae4U" },
+      "snippet": {
+        "publishedAt": "2019-04-05T15:48:49Z",
+        "channelId": "UCONdt8C5CiEdBPfw3kMbrWw",
+        "title": "Twin N Twice - COUCOU (Official Music Video) (Prod. by Khalid Bouloe)",
+        "description": "COUCOU AVAILABLE ON ALL PLATFORMS We proud to present Our Fresh New album \"Twin Paradox\" SPOTIFY ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/yW_8HQPae4U/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/yW_8HQPae4U/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/yW_8HQPae4U/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Twin N Twice Music",
+        "liveBroadcastContent": "none",
+        "publishTime": "2019-04-05T15:48:49Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "6HPQl015eq0gRUM2kzZOaSX48Ks",
+      "id": { "kind": "youtube#video", "videoId": "SgBfTwVTIQY" },
+      "snippet": {
+        "publishedAt": "2022-04-03T16:30:02Z",
+        "channelId": "UCL_cZf5sHKQHMRIEax5o3sg",
+        "title": "Coucous &amp; co. | Dans le nid d’un autre | ARTE",
+        "description": "La stratégie est bien connue. Pour ne pas s'embarrasser de couver et de nourrir sa descendance, la femelle du coucou pond ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/SgBfTwVTIQY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/SgBfTwVTIQY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/SgBfTwVTIQY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "ARTE Découverte",
+        "liveBroadcastContent": "none",
+        "publishTime": "2022-04-03T16:30:02Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "uzsfCJeS9Z63dxNiimenwYjVOhY",
+      "id": { "kind": "youtube#video", "videoId": "HZNKqR6C1cE" },
+      "snippet": {
+        "publishedAt": "2016-04-13T21:00:45Z",
+        "channelId": "UCkYuxZikUUtrZqNzMS-DuPw",
+        "title": "Coucou",
+        "description": "Provided to YouTube by DMS Coucou · Koffie Olomide · Koffi Olomidé · Koffi Olomidé Tchatcho ℗ DMS Released on: 1994-07-13 ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/HZNKqR6C1cE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/HZNKqR6C1cE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/HZNKqR6C1cE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Koffi Olomidé - Topic",
+        "liveBroadcastContent": "none",
+        "publishTime": "2016-04-13T21:00:45Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "HPqSkuFjnkYXs25u5WsVsGfzItw",
+      "id": { "kind": "youtube#video", "videoId": "5V_aCw3qyOM" },
+      "snippet": {
+        "publishedAt": "2018-11-08T10:34:37Z",
+        "channelId": "UCIQE_UNqXBXVLWxmyaks3UA",
+        "title": "Coucou",
+        "description": "Provided to YouTube by Rec. 118 Coucou · Soprano Phoenix ℗ 2018 Rec. 118 / Warner Music France, a Warner Music Group ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/5V_aCw3qyOM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/5V_aCw3qyOM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/5V_aCw3qyOM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Soprano - Topic",
+        "liveBroadcastContent": "none",
+        "publishTime": "2018-11-08T10:34:37Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "KHeoKbDC-a7ZHnqafPcX7AKUaQ0",
+      "id": { "kind": "youtube#video", "videoId": "8bGkXIyqjwE" },
+      "snippet": {
+        "publishedAt": "2020-10-27T09:50:00Z",
+        "channelId": "UCrv95MIachLXwJEkNHv52zQ",
+        "title": "Frànçois &amp; The Atlas Mountains - Coucou (Official Video)",
+        "description": "Frànçois & the Atlas Mountains - \"Coucou\" taken from the new album 'Banane Bleue' out now. Subscribe to Frànçois & the Atlas ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/8bGkXIyqjwE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/8bGkXIyqjwE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/8bGkXIyqjwE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "FrancoisAtlasVEVO",
+        "liveBroadcastContent": "none",
+        "publishTime": "2020-10-27T09:50:00Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "Dy2Vr7-Rpn9k0nFV1mx9ilg_PcM",
+      "id": { "kind": "youtube#video", "videoId": "m_yHVl-_zxo" },
+      "snippet": {
+        "publishedAt": "2016-04-02T12:06:04Z",
+        "channelId": "UCxHq7QQAM5S8UoxDVt5JpQQ",
+        "title": "JUL - COUCOU",
+        "description": "''D'OR ET DE PLATINE'' EST LE NOUVEAU LABEL DE JUL SUIVEZ L'ACTUALITÉ DE JUL : FACEBOOK ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/m_yHVl-_zxo/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/m_yHVl-_zxo/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/m_yHVl-_zxo/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "JUL OFFICIEL",
+        "liveBroadcastContent": "none",
+        "publishTime": "2016-04-02T12:06:04Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "kSFc7Lctj5rOggY8O3H-tRsuDJM",
+      "id": { "kind": "youtube#video", "videoId": "zeez4OmkgwU" },
+      "snippet": {
+        "publishedAt": "2019-05-13T12:43:12Z",
+        "channelId": "UCniG4jn_q5bwLc73uDfr49Q",
+        "title": "Charlotte Dipanda - Coucou feat Singuila - Live au Grand Rex - Paris",
+        "description": "Retrouve Charlotte Dipanda sur : Site Officiel : http://www.charlottedipandamusic.com Facebook ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/zeez4OmkgwU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/zeez4OmkgwU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/zeez4OmkgwU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Charlotte Dipanda Officielle",
+        "liveBroadcastContent": "none",
+        "publishTime": "2019-05-13T12:43:12Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "vTViQgEaMiqLJDCWCQylcI1Pkg0",
+      "id": { "kind": "youtube#video", "videoId": "KxbstZhKEOM" },
+      "snippet": {
+        "publishedAt": "2022-05-29T08:00:26Z",
+        "channelId": "UC9lEEJEv5SJDGx6NPtkGsWw",
+        "title": "MON 1ER VLOG - y a rien qui va",
+        "description": "Coucou Les Girls ! ❤️❤️❤️❤️❤️❤️❤️❤️ Est-ce qu'on part sur un echec pour ce 1er vlog ? Tout à fait. Mais ça m'a ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/KxbstZhKEOM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/KxbstZhKEOM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/KxbstZhKEOM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Coucou Les Girls",
+        "liveBroadcastContent": "none",
+        "publishTime": "2022-05-29T08:00:26Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "0AeuEj2pqh8BlXh9AUQOcPg4BH0",
+      "id": { "kind": "youtube#video", "videoId": "AsVdSicpGpY" },
+      "snippet": {
+        "publishedAt": "2016-11-07T21:07:51Z",
+        "channelId": "UCCNIJNq8solL7dV0wSIZnjg",
+        "title": "MissJirachi Coucou",
+        "description": "Coucou Sous titres maintenant disponibles ! Je supprime toute insulte et menace envers David et Missjirachi btw.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/AsVdSicpGpY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/AsVdSicpGpY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/AsVdSicpGpY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "dadicool",
+        "liveBroadcastContent": "none",
+        "publishTime": "2016-11-07T21:07:51Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "bC-TfY0S5SX_yafUc9B29D8x8KU",
+      "id": { "kind": "youtube#video", "videoId": "zAKU5JOBnVI" },
+      "snippet": {
+        "publishedAt": "2021-12-09T16:00:12Z",
+        "channelId": "UCCSFseZ6DfCtVO8giGp7GfA",
+        "title": "Koba LaD - Doudou Feat. Naps",
+        "description": "\"DOUDOU\" FEAT NAPS INCLUS DANS LA MIXTAPE « CARTEL : VOLUME 1 & 2 » DISPO A MINUIT ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/zAKU5JOBnVI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/zAKU5JOBnVI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/zAKU5JOBnVI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Koba LaD",
+        "liveBroadcastContent": "none",
+        "publishTime": "2021-12-09T16:00:12Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "equuDpxPIjnM_5YDoLZH31bIXDY",
+      "id": { "kind": "youtube#video", "videoId": "sWnipvpTqpc" },
+      "snippet": {
+        "publishedAt": "2019-11-07T10:11:19Z",
+        "channelId": "UCIQE_UNqXBXVLWxmyaks3UA",
+        "title": "Coucou",
+        "description": "Provided to YouTube by Rec. 118 Coucou · Soprano Du Phoenix aux étoiles... ℗ 2018 Rec. 118 / Warner Music France, a Warner ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/sWnipvpTqpc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/sWnipvpTqpc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/sWnipvpTqpc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Soprano - Topic",
+        "liveBroadcastContent": "none",
+        "publishTime": "2019-11-07T10:11:19Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "UtZZ53q2m7PHHjlcUITliFbUTe4",
+      "id": { "kind": "youtube#video", "videoId": "Xbbdvh3_Xtc" },
+      "snippet": {
+        "publishedAt": "2018-05-07T13:39:45Z",
+        "channelId": "UCOIrnztq38O86VowvdK0X4Q",
+        "title": "Coucou",
+        "description": "Provided to YouTube by Musicast Coucou · Naza C'est la loi ℗ Mukongo Business Released on: 2018-05-04 Author: Naza ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Xbbdvh3_Xtc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Xbbdvh3_Xtc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Xbbdvh3_Xtc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Naza - Topic",
+        "liveBroadcastContent": "none",
+        "publishTime": "2018-05-07T13:39:45Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "CFbfArkOQfwfQQ7w-4kJmc7cYac",
+      "id": { "kind": "youtube#video", "videoId": "3HzC26zEK-4" },
+      "snippet": {
+        "publishedAt": "2019-03-14T10:22:34Z",
+        "channelId": "UCSKdvgqdnj72_SLggp7BDTg",
+        "title": "Ce coucou est un parasite, un imposteur et un tueur",
+        "description": "Déposé par sa mère dans un autre nid, cette espèce de coucou a pour habitude de se débarrasser des autres œufs afin de ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/3HzC26zEK-4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/3HzC26zEK-4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/3HzC26zEK-4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Brut",
+        "liveBroadcastContent": "none",
+        "publishTime": "2019-03-14T10:22:34Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "UXNQyE_19v1QTMfDFi-dqOSyuSg",
+      "id": { "kind": "youtube#video", "videoId": "NrTJ_v_acP8" },
+      "snippet": {
+        "publishedAt": "2013-12-28T13:00:28Z",
+        "channelId": "UC5InZkXsnR_i6vsnpr8oppQ",
+        "title": "le coucou , l&#39;oiseau invisible",
+        "description": "invisible à la plupart des êtres humains , j'ai eu l'opportunité de le filmer sur une période de deux ans ...près de quatre heures de ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/NrTJ_v_acP8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/NrTJ_v_acP8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/NrTJ_v_acP8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "chasdim",
+        "liveBroadcastContent": "none",
+        "publishTime": "2013-12-28T13:00:28Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "rQLpcWoQWq7mrq2hAsFwsiliGFc",
+      "id": { "kind": "youtube#video", "videoId": "n2EdG6W6ffc" },
+      "snippet": {
+        "publishedAt": "2012-09-12T19:15:14Z",
+        "channelId": "UCQQKCydjEzNpDVgmRQMhsjQ",
+        "title": "Colonel Reyel - Coucou (Clip Officiel)",
+        "description": "Mon 2ème album \"Soldat de l'amour\" est dans les bacs et en téléchargement sur toutes les plateformes ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/n2EdG6W6ffc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/n2EdG6W6ffc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/n2EdG6W6ffc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Colonel Reyel",
+        "liveBroadcastContent": "none",
+        "publishTime": "2012-09-12T19:15:14Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "w-vrFnFYwnmJfwx4Euy3qQdk3Ac",
+      "id": { "kind": "youtube#video", "videoId": "0WqmkSMpqvg" },
+      "snippet": {
+        "publishedAt": "2008-07-24T23:39:06Z",
+        "channelId": "UC5oAEZczaKyUencbX20Zc8Q",
+        "title": "Django Reinhardt e Josette Dayde - Coucou",
+        "description": "Django Reinhardt e Josette Dayde.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/0WqmkSMpqvg/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/0WqmkSMpqvg/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/0WqmkSMpqvg/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "trigorina",
+        "liveBroadcastContent": "none",
+        "publishTime": "2008-07-24T23:39:06Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "VAGOFtxtx1fek0Ranwx91N6dvLc",
+      "id": { "kind": "youtube#video", "videoId": "7LAr1HC6c0w" },
+      "snippet": {
+        "publishedAt": "2020-06-11T14:00:02Z",
+        "channelId": "UCXptamDYEVcU4JCio30hYTw",
+        "title": "Peppa Pig Français 🕰️ La Pendule À Coucou | Compilation Spéciale | Dessin Animé Pour Bébé",
+        "description": "Peppa Pig Français 🕰️ La Pendule À Coucou | Compilation Spéciale | Dessin Animé Pour Bébé Abonnez-vous à la chaîne ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/7LAr1HC6c0w/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/7LAr1HC6c0w/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/7LAr1HC6c0w/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Peppa Pig Français - Chaîne Officielle",
+        "liveBroadcastContent": "none",
+        "publishTime": "2020-06-11T14:00:02Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "5_Fctz8oHUT0Ha54kzJt5Zj7ONA",
+      "id": { "kind": "youtube#video", "videoId": "1QqmpDapXWU" },
+      "snippet": {
+        "publishedAt": "2021-12-27T14:00:01Z",
+        "channelId": "UCy20mWcFYbxNIdP4g461WMA",
+        "title": "Jouer au jeu de calmar dans la vraie vie Défi #2 par Multi DO Challenge",
+        "description": "Jouer au jeu de calmar dans la vraie vie Défi #2 par Multi DO Challenge Es-tu prêt à essayer certaines de ces astuces pour mieux ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/1QqmpDapXWU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/1QqmpDapXWU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/1QqmpDapXWU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Multi DO French",
+        "liveBroadcastContent": "none",
+        "publishTime": "2021-12-27T14:00:01Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "g2o_qg14xTpO3Ghr4aBZi6kjFag",
+      "id": { "kind": "youtube#video", "videoId": "yiZeq3o-drA" },
+      "snippet": {
+        "publishedAt": "2020-08-19T10:00:19Z",
+        "channelId": "UC5HKrNXapsQYLouta4w-7rg",
+        "title": "Wejdene - Coco (Clip Officiel)",
+        "description": "WEJDENE✨ EN TOURNÉ ❤️ DANS TOUTE LA FRANCE : https://wejdene.to/tour Coco ❤️ disponible sur toutes ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/yiZeq3o-drA/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/yiZeq3o-drA/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/yiZeq3o-drA/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "WejdeneOfficiel",
+        "liveBroadcastContent": "none",
+        "publishTime": "2020-08-19T10:00:19Z"
+      }
+    }
+  ]
+}
