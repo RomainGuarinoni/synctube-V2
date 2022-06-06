@@ -28,6 +28,12 @@ The V2 of synctube, faster, more powerfull and nicer !
 - nbre d'utilisateurs sur l'app
 - nbre de video sur la salle privée
 
+## Rooms
+
+- post the user in the db at the login 
+- each user can create 5 distinct rooms
+- at the  / route, they can see theire rooms and the one they visited
+
 
 ## Stack
 
