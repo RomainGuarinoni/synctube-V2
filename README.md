@@ -33,6 +33,18 @@ The V2 of synctube, faster, more powerfull and nicer !
 - post the user in the db at the login 
 - each user can create 5 distinct rooms
 - at the  / route, they can see theire rooms and the one they visited
+- The creator of the room can kick user in the room
+- Create a Room context with : 
+
+```ts
+{
+  video: Video,
+  isOwner: boolean,
+  connected: Profil[],
+  onVideoChange: ()=>void,
+  ...
+}
+```
 
 
 ## Stack
