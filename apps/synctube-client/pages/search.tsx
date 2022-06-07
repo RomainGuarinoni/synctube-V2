@@ -92,16 +92,8 @@ function Search(): JSX.Element {
     return <div className="text-zinc-400 font-bold">Error</div>;
   }
 
-  if (!getDataAndErrorOfSelected().data) {
-    return (
-      <div className=" w-full h-full flex flex-col items-center justify-center">
-        <Loader />
-      </div>
-    );
-  }
-
   return (
-    <div className="flex justify-start items-center flex-wrap text-zinc-400 w-full ">
+    <div className="flex flex-col justify-start items-center flex-wrap text-zinc-400 w-full h-full  ">
       <Tab
         items={[
           SearchLocation.youtube,
@@ -112,7 +104,15 @@ function Search(): JSX.Element {
         defaultValue={searchLocation || SearchLocation.youtube}
       />
 
-      <VideosList video={getDataAndErrorOfSelected().data as Video[]} />
+      <div className="overflow-auto flex-1">
+        {getDataAndErrorOfSelected().data ? (
+          <VideosList video={getDataAndErrorOfSelected().data as Video[]} />
+        ) : (
+          <div className=" w-full h-full flex flex-col items-center justify-center">
+            <Loader />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

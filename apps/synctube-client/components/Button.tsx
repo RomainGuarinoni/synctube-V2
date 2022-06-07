@@ -10,7 +10,7 @@ export function Button({ children, size, ...props }: ButtonProps): JSX.Element {
         size === 'small'
           ? 'text-sm px-3 py-2 rounded-3xl'
           : size === 'medium'
-          ? 'text-base px-3 py-2 rounded-xl'
+          ? 'text-base px-4 py-2 rounded-xl'
           : 'text-lg px-4 py-3 rounded-xl'
       } `}
       {...props}

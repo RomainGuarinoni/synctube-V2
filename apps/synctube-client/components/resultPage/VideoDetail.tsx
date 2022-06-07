@@ -19,14 +19,12 @@ export function VideoDetail({
     return htmlText.value;
   };
 
-  const playVideo = (e: MouseEventReact<HTMLDivElement, MouseEvent>) => {
+  const playVideo = (e: MouseEventReact<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
     console.log(`Play the video : ${title}`);
   };
 
-  const setVideoToFavourite = (
-    e: MouseEventReact<HTMLDivElement, MouseEvent>,
-  ) => {
+  const setVideoToFavourite = (e: MouseEventReact<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
 
     console.log(`New Favourite : ${title}`);
@@ -37,17 +35,17 @@ export function VideoDetail({
       className="h-[28rem] w-80 bg-zinc-800 cursor-pointer hover:scale-105 ease-linear duration-100 rounded-lg overflow-hidden flex flex-col text-zinc-200"
       onClick={playVideo}
     >
-      <div className="w-full h-1/2 relative">
+      <div className="w-full h-1/2 relative image">
         <Image
           src={picture}
           alt="Youtube thumbnail"
           title={`Youtube thumbnail for the video ${title}`}
           objectFit="cover"
           layout="fill"
-          className="scale-[1.23]"
+          className="scale-[1.24]"
         />
       </div>
-      <div className="flex-1 w-full p-2 flex flex-col">
+      <div className="flex-1 w-full px-2 flex flex-col">
         <div className="h-16 overflow-hidden">
           <h3 className="text-lg font-bold leading-none title">
             {decodeHtml(title)}
@@ -98,6 +96,14 @@ export function VideoDetail({
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
+        }
+
+        .image {
+          mask-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 1),
+            rgb(0, 0, 0, 0)
+          );
         }
       `}</style>
     </div>
