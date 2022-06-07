@@ -6,15 +6,29 @@ export function convertYoutubeVideo(
 ): Video[] | undefined {
   if (!response) return undefined;
 
-  return response.items.map(
-    ({ id, snippet: { title, description, channelTitle, thumbnails } }) => {
-      return {
-        id: id.videoId,
-        title,
-        description,
-        channelTitle,
-        picture: thumbnails.medium.url,
-      };
-    },
-  );
+  return response.items
+    .filter(({ id: { kind } }) => kind !== 'youtube#channel')
+    .map(
+      ({
+        id: { videoId },
+        snippet: {
+          title,
+          description,
+          channelTitle,
+          publishedAt,
+          thumbnails: {
+            high: { url },
+          },
+        },
+      }) => {
+        return {
+          title,
+          id: videoId,
+          description,
+          channelTitle,
+          publishedAt,
+          picture: url,
+        };
+      },
+    );
 }

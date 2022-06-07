@@ -5,4 +5,5 @@ export interface Video {
   picture: string;
   channelTitle: string;
   owner?: string;
+  publishedAt: string;
 }

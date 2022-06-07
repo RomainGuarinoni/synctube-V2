@@ -1,39 +1,101 @@
 import { Video } from '@synctube-v2/types';
+import Image from 'next/image';
+import { Button } from '../Button';
+import { IHearth } from '../icons/IHearth';
+import { IPlay } from '../icons/IPlay';
 
 interface VideoProps {
   video: Video;
-  setDetailedVideoID: (arg: string | null) => void;
-  detailedVideoId: string | null;
 }
 
 export function VideoDetail({
-  video: { id, title, description, channelTitle, picture, owner },
-  setDetailedVideoID,
-  detailedVideoId,
+  video: { id, title, description, channelTitle, picture, owner, publishedAt },
 }: VideoProps): JSX.Element {
-  const handleMoreDetailClick = () => {
-    if (detailedVideoId === id) {
-      setDetailedVideoID(null);
-      return;
-    }
-    setDetailedVideoID(id);
+  const decodeHtml = (text: string) => {
+    const htmlText = document.createElement('textarea');
+    htmlText.innerHTML = text;
+    return htmlText.value;
+  };
+
+  const playVideo = (e: MouseEvent) => {
+    e.stopPropagation();
+    console.log(`Play the video : ${title}`);
+  };
+
+  const setVideoToFavourite = (e: MouseEvent) => {
+    e.stopPropagation();
+
+    console.log(`New Favourite : ${title}`);
   };
 
   return (
     <div
-      className={`flex gap-2 flex-row items-center bg-zinc-800 rounded-xl w-[35rem]
-      ${
-        detailedVideoId === id ? 'h-96' : 'h-48'
-      } px-5 text-zinc-400 py-3 cursor-pointer ease-linear duration-100 hover:scale-105 flex-wrap `}
-      onClick={handleMoreDetailClick}
+      className="h-[28rem] w-80 bg-zinc-800 cursor-pointer hover:scale-105 ease-linear duration-100 rounded-lg overflow-hidden flex flex-col text-zinc-200"
+      onClick={playVideo}
     >
-      <div className="w-1/3 h-full flex items-center justify-center aspect-video  ">
-        <img src={picture} alt="" />
+      <div className="w-full h-1/2 relative">
+        <Image
+          src={picture}
+          alt="Youtube thumbnail"
+          title={`Youtube thumbnail for the video ${title}`}
+          objectFit="cover"
+          layout="fill"
+          className="scale-[1.23]"
+        />
       </div>
-      <div className="flex-1 flex flex-col justify-start items-start h-full">
-        <h3 className="font-bold"> {title} </h3>
-        <p className="font-normal h-1/3 overflow-hidden">{description} </p>
+      <div className="flex-1 w-full p-2 flex flex-col">
+        <div className="h-16 overflow-hidden">
+          <h3 className="text-lg font-bold leading-none title">
+            {decodeHtml(title)}
+          </h3>
+          <p className="text-zinc-400 text-sm mt-1 w-full">
+            <span className="mr-2">{channelTitle}</span>
+            <span className="mr-2">•</span>
+            {new Date(publishedAt).toLocaleDateString()}
+          </p>
+        </div>
+        <div className="mt-1">
+          <h4>Description</h4>
+          <p className="leading-none text-sm text-zinc-400 description h-14">
+            {decodeHtml(description)}
+          </p>
+        </div>
+        <div className="flex items-center justify-around flex-wrap flex-1 w-full">
+          <Button size="medium" onClick={playVideo}>
+            <div className="flex flex-wrap items-center justify-start">
+              <span className="w-2 mr-1">
+                <IPlay />
+              </span>
+              Regarder
+            </div>
+          </Button>
+          <Button size="medium" onClick={setVideoToFavourite}>
+            <div className="flex flex-wrap items-center justify-start">
+              <span className="w-4 mr-1">
+                <IHearth />
+              </span>
+              Favoris
+            </div>
+          </Button>
+        </div>
       </div>
+      <style jsx>{`
+        .title {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .description {
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      `}</style>
     </div>
   );
 }

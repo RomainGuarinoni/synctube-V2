@@ -81,11 +81,9 @@ export default function Login() {
             </span>
           </h2>
           <p className="mb-10 text-center">{loginTranslation.explanation} </p>
-          <Button
-            label={loginTranslation.googleText}
-            size="medium"
-            onClick={handleLoginGoogle}
-          />
+          <Button size="large" onClick={handleLoginGoogle}>
+            {loginTranslation.googleText}
+          </Button>
           {googleError && <p className="mt-10 text-red-500"> {googleError}</p>}
         </>
       )}

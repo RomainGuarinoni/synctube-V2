@@ -12,12 +12,12 @@ export type SearchResult = {
     playlistId: string;
   };
   snippet: {
-    publishedAt: Date;
+    publishedAt: string;
     channelId: string;
     title: string;
     description: string;
     thumbnails: {
-      medium: {
+      high: {
         url: string;
         width: number;
         height: number;

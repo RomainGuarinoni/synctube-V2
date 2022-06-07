@@ -17,7 +17,7 @@ export function AppLayout({ children }: AppLayoutProps) {
     >
       <Navbar />
       <main
-        className={`bg-zinc-900 flex-1 rounded-2xl overflow-auto px-10 py-5`}
+        className={`flex-1 bg-zinc-900 rounded-2xl overflow-auto px-10 py-5`}
       >
         {children}
       </main>

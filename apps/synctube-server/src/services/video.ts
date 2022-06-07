@@ -27,7 +27,7 @@ const MockData: Video[] = [
   },
 ];
 
-export function getRoomHistoryVideo(roomId: string): HistoryVideo[] {
+export function getRoomHistoryVideo(roomId: string): Video[] {
   return MockData;
 }
 
