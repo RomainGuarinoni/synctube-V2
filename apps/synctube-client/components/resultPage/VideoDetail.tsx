@@ -1,5 +1,7 @@
 import { Video } from '@synctube-v2/types';
 import Image from 'next/image';
+import { MouseEvent as MouseEventReact } from 'react';
+
 import { Button } from '../Button';
 import { IHearth } from '../icons/IHearth';
 import { IPlay } from '../icons/IPlay';
@@ -17,12 +19,14 @@ export function VideoDetail({
     return htmlText.value;
   };
 
-  const playVideo = (e: MouseEvent) => {
+  const playVideo = (e: MouseEventReact<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     console.log(`Play the video : ${title}`);
   };
 
-  const setVideoToFavourite = (e: MouseEvent) => {
+  const setVideoToFavourite = (
+    e: MouseEventReact<HTMLDivElement, MouseEvent>,
+  ) => {
     e.stopPropagation();
 
     console.log(`New Favourite : ${title}`);
