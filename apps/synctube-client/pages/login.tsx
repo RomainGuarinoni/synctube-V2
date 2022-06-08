@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { Button } from '../components/Button';
-import { Loader } from '../components/Loader';
+import { Button } from '../components/shared/Button';
+import { Loader } from '../components/shared/Loader';
 import { useTranslation } from '../hooks/useTranslation';
 
 import { useAuth } from '../context/AuthContext';

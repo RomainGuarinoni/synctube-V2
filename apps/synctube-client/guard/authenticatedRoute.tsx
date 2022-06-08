@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
-import { Loader } from '../components/Loader';
+import { Loader } from '../components/shared/Loader';
 import { useAuth } from '../context/AuthContext';
 
 export function authenticatedRoute(Component: FC) {

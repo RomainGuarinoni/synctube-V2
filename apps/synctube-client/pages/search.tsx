@@ -1,16 +1,11 @@
 import { useRouter } from 'next/router';
-import { Video } from '@synctube-v2/types';
 import { useEffect, useState } from 'react';
-import { useFavourite } from '../api/favourite';
-import { useHistory } from '../api/history';
-import { useYoutubeSearch, YoutubeResponse } from '../api/youtube';
-import { Loader } from '../components/Loader';
 import { SearchLocation } from '../components/navbar/SearchBar';
-import { Tab } from '../components/Tabs';
+import { YoutubeSearch } from '../components/search/YoutubeSearch';
+import { FavouriteSearch } from '../components/search/FavouriteSearch';
+import { Tab } from '../components/shared/Tabs';
 import { authenticatedRoute } from '../guard/authenticatedRoute';
-import mockYoutubeResponse from '../mock/youtubeResponse.json';
-import { convertYoutubeVideo } from '../utils/video';
-import { VideosList } from '../components/resultPage/VideosList';
+import { HistorySearch } from '../components/search/HistorySearch';
 
 function Search(): JSX.Element {
   const { query, push } = useRouter();
@@ -20,48 +15,11 @@ function Search(): JSX.Element {
     null,
   );
 
-  // const { data: youtubeData, isError: youtubeError } = useYoutubeSearch(
-  //   searchLocation && searchLocation === SearchLocation.youtube && searchInput
-  //     ? searchInput
-  //     : '',
-  // );
-
-  const { data: youtubeData, isError: youtubeError } = {
-    data: mockYoutubeResponse as unknown as YoutubeResponse,
-    isError: false,
-  };
-
-  const { data: historyData, isError: historyError } = useHistory(
-    searchLocation && searchLocation === SearchLocation.history ? '510' : null,
-  );
-
-  const { data: favouriteData, isError: favouriteError } = useFavourite(
-    searchLocation && searchLocation === SearchLocation.favourite
-      ? '510'
-      : null,
-  );
-
   const handleChangeSearchLocation = (location: SearchLocation) => {
     push({ pathname: '/search', query: { ...query, location } }, undefined, {
       shallow: true,
     });
     setSearchLocation(location);
-  };
-
-  const getDataAndErrorOfSelected = (): {
-    data: Video[] | undefined;
-    error: boolean;
-  } => {
-    switch (searchLocation) {
-      case null:
-        return { data: undefined, error: false };
-      case SearchLocation.youtube:
-        return { data: convertYoutubeVideo(youtubeData), error: youtubeError };
-      case SearchLocation.favourite:
-        return { data: favouriteData, error: favouriteError };
-      case SearchLocation.history:
-        return { data: historyData, error: historyError };
-    }
   };
 
   // Redirect to index page if there is no query q in the path
@@ -88,10 +46,6 @@ function Search(): JSX.Element {
     }
   }, [setSearchLocation, query]);
 
-  if (getDataAndErrorOfSelected().error) {
-    return <div className="text-zinc-400 font-bold">Error</div>;
-  }
-
   return (
     <div className="flex flex-col justify-start items-center flex-wrap text-zinc-400 w-full h-full  ">
       <Tab
@@ -103,16 +57,15 @@ function Search(): JSX.Element {
         onChange={handleChangeSearchLocation}
         defaultValue={searchLocation || SearchLocation.youtube}
       />
-
-      <div className="overflow-auto flex-1">
-        {getDataAndErrorOfSelected().data ? (
-          <VideosList video={getDataAndErrorOfSelected().data as Video[]} />
-        ) : (
-          <div className=" w-full h-full flex flex-col items-center justify-center">
-            <Loader />
-          </div>
-        )}
-      </div>
+      {searchLocation === SearchLocation.youtube && (
+        <YoutubeSearch searchInput={searchInput} />
+      )}
+      {searchLocation === SearchLocation.favourite && (
+        <FavouriteSearch searchInput={searchInput} />
+      )}
+      {searchLocation === SearchLocation.history && (
+        <HistorySearch searchInput={searchInput} />
+      )}
     </div>
   );
 }

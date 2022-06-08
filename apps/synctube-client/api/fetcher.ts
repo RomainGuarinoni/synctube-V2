@@ -5,6 +5,13 @@ export type useSwrResponse<T> = {
   data: T | undefined;
 };
 
+export type useSwrInfiniteResponse<T> = {
+  isError: boolean;
+  data: T[] | undefined;
+  size: number;
+  setSize: (size: number) => void;
+};
+
 export async function fetcher(
   url: string,
   params?: Record<string, unknown>,

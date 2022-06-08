@@ -2,9 +2,9 @@ import { Video } from '@synctube-v2/types';
 import Image from 'next/image';
 import { MouseEvent as MouseEventReact } from 'react';
 
-import { Button } from '../Button';
-import { IHearth } from '../icons/IHearth';
-import { IPlay } from '../icons/IPlay';
+import { Button } from '../../shared/Button';
+import { IHearth } from '../../icons/IHearth';
+import { IPlay } from '../../icons/IPlay';
 
 interface VideoProps {
   video: Video;
