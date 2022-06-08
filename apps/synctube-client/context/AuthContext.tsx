@@ -101,7 +101,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error(LoginErrors.profilMissing);
     }
 
-    setCookie(REFRESH_TOKEN_LOCATION, tokens.refresh_token as string);
+    setCookie(REFRESH_TOKEN_LOCATION, tokens.refresh_token as string, {
+      isSession: false,
+    });
 
     console.log(profil);
     localStorage.setItem(PROFIL_LOCATION, JSON.stringify(profil));
