@@ -93,15 +93,17 @@ export function useYoutubeSearch(
 
   const getKey = getKeyBuilder(searchInput, accessToken);
 
-  const { data, error, size, setSize } = useSWRInfinite<YoutubeResponse>(
-    getKey,
-    fetcher,
-  );
+  const { data, error, size, setSize, isValidating } = useSWRInfinite<
+    YoutubeResponse,
+    boolean
+  >(getKey, fetcher, { errorRetryCount: 3 });
+  console.log(data, error, size, isValidating);
 
   return {
     data,
     isError: error,
     size,
     setSize,
+    isValidating,
   };
 }

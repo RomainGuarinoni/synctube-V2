@@ -6,10 +6,11 @@ export type useSwrResponse<T> = {
 };
 
 export type useSwrInfiniteResponse<T> = {
-  isError: boolean;
+  isError: boolean | undefined;
   data: T[] | undefined;
   size: number;
   setSize: (size: number) => void;
+  isValidating: boolean;
 };
 
 export async function fetcher(
@@ -24,6 +25,5 @@ export async function fetcher(
         ? { headers: { Authorization: `Bearer ${accessToken}` } }
         : {}),
     })
-    .then((res) => res.data)
-    .catch(console.error);
+    .then((res) => res.data);
 }

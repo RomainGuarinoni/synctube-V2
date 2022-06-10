@@ -4,7 +4,7 @@ import { YoutubeResponse } from '../api/youtube';
 export function convertYoutubeVideo(
   response: YoutubeResponse[] | undefined,
 ): Video[] | undefined {
-  if (!response) return undefined;
+  if (!response || !response[0]) return undefined;
 
   return response
     .map((youtubeResponse) =>
