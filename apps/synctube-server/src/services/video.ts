@@ -8,6 +8,7 @@ const MockData: Video[] = [
     picture: 'https://video.com',
     channelTitle: 'Romain Guar',
     owner: 'Romauin Guarinoni',
+    publishedAt: new Date().toISOString(),
   },
   {
     id: '541',
@@ -16,6 +17,7 @@ const MockData: Video[] = [
     picture: 'https://video.com',
     channelTitle: 'panash',
     owner: 'Alexandre garcia',
+    publishedAt: new Date().toISOString(),
   },
   {
     id: '874',
@@ -24,6 +26,7 @@ const MockData: Video[] = [
     picture: 'https://video.com',
     channelTitle: 'Romain Guar',
     owner: 'Alexandre garcia',
+    publishedAt: new Date().toISOString(),
   },
 ];
 

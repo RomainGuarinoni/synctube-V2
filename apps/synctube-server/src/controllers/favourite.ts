@@ -1,9 +1,16 @@
 import type { Request, Response } from 'express';
 
 import { getUserFavouriteVideo } from '../services/video';
+import { validateBody } from '../validators/validateBody';
 
 export async function getFavouriteVideo(req: Request, res: Response) {
-  const video = getUserFavouriteVideo('5410');
+  try {
+    await validateBody('getFavouriteVideo', req.body);
 
-  return res.status(200).json(video);
+    const video = getUserFavouriteVideo('5410');
+
+    return res.status(200).json(video);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 }

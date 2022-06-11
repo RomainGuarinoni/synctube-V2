@@ -9,7 +9,7 @@ export type SearchResult = {
     kind: string;
     videoId: string;
     channelId: string;
-    playlistId: string;
+    playlistId?: string;
   };
   snippet: {
     publishedAt: string;
@@ -29,9 +29,9 @@ export type SearchResult = {
 };
 
 export type YoutubeResponse = {
-  nextPageToken: string;
-  prevPageToken: string;
   items: SearchResult[];
+  nextPageToken?: string;
+  prevPageToken?: string;
 };
 
 type GetKeyResponse = [
