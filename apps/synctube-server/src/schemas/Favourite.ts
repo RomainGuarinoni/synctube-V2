@@ -3,7 +3,7 @@ import { Video } from '@synctube-v2/types';
 
 import { VideoSchema } from './Video';
 
-interface IFavouriteSchema {
+export interface IFavouriteSchema {
   userId: string;
   video: Video;
   date: Date;

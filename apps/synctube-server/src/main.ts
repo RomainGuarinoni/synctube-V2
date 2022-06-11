@@ -4,10 +4,10 @@ import * as cors from 'cors';
 
 import { historyRouter } from './routes/history';
 
-import { log } from './middlewares/log';
 import { favouriteRouter } from './routes/favourite';
 import { connect } from './database/connect';
 import { userRouter } from './routes/user';
+import { frontUrl } from './config/url';
 
 const app = express();
 
@@ -16,9 +16,7 @@ const PORT = process.env.port || 3333;
 app.use(express.json());
 
 // TODO UPDATE THIS
-app.use(cors({ origin: 'http://localhost:4200' }));
-
-app.use(log);
+app.use(cors({ origin: frontUrl }));
 
 app.use('/api/history', historyRouter);
 app.use('/api/favourite', favouriteRouter);

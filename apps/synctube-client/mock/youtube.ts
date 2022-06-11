@@ -23,8 +23,6 @@ export function useYoutubeSearchMock(
       return item;
     });
 
-    console.log(newItems);
-
     setData(data.concat({ ...youtubeResponseData, items: newItems }));
 
     setIsValidating(false);

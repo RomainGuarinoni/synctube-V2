@@ -11,20 +11,15 @@ export async function loginUser(req: Request, res: Response) {
 
     const profil: Profil = req.body;
 
-    console.log(profil);
-
     const user = await getUserById(profil.id);
 
     if (user) {
-      console.log('USER FIND');
-
       return res.sendStatus(200);
     }
 
     const newUser: IUSerSchema = { ...profil, resgisteredAt: new Date() };
     await createUser(newUser);
 
-    console.log('USER CREATED');
     return res.sendStatus(200);
   } catch (err) {
     res.status(400).json(err);

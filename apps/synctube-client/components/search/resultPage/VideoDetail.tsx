@@ -5,6 +5,8 @@ import { MouseEvent as MouseEventReact } from 'react';
 import { Button } from '../../shared/Button';
 import { IHearth } from '../../icons/IHearth';
 import { IPlay } from '../../icons/IPlay';
+import { useAuth } from '../../../context/AuthContext';
+import { addFavouriteVideo } from '../../../api/favourite';
 
 interface VideoProps {
   video: Video;
@@ -13,6 +15,10 @@ interface VideoProps {
 export function VideoDetail({
   video: { id, title, description, channelTitle, picture, owner, publishedAt },
 }: VideoProps): JSX.Element {
+  const {
+    authState: { profil },
+  } = useAuth();
+
   const decodeHtml = (text: string) => {
     const htmlText = document.createElement('textarea');
     htmlText.innerHTML = text;
@@ -24,10 +30,26 @@ export function VideoDetail({
     console.log(`Play the video : ${title}`);
   };
 
-  const setVideoToFavourite = (e: MouseEventReact<HTMLElement, MouseEvent>) => {
+  const setVideoToFavourite = async (
+    e: MouseEventReact<HTMLElement, MouseEvent>,
+  ) => {
     e.stopPropagation();
 
-    console.log(`New Favourite : ${title}`);
+    if (profil) {
+      try {
+        await addFavouriteVideo(profil.id, {
+          id,
+          title,
+          description,
+          channelTitle,
+          picture,
+          publishedAt,
+        });
+      } catch (err) {
+        console.log(err);
+        //ADD TOAST HERE
+      }
+    }
   };
 
   return (

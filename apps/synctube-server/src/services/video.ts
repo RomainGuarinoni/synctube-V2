@@ -1,39 +1,36 @@
 import { Video } from '@synctube-v2/types';
-
-const MockData: Video[] = [
-  {
-    id: '454',
-    title: 'Nouvelle video',
-    description: "c'est une nouvelle vidéo",
-    picture: 'https://video.com',
-    channelTitle: 'Romain Guar',
-    owner: 'Romauin Guarinoni',
-    publishedAt: new Date().toISOString(),
-  },
-  {
-    id: '541',
-    title: 'Je dois vous parler',
-    description: "c'est compliquer en ce moment",
-    picture: 'https://video.com',
-    channelTitle: 'panash',
-    owner: 'Alexandre garcia',
-    publishedAt: new Date().toISOString(),
-  },
-  {
-    id: '874',
-    title: 'bonsoir a tous',
-    description: "de la musique que l'on aime",
-    picture: 'https://video.com',
-    channelTitle: 'Romain Guar',
-    owner: 'Alexandre garcia',
-    publishedAt: new Date().toISOString(),
-  },
-];
+import { FavouriteModel, IFavouriteSchema } from '../schemas/Favourite';
 
 export function getRoomHistoryVideo(roomId: string): Video[] {
-  return MockData;
+  return;
 }
 
-export function getUserFavouriteVideo(userId: string): Video[] {
-  return MockData;
+export async function getUserFavouriteVideos(userId: string): Promise<Video[]> {
+  const favouriteVideos = await FavouriteModel.find({ userId });
+
+  // DO PAGINATION
+
+  return favouriteVideos.map((video) => video.video);
+}
+
+export async function getUserFavouriteVideoById(
+  userId: string,
+  videoId: string,
+): Promise<Video> {
+  const favouriteVideo = await FavouriteModel.findOne({
+    'video.id': videoId,
+    userId,
+  });
+
+  if (!favouriteVideo) return null;
+
+  return favouriteVideo.video;
+}
+
+export async function addUserFavouriteVideo(
+  video: IFavouriteSchema,
+): Promise<void> {
+  const favouriteVideo = new FavouriteModel(video);
+
+  await favouriteVideo.save();
 }

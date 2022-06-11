@@ -6,7 +6,6 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import axios from 'axios';
 
 import Cookies from 'js-cookie';
 import { REFRESH_TOKEN_LOCATION } from '../config/cookie';
@@ -14,6 +13,7 @@ import { PROFIL_LOCATION } from '../config/localStorage';
 import { LoginErrors } from '../errors/LoginErrors';
 import { setCookie } from '../utils/cookie';
 import { OAuthClient } from '../auth/OAuthClient';
+import { loginUser } from '../api/user';
 
 type AuthState = {
   profil: Profil | null;
@@ -104,7 +104,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      await axios.post('/api/user/login', profil);
+      await loginUser(profil);
     } catch (err) {
       throw new Error(LoginErrors.apiError);
     }

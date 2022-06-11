@@ -14,10 +14,10 @@ export function YoutubeSearch({ searchInput }: SearchProps): JSX.Element {
   const { data, isError, size, setSize, isValidating } =
     useYoutubeSearchMock(searchInput);
 
-  const [youtubeVideos, setYOutubeVideos] = useState(convertYoutubeVideo(data));
+  const [youtubeVideos, setYoutubeVideos] = useState(convertYoutubeVideo(data));
 
   useEffect(() => {
-    setYOutubeVideos(convertYoutubeVideo(data));
+    setYoutubeVideos(convertYoutubeVideo(data));
   }, [data]);
 
   return (
