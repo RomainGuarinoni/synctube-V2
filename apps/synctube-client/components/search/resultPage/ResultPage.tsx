@@ -19,7 +19,8 @@ export function ResultPage({
   isValidating,
 }: ResultPageProps): JSX.Element {
   const ref = useObserver<HTMLDivElement>(() => {
-    if (setSize && size) {
+    if (setSize && size && !isValidating) {
+      console.log('more data');
       setSize(size + 1);
     }
   });

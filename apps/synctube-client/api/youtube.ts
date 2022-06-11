@@ -3,24 +3,30 @@ import { useAuth } from '../context/AuthContext';
 import { fetcher, useSwrInfiniteResponse } from './fetcher';
 
 export type SearchResult = {
-  kind: 'youtube#searchResult';
+  kind: string;
   etag: string;
   id: {
     kind: string;
-    videoId: string;
-    channelId: string;
+    videoId?: string;
+    channelId?: string;
     playlistId?: string;
   };
   snippet: {
     publishedAt: string;
+    publishTime: string;
     channelId: string;
     title: string;
     description: string;
     thumbnails: {
       high: {
         url: string;
-        width: number;
-        height: number;
+        width?: number;
+        height?: number;
+      };
+      [key: string]: {
+        url: string;
+        width?: number;
+        height?: number;
       };
     };
     channelTitle: string;
@@ -32,6 +38,13 @@ export type YoutubeResponse = {
   items: SearchResult[];
   nextPageToken?: string;
   prevPageToken?: string;
+  kind: string;
+  etag: string;
+  regionCode: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
 };
 
 type GetKeyResponse = [

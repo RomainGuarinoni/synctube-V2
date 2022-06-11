@@ -6,6 +6,8 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import axios from 'axios';
+
 import Cookies from 'js-cookie';
 import { REFRESH_TOKEN_LOCATION } from '../config/cookie';
 import { PROFIL_LOCATION } from '../config/localStorage';
@@ -99,6 +101,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     if (!profil) {
       throw new Error(LoginErrors.profilMissing);
+    }
+
+    try {
+      await axios.post('/api/user/login', profil);
+    } catch (err) {
+      throw new Error(LoginErrors.apiError);
     }
 
     setCookie(REFRESH_TOKEN_LOCATION, tokens.refresh_token as string, {

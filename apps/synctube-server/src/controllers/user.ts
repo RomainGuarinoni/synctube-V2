@@ -7,11 +7,11 @@ import { createUser, getUserById } from '../services/user';
 
 export async function loginUser(req: Request, res: Response) {
   try {
-    console.log(req.body);
-
     await validateBody('loginUser', req.body);
 
     const profil: Profil = req.body;
+
+    console.log(profil);
 
     const user = await getUserById(profil.id);
 
@@ -22,10 +22,10 @@ export async function loginUser(req: Request, res: Response) {
     }
 
     const newUser: IUSerSchema = { ...profil, resgisteredAt: new Date() };
+    await createUser(newUser);
+
     console.log('USER CREATED');
     return res.sendStatus(200);
-
-    await createUser(newUser);
   } catch (err) {
     res.status(400).json(err);
   }

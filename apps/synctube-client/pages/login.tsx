@@ -43,6 +43,7 @@ export default function Login() {
             break;
           case LoginErrors.profilMissing:
           case LoginErrors.tokenMissing:
+          case LoginErrors.apiError:
           default:
             setGoogleError(loginTranslation.errors.internal);
             break;

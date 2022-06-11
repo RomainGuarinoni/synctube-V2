@@ -6,6 +6,7 @@ export function log(req: Request, res: Response, next: NextFunction) {
     `${new Date().toISOString()} : ${req.method.toUpperCase()} -> ${req.path}`,
   );
   console.log(req.body);
+  console.log('\n------------------------\n');
 
   next();
 }
