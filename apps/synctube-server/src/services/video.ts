@@ -9,15 +9,23 @@ export async function getUserFavouriteVideos(
   userId: string,
   limit: number,
   pageToken?: string,
+  searchInput?: string,
 ): Promise<Paginate<Video>> {
   const favouriteVideos = await FavouriteModel.find({
     userId,
     ...(pageToken ? { _id: { $gt: pageToken } } : {}),
+    ...(searchInput
+      ? {
+          $or: [
+            { 'video.title': { $regex: searchInput } },
+            { 'video.description': { $regex: searchInput } },
+            { 'video.channelTitle': { $regex: searchInput } },
+          ],
+        }
+      : {}),
   }).limit(limit);
 
-  console.log('pass there hehe');
-
-  const paginateReponse: Paginate<Video> = {
+  return {
     items: favouriteVideos.map((item) => item.video),
     pageInfo: {
       resultsPerPage: limit,
@@ -30,12 +38,6 @@ export async function getUserFavouriteVideos(
       ? { previousPageToken: favouriteVideos[0]._id.toString() }
       : {}),
   };
-
-  console.log('mais wtf quoi');
-
-  console.log(paginateReponse);
-
-  return paginateReponse;
 }
 
 export async function getUserFavouriteVideoById(

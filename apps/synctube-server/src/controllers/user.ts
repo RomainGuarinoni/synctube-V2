@@ -1,4 +1,3 @@
-import { Profil } from '@synctube-v2/types';
 import { Request, Response } from 'express';
 
 import { validateBody } from '../validators/validateBody';

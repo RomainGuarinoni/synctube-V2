@@ -10,14 +10,19 @@ import { validateBody } from '../validators/validateBody';
 
 export async function getFavouriteVideo(req: Request, res: Response) {
   try {
-    const { userId, limit, pageToken } = await validateBody(
+    const { userId, limit, pageToken, searchInput } = await validateBody(
       'getFavouriteVideo',
       req.body,
     );
 
     console.log('pass here');
 
-    const video = await getUserFavouriteVideos(userId, limit, pageToken);
+    const video = await getUserFavouriteVideos(
+      userId,
+      limit,
+      pageToken,
+      searchInput,
+    );
     console.log('pass there too');
 
     return res.status(200).json(video);
