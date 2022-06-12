@@ -10,9 +10,15 @@ import { validateBody } from '../validators/validateBody';
 
 export async function getFavouriteVideo(req: Request, res: Response) {
   try {
-    await validateBody('getFavouriteVideo', req.body);
+    const { userId, limit, pageToken } = await validateBody(
+      'getFavouriteVideo',
+      req.body,
+    );
 
-    const video = getUserFavouriteVideos('5410');
+    console.log('pass here');
+
+    const video = await getUserFavouriteVideos(userId, limit, pageToken);
+    console.log('pass there too');
 
     return res.status(200).json(video);
   } catch (err) {
@@ -22,11 +28,10 @@ export async function getFavouriteVideo(req: Request, res: Response) {
 
 export async function addFavouriteVideo(req: Request, res: Response) {
   try {
-    await validateBody('addFavouriteVideo', req.body);
+    const body = await validateBody('addFavouriteVideo', req.body);
 
     const favouriteVideo: IFavouriteSchema = {
-      userId: req.body.userId,
-      video: req.body.video,
+      ...body,
       date: new Date(),
     };
 

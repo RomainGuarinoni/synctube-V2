@@ -7,9 +7,7 @@ import { createUser, getUserById } from '../services/user';
 
 export async function loginUser(req: Request, res: Response) {
   try {
-    await validateBody('loginUser', req.body);
-
-    const profil: Profil = req.body;
+    const profil = await validateBody('loginUser', req.body);
 
     const user = await getUserById(profil.id);
 

@@ -70,7 +70,7 @@ function getKeyBuilder(searchInput: string, accessToken: string) {
     previousPageData: YoutubeResponse,
   ): GetKeyResponse | null {
     if (
-      (previousPageData && !previousPageData.items) ||
+      (previousPageData && !previousPageData.nextPageToken) ||
       !searchInput.trim().length
     )
       return null;
