@@ -1,57 +1,70 @@
-import { Video, Paginate } from '@synctube-v2/types';
+import { Video, Paginate, Profil } from '@synctube-v2/types';
 import axios from 'axios';
 import useSWRInfinite from 'swr/infinite';
+import { useAuth } from '../context/AuthContext';
 import { useSwrInfiniteResponse, fetcher } from './fetcher';
 
-const MAX_RESULT = 25;
+const MAX_RESULT = 5;
 
-function getKeyBuilder(searchInput: string, accessToken: string) {
+const FAVOURITE_URL = '/api/favourite';
+
+type GetKeyResponse = [
+  url: string,
+  params: {
+    userId: string;
+    limit: number;
+    pageToken?: string;
+    searchInput?: string;
+  },
+];
+
+function getKeyBuilder(profil: Profil | null, searchInput?: string) {
   return function getKey(
     pageIndex: number,
     previousPageData: Paginate<Video>,
   ): GetKeyResponse | null {
-    if (
-      (previousPageData && !previousPageData.nextPageToken) ||
-      !searchInput.trim().length
-    )
+    if (previousPageData && !previousPageData.nextPageToken) {
+      console.log('no more items');
       return null;
+    }
 
     // first page, we don't have `previousPageData`
-    if (pageIndex === 0)
+    if (pageIndex === 0) {
       return [
-        YOUTUBE_URL,
-        { part: PART, q: searchInput, maxResults: MAX_RESULT },
-        accessToken,
+        FAVOURITE_URL,
+        {
+          userId: profil!.id,
+          limit: MAX_RESULT,
+          ...(searchInput ? { searchInput } : {}),
+        },
       ];
+    }
 
-    // add the nextPageToken to the API endpoint
     return [
-      YOUTUBE_URL,
+      FAVOURITE_URL,
       {
-        part: PART,
-        q: searchInput,
-        maxResults: MAX_RESULT,
+        userId: profil!.id,
+        limit: MAX_RESULT,
         pageToken: previousPageData.nextPageToken,
+        ...(searchInput ? { searchInput } : {}),
       },
-      accessToken,
     ];
   };
 }
 
-export function useYoutubeSearch(
-  searchInput: string,
-): useSwrInfiniteResponse<YoutubeResponse> {
+export function useFavouriteSearch(
+  searchInput: string | undefined,
+): useSwrInfiniteResponse<Paginate<Video>> {
   const {
-    authState: { accessToken },
+    authState: { profil },
   } = useAuth();
 
-  const getKey = getKeyBuilder(searchInput, accessToken);
+  const getKey = getKeyBuilder(profil, searchInput);
 
   const { data, error, size, setSize, isValidating } = useSWRInfinite<
-    YoutubeResponse,
+    Paginate<Video>,
     boolean
-  >(getKey, fetcher, { errorRetryCount: 3 });
-  console.log(data, error, size, isValidating);
+  >(getKey, fetcher);
 
   return {
     data,

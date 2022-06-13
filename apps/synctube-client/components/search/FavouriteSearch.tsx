@@ -1,10 +1,27 @@
-import { useFavourite } from '../../api/favourite';
-import { ResultPage } from './resultPage/ResultPage';
+import { useState, useEffect } from 'react';
+import { useFavouriteSearch } from '../../api/favourite';
+import { convertApiVideo } from '../../utils/video';
 
+import { ResultPage } from './resultPage/ResultPage';
 import { SearchProps } from './searchProps';
 
 export function FavouriteSearch({ searchInput }: SearchProps): JSX.Element {
-  const { data, isError } = useFavourite(searchInput);
+  const { data, isError, size, setSize, isValidating } =
+    useFavouriteSearch(searchInput);
 
-  return <ResultPage data={data} isError={isError} />;
+  const [favouriteVideos, setFavouriteVideos] = useState(convertApiVideo(data));
+
+  useEffect(() => {
+    setFavouriteVideos(convertApiVideo(data));
+  }, [data]);
+
+  return (
+    <ResultPage
+      data={favouriteVideos}
+      isError={isError}
+      size={size}
+      setSize={setSize}
+      isValidating={isValidating}
+    />
+  );
 }

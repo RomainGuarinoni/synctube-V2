@@ -6,9 +6,9 @@ import { VideosList } from './VideosList';
 interface ResultPageProps {
   isError: boolean | undefined;
   data: Video[] | undefined;
-  size?: number;
-  setSize?: (size: number) => void;
-  isValidating?: boolean;
+  size: number;
+  setSize: (size: number) => void;
+  isValidating: boolean;
 }
 
 export function ResultPage({
@@ -18,27 +18,31 @@ export function ResultPage({
   setSize,
   isValidating,
 }: ResultPageProps): JSX.Element {
-  const ref = useObserver<HTMLDivElement>(() => {
-    if (setSize && size && !isValidating) {
-      console.log('more data');
-      setSize(size + 1);
-    }
-  });
+  const isRefreshing = isValidating && data && data.length === size;
+  // const ref = useObserver<HTMLDivElement>(() => {
+  //   if (!isRefreshing) {
+  //     console.log('more data');
+  //     setSize(size + 1);
+  //   }
+  // });
 
   return (
     <div className="overflow-auto flex-1 w-full flex flex-col">
       {isError && !data && <div>Error</div>}
-      {data && (
+      {data && !!data.length && (
         <>
           <div className="w-full flex-1">
             <VideosList video={data} />
           </div>
 
           <div
-            ref={ref}
-            className="w-full flex items-center justify-center mt-8"
+            // ref={ref}
+            className="w-full flex items-center justify-center mt-8 text-zinc-200"
+            onClick={() => {
+              setSize(size + 1);
+            }}
           >
-            <Loader />
+            load more
           </div>
         </>
       )}

@@ -110,7 +110,6 @@ export function useYoutubeSearch(
     YoutubeResponse,
     boolean
   >(getKey, fetcher, { errorRetryCount: 3 });
-  console.log(data, error, size, isValidating);
 
   return {
     data,

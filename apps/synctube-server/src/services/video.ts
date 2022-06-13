@@ -23,19 +23,35 @@ export async function getUserFavouriteVideos(
           ],
         }
       : {}),
-  }).limit(limit);
+  }).limit(limit + 1);
+
+  const total = await FavouriteModel.find({
+    userId,
+    ...(searchInput
+      ? {
+          $or: [
+            { 'video.title': { $regex: searchInput } },
+            { 'video.description': { $regex: searchInput } },
+            { 'video.channelTitle': { $regex: searchInput } },
+          ],
+        }
+      : {}),
+  }).count();
+
+  const hasMore = favouriteVideos.length == limit + 1;
+
+  if (hasMore) {
+    favouriteVideos.pop();
+  }
 
   return {
     items: favouriteVideos.map((item) => item.video),
     pageInfo: {
       resultsPerPage: limit,
-      totalResults: 500,
+      totalResults: total,
     },
-    ...(favouriteVideos.length === limit
+    ...(hasMore
       ? { nextPageToken: favouriteVideos[limit - 1]._id.toString() }
-      : {}),
-    ...(pageToken
-      ? { previousPageToken: favouriteVideos[0]._id.toString() }
       : {}),
   };
 }

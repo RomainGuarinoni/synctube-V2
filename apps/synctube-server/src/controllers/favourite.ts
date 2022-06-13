@@ -12,21 +12,19 @@ export async function getFavouriteVideo(req: Request, res: Response) {
   try {
     const { userId, limit, pageToken, searchInput } = await validateBody(
       'getFavouriteVideo',
-      req.body,
+      req.query,
     );
-
-    console.log('pass here');
 
     const video = await getUserFavouriteVideos(
       userId,
-      limit,
+      parseInt(limit as unknown as string),
       pageToken,
       searchInput,
     );
-    console.log('pass there too');
 
     return res.status(200).json(video);
   } catch (err) {
+    console.log(err);
     res.status(400).json(err);
   }
 }

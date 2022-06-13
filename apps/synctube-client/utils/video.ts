@@ -1,4 +1,4 @@
-import { Video } from '@synctube-v2/types';
+import { Video, Paginate } from '@synctube-v2/types';
 import { YoutubeResponse } from '../api/youtube';
 
 export function convertYoutubeVideo(
@@ -25,7 +25,7 @@ export function convertYoutubeVideo(
           }) => {
             return {
               title,
-              id: videoId,
+              id: videoId as string,
               description,
               channelTitle,
               publishedAt,
@@ -34,5 +34,15 @@ export function convertYoutubeVideo(
           },
         ),
     )
+    .flat();
+}
+
+export function convertApiVideo(
+  videosResponses: Paginate<Video>[] | undefined,
+): Video[] | undefined {
+  if (!videosResponses || !videosResponses[0]) return undefined;
+
+  return videosResponses
+    .map((videosResponse) => videosResponse.items.map((item) => item))
     .flat();
 }
