@@ -2,9 +2,8 @@ import { Video, Paginate, Profil } from '@synctube-v2/types';
 import axios from 'axios';
 import useSWRInfinite from 'swr/infinite';
 import { useAuth } from '../context/AuthContext';
+import { MAX_RESULT } from './config';
 import { useSwrInfiniteResponse, fetcher } from './fetcher';
-
-const MAX_RESULT = 5;
 
 const FAVOURITE_URL = '/api/favourite';
 
@@ -23,7 +22,7 @@ function getKeyBuilder(profil: Profil | null, searchInput?: string) {
     pageIndex: number,
     previousPageData: Paginate<Video>,
   ): GetKeyResponse | null {
-    if (previousPageData && !previousPageData.nextPageToken) {
+    if (previousPageData && !previousPageData.items.length) {
       console.log('no more items');
       return null;
     }

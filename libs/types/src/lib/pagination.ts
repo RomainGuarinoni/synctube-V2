@@ -4,5 +4,6 @@ export interface Paginate<T> {
   pageInfo: {
     totalResults: number;
     resultsPerPage: number;
+    count: number;
   };
 }

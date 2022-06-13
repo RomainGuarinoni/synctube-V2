@@ -1,5 +1,6 @@
 import useSWRInfinite from 'swr/infinite';
 import { useAuth } from '../context/AuthContext';
+import { MAX_RESULT } from './config';
 import { fetcher, useSwrInfiniteResponse } from './fetcher';
 
 export type SearchResult = {
@@ -57,8 +58,6 @@ type GetKeyResponse = [
   },
   accessToken: string,
 ];
-
-const MAX_RESULT = 25;
 
 const PART = 'snippet';
 

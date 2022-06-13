@@ -23,7 +23,7 @@ export async function getUserFavouriteVideos(
           ],
         }
       : {}),
-  }).limit(limit + 1);
+  }).limit(limit);
 
   const total = await FavouriteModel.find({
     userId,
@@ -38,20 +38,18 @@ export async function getUserFavouriteVideos(
       : {}),
   }).count();
 
-  const hasMore = favouriteVideos.length == limit + 1;
-
-  if (hasMore) {
-    favouriteVideos.pop();
-  }
-
   return {
     items: favouriteVideos.map((item) => item.video),
     pageInfo: {
       resultsPerPage: limit,
       totalResults: total,
+      count: favouriteVideos.length,
     },
-    ...(hasMore
-      ? { nextPageToken: favouriteVideos[limit - 1]._id.toString() }
+    ...(favouriteVideos.length
+      ? {
+          nextPageToken:
+            favouriteVideos[favouriteVideos.length - 1]._id.toString(),
+        }
       : {}),
   };
 }

@@ -9,6 +9,7 @@ interface ResultPageProps {
   size: number;
   setSize: (size: number) => void;
   isValidating: boolean;
+  reachedEnd: boolean;
 }
 
 export function ResultPage({
@@ -17,6 +18,7 @@ export function ResultPage({
   size,
   setSize,
   isValidating,
+  reachedEnd,
 }: ResultPageProps): JSX.Element {
   const isRefreshing = isValidating && data && data.length === size;
   // const ref = useObserver<HTMLDivElement>(() => {
@@ -35,15 +37,17 @@ export function ResultPage({
             <VideosList video={data} />
           </div>
 
-          <div
-            // ref={ref}
-            className="w-full flex items-center justify-center mt-8 text-zinc-200"
-            onClick={() => {
-              setSize(size + 1);
-            }}
-          >
-            load more
-          </div>
+          {!reachedEnd && (
+            <div
+              // ref={ref}
+              className="w-full flex items-center justify-center mt-8 text-zinc-200"
+              onClick={() => {
+                setSize(size + 1);
+              }}
+            >
+              load more
+            </div>
+          )}
         </>
       )}
       {!data && !isError && (

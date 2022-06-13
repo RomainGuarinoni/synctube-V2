@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { MAX_RESULT } from '../../api/config';
 import { useFavouriteSearch } from '../../api/favourite';
 import { convertApiVideo } from '../../utils/video';
 
@@ -11,6 +12,12 @@ export function FavouriteSearch({ searchInput }: SearchProps): JSX.Element {
 
   const [favouriteVideos, setFavouriteVideos] = useState(convertApiVideo(data));
 
+  const reachedEnd = useMemo(() => {
+    if (!data) return false;
+
+    return data[data.length - 1].items.length != MAX_RESULT;
+  }, [data]);
+
   useEffect(() => {
     setFavouriteVideos(convertApiVideo(data));
   }, [data]);
@@ -22,6 +29,7 @@ export function FavouriteSearch({ searchInput }: SearchProps): JSX.Element {
       size={size}
       setSize={setSize}
       isValidating={isValidating}
+      reachedEnd={reachedEnd}
     />
   );
 }
