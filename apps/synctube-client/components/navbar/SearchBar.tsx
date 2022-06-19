@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { IChevron } from '../icons/IChevron';
 
@@ -18,7 +18,7 @@ export function SearchBar(): JSX.Element {
     searchLocation: { history, youtube, favourite },
   } = useTranslation();
 
-  const router = useRouter();
+  const { push, query } = useRouter();
 
   const [searchLocation, setSearchLocation] = useState<SearchLocation>(
     SearchLocation.youtube,
@@ -34,7 +34,7 @@ export function SearchBar(): JSX.Element {
       // TODO show error to the end user
     }
 
-    router.push({
+    push({
       pathname: '/search',
       query: {
         q: searchInput,
@@ -42,6 +42,16 @@ export function SearchBar(): JSX.Element {
       },
     });
   };
+
+  useEffect(() => {
+    if (query.q) {
+      setSearchInput(query.q as string);
+    }
+
+    if (query.location) {
+      setSearchLocation(query.location as SearchLocation);
+    }
+  }, [query]);
 
   return (
     <form

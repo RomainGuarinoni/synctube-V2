@@ -1,5 +1,5 @@
 import { Video } from '@synctube-v2/types';
-import { useObserver } from '../../../hooks/useObserver';
+import { useScrollTreshold } from '../../../hooks/useScrollTreshold';
 import { Loader } from '../../shared/Loader';
 import { VideosList } from './VideosList';
 
@@ -21,15 +21,16 @@ export function ResultPage({
   reachedEnd,
 }: ResultPageProps): JSX.Element {
   const isRefreshing = isValidating && data && data.length === size;
-  // const ref = useObserver<HTMLDivElement>(() => {
-  //   if (!isRefreshing) {
-  //     console.log('more data');
-  //     setSize(size + 1);
-  //   }
-  // });
+
+  const handleScrollTreshold = () => {
+    if (isValidating || reachedEnd) return;
+    setSize(size + 1);
+  };
+
+  const ref = useScrollTreshold<HTMLDivElement>(80, handleScrollTreshold);
 
   return (
-    <div className="overflow-auto flex-1 w-full flex flex-col">
+    <div ref={ref} className="overflow-auto flex-1 w-full flex flex-col">
       {isError && !data && <div>Error</div>}
       {data && !!data.length && (
         <>
@@ -39,13 +40,12 @@ export function ResultPage({
 
           {!reachedEnd && (
             <div
-              // ref={ref}
               className="w-full flex items-center justify-center mt-8 text-zinc-200"
               onClick={() => {
                 setSize(size + 1);
               }}
             >
-              load more
+              <Loader />
             </div>
           )}
         </>
