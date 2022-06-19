@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { MAX_RESULT } from '../../api/config';
 import { useFavouriteSearch } from '../../api/favourite';
 import { convertApiVideo } from '../../utils/video';
@@ -6,7 +6,7 @@ import { convertApiVideo } from '../../utils/video';
 import { ResultPage } from './resultPage/ResultPage';
 import { SearchProps } from './searchProps';
 
-export function FavouriteSearch({ searchInput }: SearchProps): JSX.Element {
+export const FavouriteSearch: React.FC<SearchProps> = ({ searchInput }) => {
   const { data, isError, size, setSize, isValidating } =
     useFavouriteSearch(searchInput);
 
@@ -28,4 +28,4 @@ export function FavouriteSearch({ searchInput }: SearchProps): JSX.Element {
       reachedEnd={reachedEnd}
     />
   );
-}
+};

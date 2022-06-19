@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { IChevron } from '../icons/IChevron';
 
@@ -12,7 +12,7 @@ export enum SearchLocation {
   favourite = 'favourite',
 }
 
-export function SearchBar(): JSX.Element {
+export const SearchBar: React.FC = () => {
   const {
     search: searchText,
     searchLocation: { history, youtube, favourite },
@@ -122,4 +122,4 @@ export function SearchBar(): JSX.Element {
       </button>
     </form>
   );
-}
+};

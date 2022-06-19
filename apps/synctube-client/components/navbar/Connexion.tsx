@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { useTranslation } from '../../hooks/useTranslation';
 
@@ -5,7 +6,7 @@ interface ConnexionProps {
   connexions: number;
 }
 
-export function Connexion({ connexions }: ConnexionProps): JSX.Element {
+export const Connexion: React.FC<ConnexionProps> = ({ connexions }) => {
   const { theme } = useTheme();
 
   const { connection: connectionText } = useTranslation();
@@ -24,4 +25,4 @@ export function Connexion({ connexions }: ConnexionProps): JSX.Element {
       </p>
     </div>
   );
-}
+};

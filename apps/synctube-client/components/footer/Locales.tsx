@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
+import React from 'react';
 import { LOCALES } from '../../i18n/translation';
 
-export function Locales(): JSX.Element {
+export const Locales: React.FC = () => {
   const router = useRouter();
 
   const { pathname, asPath, query } = router;
@@ -26,7 +27,7 @@ export function Locales(): JSX.Element {
       ))}
     </div>
   );
-}
+};
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

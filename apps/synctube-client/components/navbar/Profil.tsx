@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import React from 'react';
 
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../hooks/useTranslation';
 import { Select } from '../select/Select';
 
-export function Profil(): JSX.Element {
+export const Profil: React.FC = () => {
   const {
     authState: { profil },
     logout,
@@ -53,4 +54,4 @@ export function Profil(): JSX.Element {
       )}
     </>
   );
-}
+};

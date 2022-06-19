@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useOnclickOutside } from '../../hooks/useOnClickOutside';
 import { SelectItems, SelectItemsProps } from './SelectItems';
 
@@ -11,14 +11,14 @@ interface Selectprops {
   onClose?: () => void;
 }
 
-export function Select({
+export const Select: React.FC<Selectprops> = ({
   children,
   items,
   bold,
   align,
   large,
   onClose,
-}: Selectprops): JSX.Element {
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const profilRef = useOnclickOutside<HTMLDivElement>(() => {
@@ -57,4 +57,4 @@ export function Select({
       )}
     </div>
   );
-}
+};

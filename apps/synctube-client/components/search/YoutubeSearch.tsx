@@ -1,13 +1,12 @@
-import { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useYoutubeSearch } from '../../api/youtube';
 import { convertYoutubeVideo } from '../../utils/video';
-import { useYoutubeSearchMock } from '../../mock/youtube';
 import { MAX_RESULT } from '../../api/config';
 import { SearchProps } from './searchProps';
 import { ResultPage } from './resultPage/ResultPage';
 
-export function YoutubeSearch({ searchInput }: SearchProps): JSX.Element {
+export const YoutubeSearch: React.FC<SearchProps> = ({ searchInput }) => {
   const { data, isError, size, setSize, isValidating } =
     useYoutubeSearch(searchInput);
 
@@ -32,4 +31,4 @@ export function YoutubeSearch({ searchInput }: SearchProps): JSX.Element {
       reachedEnd={reachedEnd}
     />
   );
-}
+};

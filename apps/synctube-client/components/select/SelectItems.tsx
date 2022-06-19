@@ -1,12 +1,14 @@
+import React from 'react';
+
 export interface SelectItemsProps {
   label: string;
   callback: () => void;
 }
 
-export function SelectItems({
+export const SelectItems: React.FC<SelectItemsProps> = ({
   label,
   callback,
-}: SelectItemsProps): JSX.Element {
+}) => {
   return (
     <p
       onClick={callback}
@@ -15,4 +17,4 @@ export function SelectItems({
       {label}
     </p>
   );
-}
+};

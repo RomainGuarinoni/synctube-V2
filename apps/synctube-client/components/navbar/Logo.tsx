@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
+import React from 'react';
 
-export function Logo(): JSX.Element {
+export const Logo: React.FC = () => {
   const router = useRouter();
 
   const handleLogoClick = () => {
@@ -17,4 +18,4 @@ export function Logo(): JSX.Element {
       SYNCTUBE
     </h1>
   );
-}
+};

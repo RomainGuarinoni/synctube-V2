@@ -1,5 +1,7 @@
 import { Video } from '@synctube-v2/types';
+import React from 'react';
 import { useScrollTreshold } from '../../../hooks/useScrollTreshold';
+import { useTranslation } from '../../../hooks/useTranslation';
 import { Loader } from '../../shared/Loader';
 import { VideosList } from './VideosList';
 
@@ -12,15 +14,17 @@ interface ResultPageProps {
   reachedEnd: boolean;
 }
 
-export function ResultPage({
+export const ResultPage: React.FC<ResultPageProps> = ({
   isError,
   data,
   size,
   setSize,
   isValidating,
   reachedEnd,
-}: ResultPageProps): JSX.Element {
-  const isRefreshing = isValidating && data && data.length === size;
+}) => {
+  const {
+    searchResult: { noMoreResult },
+  } = useTranslation();
 
   const handleScrollTreshold = () => {
     if (isValidating || reachedEnd) return;
@@ -29,16 +33,38 @@ export function ResultPage({
 
   const ref = useScrollTreshold<HTMLDivElement>(80, handleScrollTreshold);
 
+  if (!!isError && !data) {
+    return <div>Error</div>;
+  }
+
+  if ((!data || !data.length) && !isValidating) {
+    return (
+      <div className="flex-1 w-full flex text-red-500">
+        <p className="m-auto"> Aucun résultats pour votre recherche</p>
+      </div>
+    );
+  }
+
+  if (!data && isValidating) {
+    return (
+      <div className="flex-1 w-full flex text-red-500 justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div ref={ref} className="overflow-auto flex-1 w-full flex flex-col">
-      {isError && !data && <div>Error</div>}
+      {!data && !isError && !isValidating}
       {data && !!data.length && (
         <>
           <div className="w-full flex-1">
             <VideosList video={data} />
           </div>
 
-          {!reachedEnd && (
+          {reachedEnd ? (
+            <p className="w-full mt-8 text-center "> {noMoreResult}</p>
+          ) : (
             <div
               className="w-full flex items-center justify-center mt-8 text-zinc-200"
               onClick={() => {
@@ -50,11 +76,6 @@ export function ResultPage({
           )}
         </>
       )}
-      {!data && !isError && (
-        <div className=" w-full h-full flex flex-col items-center justify-center">
-          <Loader />
-        </div>
-      )}
     </div>
   );
-}
+};

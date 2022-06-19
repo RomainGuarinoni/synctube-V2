@@ -20,6 +20,9 @@ export type translationKeys = {
     history: string;
     favourite: string;
   };
+  searchResult: {
+    noMoreResult: string;
+  };
 };
 
 export const translation: Record<typeof LOCALES[number], translationKeys> = {
@@ -44,6 +47,9 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       history: 'Historique',
       favourite: 'Favoris',
     },
+    searchResult: {
+      noMoreResult: 'Fin des résultats de recherche',
+    },
   },
   en: {
     search: 'Search for a video',
@@ -64,6 +70,9 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       youtube: 'Youtube',
       history: 'History',
       favourite: 'Favourite',
+    },
+    searchResult: {
+      noMoreResult: 'No more results',
     },
   },
 };

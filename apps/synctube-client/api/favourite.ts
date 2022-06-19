@@ -1,6 +1,5 @@
 import { Video, Paginate, Profil } from '@synctube-v2/types';
 import axios from 'axios';
-import loadConfig from 'next/dist/server/config';
 import useSWRInfinite from 'swr/infinite';
 import { useAuth } from '../context/AuthContext';
 import { MAX_RESULT } from './config';
@@ -23,7 +22,7 @@ function getKeyBuilder(profil: Profil | null, searchInput?: string) {
     pageIndex: number,
     previousPageData: Paginate<Video>,
   ): GetKeyResponse | null {
-    if (previousPageData && !previousPageData.items.length) {
+    if ((previousPageData && !previousPageData.items.length) || !profil) {
       console.log('no more items');
       return null;
     }
@@ -33,7 +32,7 @@ function getKeyBuilder(profil: Profil | null, searchInput?: string) {
       return [
         FAVOURITE_URL,
         {
-          userId: profil!.id,
+          userId: profil.id,
           limit: MAX_RESULT,
           ...(searchInput ? { searchInput } : {}),
         },
@@ -43,7 +42,7 @@ function getKeyBuilder(profil: Profil | null, searchInput?: string) {
     return [
       FAVOURITE_URL,
       {
-        userId: profil!.id,
+        userId: profil.id,
         limit: MAX_RESULT,
         pageToken: previousPageData.nextPageToken,
         ...(searchInput ? { searchInput } : {}),

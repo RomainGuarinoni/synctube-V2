@@ -1,9 +1,11 @@
+import React from 'react';
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size: 'small' | 'medium' | 'large';
 }
 
-export function Button({ children, size, ...props }: ButtonProps): JSX.Element {
+export const Button: React.FC<ButtonProps> = ({ children, size, ...props }) => {
   return (
     <button
       className={`bg-red-500  ease-in duration-75 hover:bg-red-500/80 text-zinc-300 ${
@@ -18,4 +20,4 @@ export function Button({ children, size, ...props }: ButtonProps): JSX.Element {
       {children}
     </button>
   );
-}
+};

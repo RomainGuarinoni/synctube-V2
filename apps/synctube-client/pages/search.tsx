@@ -47,7 +47,7 @@ function Search(): JSX.Element {
   }, [setSearchLocation, query]);
 
   return (
-    <div className="flex flex-col justify-start items-center flex-wrap text-zinc-400 w-full h-full  ">
+    <div className="flex flex-col justify-start items-center flex-wrap text-zinc-400 w-full h-full">
       <Tab
         items={[
           SearchLocation.youtube,

@@ -1,6 +1,6 @@
 import { useTheme } from '../context/ThemeContext';
-import Navbar from '../components/navbar/Navbar';
-import Footer from '../components/footer/Footer';
+import { Navbar } from '../components/navbar/Navbar';
+import { Footer } from '../components/footer/Footer';
 
 interface AppLayoutProps {
   children: React.ReactNode;
