@@ -10,16 +10,12 @@ export function FavouriteSearch({ searchInput }: SearchProps): JSX.Element {
   const { data, isError, size, setSize, isValidating } =
     useFavouriteSearch(searchInput);
 
-  const [favouriteVideos, setFavouriteVideos] = useState(convertApiVideo(data));
+  const favouriteVideos = useMemo(() => convertApiVideo(data), [data]);
 
   const reachedEnd = useMemo(() => {
     if (!data) return false;
 
     return data[data.length - 1].items.length != MAX_RESULT;
-  }, [data]);
-
-  useEffect(() => {
-    setFavouriteVideos(convertApiVideo(data));
   }, [data]);
 
   return (

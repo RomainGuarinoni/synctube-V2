@@ -1,5 +1,6 @@
 import { Video, Paginate, Profil } from '@synctube-v2/types';
 import axios from 'axios';
+import loadConfig from 'next/dist/server/config';
 import useSWRInfinite from 'swr/infinite';
 import { useAuth } from '../context/AuthContext';
 import { MAX_RESULT } from './config';

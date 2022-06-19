@@ -1,6 +1,6 @@
 import { Video } from '@synctube-v2/types';
 import Image from 'next/image';
-import { MouseEvent as MouseEventReact } from 'react';
+import React, { MouseEvent as MouseEventReact } from 'react';
 
 import { Button } from '../../shared/Button';
 import { IHearth } from '../../icons/IHearth';
@@ -11,13 +11,14 @@ import { addFavouriteVideo } from '../../../api/favourite';
 interface VideoProps {
   video: Video;
 }
-
-export function VideoDetail({
-  video: { id, title, description, channelTitle, picture, owner, publishedAt },
-}: VideoProps): JSX.Element {
+const Component: React.FC<VideoProps> = ({
+  video: { id, title, description, channelTitle, picture, publishedAt },
+}) => {
   const {
     authState: { profil },
   } = useAuth();
+
+  console.log(title);
 
   const decodeHtml = (text: string) => {
     const htmlText = document.createElement('textarea');
@@ -130,4 +131,15 @@ export function VideoDetail({
       `}</style>
     </div>
   );
-}
+};
+
+export const VideoDetail = React.memo(
+  Component,
+  ({ video: preVideo }, { video: actVideo }) =>
+    preVideo.title === actVideo.title &&
+    preVideo.description === actVideo.description &&
+    preVideo.id === actVideo.id &&
+    preVideo.channelTitle === actVideo.channelTitle &&
+    preVideo.picture === actVideo.picture &&
+    preVideo.publishedAt === actVideo.publishedAt,
+);

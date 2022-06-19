@@ -8,11 +8,11 @@ import { SearchProps } from './searchProps';
 import { ResultPage } from './resultPage/ResultPage';
 
 export function YoutubeSearch({ searchInput }: SearchProps): JSX.Element {
-  // const { data, isError, size, setSize, isValidating } =
-  //   useYoutubeSearch(searchInput);
-
   const { data, isError, size, setSize, isValidating } =
-    useYoutubeSearchMock(searchInput);
+    useYoutubeSearch(searchInput);
+
+  // const { data, isError, size, setSize, isValidating } =
+  //   useYoutubeSearchMock(searchInput);
 
   const [youtubeVideos, setYoutubeVideos] = useState(convertYoutubeVideo(data));
 
@@ -27,6 +27,7 @@ export function YoutubeSearch({ searchInput }: SearchProps): JSX.Element {
       size={size}
       setSize={setSize}
       isValidating={isValidating}
+      reachedEnd={false}
     />
   );
 }
