@@ -1,12 +1,14 @@
 import { Video } from '@synctube-v2/types';
 import Image from 'next/image';
 import React, { MouseEvent as MouseEventReact } from 'react';
+import { toast } from 'react-toastify';
 
 import { Button } from '../../shared/Button';
 import { IHearth } from '../../icons/IHearth';
 import { IPlay } from '../../icons/IPlay';
 import { useAuth } from '../../../context/AuthContext';
 import { addFavouriteVideo } from '../../../api/favourite';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 interface VideoProps {
   video: Video;
@@ -18,7 +20,10 @@ const Component: React.FC<VideoProps> = ({
     authState: { profil },
   } = useAuth();
 
-  console.log(title);
+  const {
+    videoDetail: { description: descriptionText, watch, favourite },
+    toast: { videoAddedToFavourite },
+  } = useTranslation();
 
   const decodeHtml = (text: string) => {
     const htmlText = document.createElement('textarea');
@@ -46,6 +51,7 @@ const Component: React.FC<VideoProps> = ({
           picture,
           publishedAt,
         });
+        toast.success(videoAddedToFavourite);
       } catch (err) {
         console.log(err);
         //ADD TOAST HERE
@@ -80,7 +86,7 @@ const Component: React.FC<VideoProps> = ({
           </p>
         </div>
         <div className="mt-1">
-          <h4>Description</h4>
+          <h4>{descriptionText} </h4>
           <p className="leading-none text-sm text-zinc-400 description h-14">
             {decodeHtml(description)}
           </p>
@@ -91,7 +97,7 @@ const Component: React.FC<VideoProps> = ({
               <span className="w-2 mr-1">
                 <IPlay />
               </span>
-              Regarder
+              {watch}
             </div>
           </Button>
           <Button size="medium" onClick={setVideoToFavourite}>
@@ -99,7 +105,7 @@ const Component: React.FC<VideoProps> = ({
               <span className="w-4 mr-1">
                 <IHearth />
               </span>
-              Favoris
+              {favourite}
             </div>
           </Button>
         </div>

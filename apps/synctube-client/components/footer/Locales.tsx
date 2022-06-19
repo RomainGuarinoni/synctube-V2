@@ -7,7 +7,7 @@ export const Locales: React.FC = () => {
 
   const { pathname, asPath, query } = router;
 
-  const handleLocaleChange = (locale: string) => {
+  const handleLocaleChange = (locale: string) => () => {
     router.push({ pathname, query }, asPath, { locale });
   };
 
@@ -16,9 +16,7 @@ export const Locales: React.FC = () => {
       {LOCALES.map((locale, index) => (
         <span
           className="cursor-pointer"
-          onClick={() => {
-            handleLocaleChange(locale);
-          }}
+          onClick={handleLocaleChange(locale)}
           key={`locale-${index}`}
         >
           {' '}

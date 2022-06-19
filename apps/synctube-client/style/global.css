@@ -4,6 +4,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+:root {
+  --toastify-text-color-info: #e4e4e7 !important;
+  --toastify-text-color-success: #e4e4e7 !important;
+  --toastify-text-color-warning: #e4e4e7 !important;
+  --toastify-text-color-error: #e4e4e7 !important;
+
+  --toastify-color-success: rgb(22 163 74) !important;
+  --toastify-color-warning: rgb(234 179 8) !important;
+  --toastify-color-error: #ef4444 !important;
+}
 /* width */
 ::-webkit-scrollbar {
   width: 5px;

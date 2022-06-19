@@ -1,6 +1,8 @@
 import '../style/global.css';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { AuthProvider } from '../context/AuthContext';
 import { ThemeProvider } from '../context/ThemeContext';
@@ -18,6 +20,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
           <AppLayout>
             <ThemeProvider>
               <Component {...pageProps} />
+              <ToastContainer theme="dark" />
             </ThemeProvider>
           </AppLayout>
         </AuthProvider>

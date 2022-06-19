@@ -19,7 +19,7 @@ export const Connexion: React.FC<ConnexionProps> = ({ connexions }) => {
         }  items-center hidden lg:flex`}
       >
         <span className="font-weight text-red-500 text-lg mx-2">
-          {connexions}{' '}
+          {connexions}
         </span>
         {connectionText}
       </p>

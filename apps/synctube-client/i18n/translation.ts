@@ -23,6 +23,15 @@ export type translationKeys = {
   searchResult: {
     noMoreResult: string;
   };
+  videoDetail: {
+    description: string;
+    watch: string;
+    favourite: string;
+  };
+  toast: {
+    videoAddedToFavourite: string;
+    emptySearch: string;
+  };
 };
 
 export const translation: Record<typeof LOCALES[number], translationKeys> = {
@@ -50,6 +59,15 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
     searchResult: {
       noMoreResult: 'Fin des résultats de recherche',
     },
+    videoDetail: {
+      description: 'Description',
+      watch: 'Regarder',
+      favourite: 'Favoris',
+    },
+    toast: {
+      videoAddedToFavourite: 'Vidéo ajouté à vos favoris',
+      emptySearch: 'Veuillez remplir un contenu avant de faire une recherche',
+    },
   },
   en: {
     search: 'Search for a video',
@@ -73,6 +91,15 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
     },
     searchResult: {
       noMoreResult: 'No more results',
+    },
+    videoDetail: {
+      description: 'Description',
+      watch: 'Watch',
+      favourite: 'Favourite',
+    },
+    toast: {
+      videoAddedToFavourite: 'Video added to your favourite',
+      emptySearch: 'Please fill in a content before doing a search',
     },
   },
 };

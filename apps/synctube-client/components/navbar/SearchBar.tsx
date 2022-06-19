@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { FormEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useTranslation } from '../../hooks/useTranslation';
 import { IChevron } from '../icons/IChevron';
 
@@ -16,6 +17,7 @@ export const SearchBar: React.FC = () => {
   const {
     search: searchText,
     searchLocation: { history, youtube, favourite },
+    toast: { emptySearch },
   } = useTranslation();
 
   const { push, query } = useRouter();
@@ -30,8 +32,8 @@ export const SearchBar: React.FC = () => {
     e.preventDefault();
 
     if (!searchInput.trim().length) {
-      console.error('cannot search youtube input');
-      // TODO show error to the end user
+      toast.warn(emptySearch);
+      return;
     }
 
     push({
