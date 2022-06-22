@@ -4,8 +4,7 @@ import useSWRInfinite from 'swr/infinite';
 import { useAuth } from '../context/AuthContext';
 import { MAX_RESULT } from './config';
 import { useSwrInfiniteResponse, fetcher } from './fetcher';
-
-const FAVOURITE_URL = '/api/favourite';
+import { routes } from './routes';
 
 type GetKeyResponse = [
   url: string,
@@ -30,7 +29,7 @@ function getKeyBuilder(profil: Profil | null, searchInput?: string) {
     // first page, we don't have `previousPageData`
     if (pageIndex === 0) {
       return [
-        FAVOURITE_URL,
+        routes.videos.favourite,
         {
           userId: profil.id,
           limit: MAX_RESULT,
@@ -40,7 +39,7 @@ function getKeyBuilder(profil: Profil | null, searchInput?: string) {
     }
 
     return [
-      FAVOURITE_URL,
+      routes.videos.favourite,
       {
         userId: profil.id,
         limit: MAX_RESULT,

@@ -2,6 +2,7 @@ import useSWRInfinite from 'swr/infinite';
 import { useAuth } from '../context/AuthContext';
 import { MAX_RESULT } from './config';
 import { fetcher, useSwrInfiniteResponse } from './fetcher';
+import { routes } from './routes';
 
 export type SearchResult = {
   kind: string;
@@ -61,8 +62,6 @@ type GetKeyResponse = [
 
 const PART = 'snippet';
 
-const YOUTUBE_URL = 'https://www.googleapis.com/youtube/v3/search';
-
 function getKeyBuilder(searchInput: string, accessToken: string) {
   return function getKey(
     pageIndex: number,
@@ -77,14 +76,14 @@ function getKeyBuilder(searchInput: string, accessToken: string) {
     // first page, we don't have `previousPageData`
     if (pageIndex === 0)
       return [
-        YOUTUBE_URL,
+        routes.videos.youtube,
         { part: PART, q: searchInput, maxResults: MAX_RESULT },
         accessToken,
       ];
 
     // add the nextPageToken to the API endpoint
     return [
-      YOUTUBE_URL,
+      routes.videos.youtube,
       {
         part: PART,
         q: searchInput,
