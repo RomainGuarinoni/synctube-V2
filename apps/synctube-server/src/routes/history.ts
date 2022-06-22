@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { getHistoryVideo } from '../controllers/history';
+import { HistoryController } from '../controllers/history';
 
 const router = Router();
 
-router.get('/', getHistoryVideo);
+router.get('/', HistoryController.getHistoryVideo);
 
 export { router as historyRouter };

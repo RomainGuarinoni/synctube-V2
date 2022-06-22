@@ -1,13 +1,14 @@
 import { UserModel, IUSerSchema } from '../schemas/User';
 
-export async function getUserById(userId: string): Promise<IUSerSchema> {
-  const user = await UserModel.findOne({ id: userId });
+export class UserService {
+  static async createUser(user: IUSerSchema): Promise<void> {
+    const newUser = new UserModel(user);
 
-  return user;
-}
+    await newUser.save();
+  }
+  static async getUserById(userId: string): Promise<IUSerSchema> {
+    const user = await UserModel.findOne({ id: userId });
 
-export async function createUser(user: IUSerSchema): Promise<void> {
-  const newUser = new UserModel(user);
-
-  await newUser.save();
+    return user;
+  }
 }

@@ -6,6 +6,7 @@ import { FavouriteSearch } from '../components/search/FavouriteSearch';
 import { Tab } from '../components/shared/Tabs';
 import { authenticatedRoute } from '../guard/authenticatedRoute';
 import { HistorySearch } from '../components/search/HistorySearch';
+import { roomRoute } from '../guard/roomRoute';
 
 function Search(): JSX.Element {
   const { query, push } = useRouter();
@@ -70,4 +71,4 @@ function Search(): JSX.Element {
   );
 }
 
-export default authenticatedRoute(Search);
+export default authenticatedRoute(roomRoute(Search));

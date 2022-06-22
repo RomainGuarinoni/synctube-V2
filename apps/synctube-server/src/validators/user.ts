@@ -6,3 +6,7 @@ export const userProfilValidator = Yup.object({
   familyName: Yup.string().required(),
   picture: Yup.string().required(),
 });
+
+export const userIdValidator = Yup.object({
+  userId: Yup.string().required(),
+});

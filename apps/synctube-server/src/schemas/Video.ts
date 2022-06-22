@@ -4,27 +4,27 @@ import { Video } from '@synctube-v2/types';
 const VideoSchema = new Mongoose.Schema<Video>({
   id: {
     required: true,
-    type: 'String',
+    type: String,
   },
   title: {
     required: true,
-    type: 'String',
+    type: String,
   },
   description: {
     required: true,
-    type: 'String',
+    type: String,
   },
   picture: {
     required: true,
-    type: 'String',
+    type: String,
   },
   channelTitle: {
     required: true,
-    type: 'String',
+    type: String,
   },
   publishedAt: {
     required: true,
-    type: 'String',
+    type: String,
   },
 });
 

@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { getFavouriteVideo, addFavouriteVideo } from '../controllers/favourite';
+import { FavouriteController } from '../controllers/favourite';
 
 const router = Router();
 
-router.get('/', getFavouriteVideo);
-router.post('/', addFavouriteVideo);
+router.get('/', FavouriteController.getFavouriteVideo);
+router.post('/', FavouriteController.addFavouriteVideo);
 
 export { router as favouriteRouter };

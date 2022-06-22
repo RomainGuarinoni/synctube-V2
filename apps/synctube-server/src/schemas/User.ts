@@ -7,24 +7,24 @@ export interface IUSerSchema extends Profil {
 
 const UserSchema = new Mongoose.Schema<IUSerSchema>({
   id: {
-    type: 'String',
+    type: String,
     require: true,
     index: true,
   },
   familyName: {
-    type: 'String',
+    type: String,
     require: true,
   },
   givenName: {
-    type: 'String',
+    type: String,
     require: true,
   },
   picture: {
-    type: 'String',
+    type: String,
     require: true,
   },
   resgisteredAt: {
-    type: 'Date',
+    type: Date,
     required: true,
   },
 });

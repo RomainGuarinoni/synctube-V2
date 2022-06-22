@@ -11,9 +11,8 @@ export function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <div
-      className={`${
-        theme === 'light' ? 'bg-zinc-200' : 'bg-zinc-800'
-      } w-screen h-screen px-8 flex flex-col`}
+      className={`
+       bg-zinc-800 w-screen h-screen px-8 flex flex-col`}
     >
       <Navbar />
       <main

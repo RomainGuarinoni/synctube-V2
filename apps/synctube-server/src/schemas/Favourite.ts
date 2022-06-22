@@ -11,7 +11,7 @@ export interface IFavouriteSchema {
 
 const FavouriteSchema = new Mongoose.Schema<IFavouriteSchema>({
   userId: {
-    type: 'string',
+    type: String,
     required: true,
     index: true,
   },
@@ -20,7 +20,7 @@ const FavouriteSchema = new Mongoose.Schema<IFavouriteSchema>({
     required: true,
   },
   date: {
-    type: 'Date',
+    type: Date,
     required: true,
   },
 });

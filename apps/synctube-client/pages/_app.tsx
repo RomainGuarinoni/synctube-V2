@@ -8,6 +8,7 @@ import { AuthProvider } from '../context/AuthContext';
 import { ThemeProvider } from '../context/ThemeContext';
 
 import { AppLayout } from '../layout/App';
+import { RoomProvider } from '../context/RoomContext';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -17,12 +18,14 @@ function CustomApp({ Component, pageProps }: AppProps) {
       </Head>
       <main className="app">
         <AuthProvider>
-          <AppLayout>
+          <RoomProvider>
             <ThemeProvider>
-              <Component {...pageProps} />
-              <ToastContainer theme="dark" />
+              <AppLayout>
+                <Component {...pageProps} />
+                <ToastContainer theme="dark" />
+              </AppLayout>
             </ThemeProvider>
-          </AppLayout>
+          </RoomProvider>
         </AuthProvider>
       </main>
     </>
