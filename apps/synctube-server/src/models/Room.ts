@@ -29,6 +29,7 @@ RoomSchema.virtual('ownerProfil', {
   ref: 'User',
   localField: 'owner',
   foreignField: 'id',
+  justOne: true,
 });
 
 RoomSchema.virtual('connectedUsersList', {

@@ -41,6 +41,10 @@ export type translationKeys = {
       created: string;
       error: string;
     };
+    description: {
+      visitors: string;
+      createdAt: string;
+    };
   };
 };
 
@@ -87,6 +91,10 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
         created: 'La salle a été créée',
         error: 'Veuillez remplir ce champ',
       },
+      description: {
+        visitors: 'Visiteurs',
+        createdAt: 'Créée le',
+      },
     },
   },
   en: {
@@ -129,6 +137,10 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
         button: 'Create',
         created: 'The room has been created',
         error: 'Please fill in this field',
+      },
+      description: {
+        visitors: 'Visitors',
+        createdAt: 'Created At',
       },
     },
   },

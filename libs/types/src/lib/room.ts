@@ -2,13 +2,13 @@ import { Profil } from './auth';
 
 export interface Room {
   _id: string;
-  owner: Profil;
+  owner: string;
   name: string;
   description?: string;
-  connectedUsers: [Profil];
-  visitors: [Profil];
+  connectedUsers: string[];
+  visitors: string[];
   ownerProfil?: Profil;
-  connectedUsersList?: [Profil];
-  visitorsList?: [Profil];
+  connectedUsersList?: Profil[];
+  visitorsList?: Profil[];
   createdAt: string;
 }

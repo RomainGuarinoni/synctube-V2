@@ -4,7 +4,7 @@ import { useSwrResponse, fetcher } from './fetcher';
 import { routes } from './routes';
 
 export function useHistory(roomId: string | null): useSwrResponse<Video[]> {
-  const { data, error } = useSWR<Video[]>(
+  const { data, error, isValidating } = useSWR<Video[]>(
     roomId ? routes.videos.history : null,
     fetcher,
   );
@@ -12,5 +12,6 @@ export function useHistory(roomId: string | null): useSwrResponse<Video[]> {
   return {
     data,
     isError: error,
+    isValidating,
   };
 }

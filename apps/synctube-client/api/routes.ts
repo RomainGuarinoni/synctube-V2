@@ -7,4 +7,8 @@ export const routes = {
   user: {
     login: '/api/user/login',
   },
+  rooms: {
+    getUserRoomsOwner: (userId: string) => `/api/room/user/${userId}/owner`,
+    getUserRoomsVisited: (userId: string) => `/api/room/user/${userId}/visited`,
+  },
 };

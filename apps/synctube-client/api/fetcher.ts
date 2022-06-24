@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 export type useSwrResponse<T> = {
-  isError: boolean;
+  isError: boolean | undefined;
   data: T | undefined;
+  isValidating: boolean;
 };
 
 export type useSwrInfiniteResponse<T> = {
