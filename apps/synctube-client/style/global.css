@@ -29,3 +29,13 @@
   background: #a1a1aa;
   border-radius: 5px;
 }
+
+.green-gradient {
+  background: rgb(89, 233, 203);
+  background: linear-gradient(
+    130deg,
+    rgba(89, 233, 203, 1) 0%,
+    rgba(69, 195, 169, 1) 21%,
+    rgba(16, 185, 129, 1) 100%
+  );
+}
