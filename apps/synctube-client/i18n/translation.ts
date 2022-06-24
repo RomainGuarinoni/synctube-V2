@@ -32,6 +32,14 @@ export type translationKeys = {
     videoAddedToFavourite: string;
     emptySearch: string;
   };
+  room: {
+    modal: {
+      title: string;
+      name: string;
+      description: string;
+      button: string;
+    };
+  };
 };
 
 export const translation: Record<typeof LOCALES[number], translationKeys> = {
@@ -68,6 +76,14 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       videoAddedToFavourite: 'Vidéo ajouté à vos favoris',
       emptySearch: 'Veuillez remplir un contenu avant de faire une recherche',
     },
+    room: {
+      modal: {
+        title: 'Créer une nouvelle salle',
+        name: 'Nom de la salle',
+        description: 'Description',
+        button: 'Créer',
+      },
+    },
   },
   en: {
     search: 'Search for a video',
@@ -100,6 +116,14 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
     toast: {
       videoAddedToFavourite: 'Video added to your favourite',
       emptySearch: 'Please fill in a content before doing a search',
+    },
+    room: {
+      modal: {
+        title: 'Create a new room',
+        name: 'Name of the room',
+        description: 'Description',
+        button: 'Create',
+      },
     },
   },
 };
