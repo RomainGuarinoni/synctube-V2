@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { validateBody } from '../validators/validateBody';
-import { IUSerSchema } from '../schemas/User';
+import { IUSerSchema } from '../models/User';
 import { UserService } from '../services/user';
 
 export class UserController {

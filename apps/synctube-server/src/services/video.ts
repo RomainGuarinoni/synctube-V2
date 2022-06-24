@@ -1,5 +1,5 @@
 import { Video, Paginate } from '@synctube-v2/types';
-import { FavouriteModel, IFavouriteSchema } from '../schemas/Favourite';
+import { FavouriteModel, IFavouriteSchema } from '../models/Favourite';
 
 export class VideoService {
   static async getUserFavouriteVideos(

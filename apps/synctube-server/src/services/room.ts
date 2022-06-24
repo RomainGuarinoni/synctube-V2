@@ -1,6 +1,6 @@
 import { Room } from '@synctube-v2/types';
 import Mongoose from 'mongoose';
-import { RoomModel } from '../schemas/Room';
+import { RoomModel } from '../models/Room';
 
 export class RoomService {
   static async getRoom(_id: string) {
@@ -33,7 +33,9 @@ export class RoomService {
   }
 
   static async getUserRooms(userId: string): Promise<Room[]> {
-    const userRooms = await RoomModel.find({ owner: userId });
+    const userRooms = await RoomModel.find({ owner: userId }).populate(
+      'ownerProfil',
+    );
 
     return userRooms;
   }
@@ -42,7 +44,7 @@ export class RoomService {
     const visitedRooms = await RoomModel.find({
       visitors: userId,
       owner: { $ne: userId },
-    });
+    }).populate('ownerProfil');
 
     return visitedRooms;
   }

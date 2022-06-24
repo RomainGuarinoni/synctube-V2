@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 
-import { IFavouriteSchema } from '../schemas/Favourite';
+import { IFavouriteSchema } from '../models/Favourite';
 import { VideoService } from '../services/video';
 import { validateBody } from '../validators/validateBody';
 

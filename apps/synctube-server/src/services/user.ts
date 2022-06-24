@@ -1,4 +1,4 @@
-import { UserModel, IUSerSchema } from '../schemas/User';
+import { UserModel, IUSerSchema } from '../models/User';
 
 export class UserService {
   static async createUser(user: IUSerSchema): Promise<void> {

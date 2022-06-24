@@ -10,4 +10,5 @@ export interface Room {
   ownerProfil?: Profil;
   connectedUsersList?: [Profil];
   visitorsList?: [Profil];
+  createdAt: string;
 }

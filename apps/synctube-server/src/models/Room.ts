@@ -1,26 +1,29 @@
 import Mongoose from 'mongoose';
 import { Room } from '@synctube-v2/types';
 
-const RoomSchema = new Mongoose.Schema<Room>({
-  name: {
-    type: String,
-    required: true,
-    maxlength: 255,
+const RoomSchema = new Mongoose.Schema<Room>(
+  {
+    name: {
+      type: String,
+      required: true,
+      maxlength: 255,
+    },
+    description: {
+      type: String,
+      required: false,
+    },
+    owner: {
+      type: String,
+    },
+    connectedUsers: {
+      type: [{ type: String }],
+    },
+    visitors: {
+      type: [{ type: String }],
+    },
   },
-  description: {
-    type: String,
-    required: false,
-  },
-  owner: {
-    type: String,
-  },
-  connectedUsers: {
-    type: [{ type: String }],
-  },
-  visitors: {
-    type: [{ type: String }],
-  },
-});
+  { timestamps: true },
+);
 
 RoomSchema.virtual('ownerProfil', {
   ref: 'User',
