@@ -12,9 +12,7 @@ export const RoomDescription: React.FC<{ room: Room }> = ({
   } = useAuth();
 
   const {
-    room: {
-      description: { visitors: visitorsText, createdAt: createdAtText },
-    },
+    room: { description: descriptionText },
   } = useTranslation();
 
   const elapsedTime = intervalToDuration({
@@ -23,7 +21,12 @@ export const RoomDescription: React.FC<{ room: Room }> = ({
   });
 
   return (
-    <div className="bg-zinc-800 rounded-lg w-[33rem] h-32 cursor-pointer flex justify-between items-center gap-3 text-zinc-200 px-5 py-3">
+    <div
+      className={`bg-zinc-800 rounded-lg w-[33rem] h-32 cursor-pointer flex 
+    justify-between items-center gap-3 text-zinc-200 px-5 py-2 border-2 border-transparent 
+    transition-all duration-100 ease-linear hover:bg-zinc-700/60
+    `}
+    >
       <div className="h-full flex flex-col justify-around items-center overflow-hidden w-36">
         <div className="rounded-full w-14 h-14 overflow-hidden relative">
           <Image
@@ -38,8 +41,8 @@ export const RoomDescription: React.FC<{ room: Room }> = ({
           <p className="text-zinc-400">Créé par</p>
 
           <p className="font-bold">
-            {!(profil?.id === ownerProfil?.id)
-              ? 'vous'
+            {profil?.id === ownerProfil?.id
+              ? descriptionText.you
               : `${ownerProfil?.givenName} ${ownerProfil?.familyName}`}
           </p>
         </div>
@@ -51,19 +54,19 @@ export const RoomDescription: React.FC<{ room: Room }> = ({
       <div className="flex flex-col items-center justify-around h-full">
         <div className="flex flex-col items-center">
           <p className="font-bold text-xl">{visitors.length}</p>
-          <p className="text-zinc-400">{visitorsText}</p>
+          <p className="text-zinc-400">{descriptionText.visitors}</p>
         </div>
         <div className="flex flex-col items-center">
           <p className="font-bold text-xl">
             {elapsedTime.years
-              ? `> ${elapsedTime.years} ans`
+              ? `> ${elapsedTime.years} ${descriptionText.year}`
               : elapsedTime.months
-              ? `> ${elapsedTime.months} mois`
+              ? `> ${elapsedTime.months} ${descriptionText.year}`
               : elapsedTime.days
-              ? `> ${elapsedTime.days} jours`
+              ? `> ${elapsedTime.days}  ${descriptionText.year}`
               : '< 1 jours'}
           </p>
-          <p className="text-zinc-400">{createdAtText}</p>
+          <p className="text-zinc-400">{descriptionText.createdAt}</p>
         </div>
       </div>
       <style jsx>

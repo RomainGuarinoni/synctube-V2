@@ -44,6 +44,15 @@ export type translationKeys = {
     description: {
       visitors: string;
       createdAt: string;
+      you: string;
+      year: string;
+      month: string;
+      day: string;
+    };
+    selectPage: {
+      title: string;
+      owner: string;
+      visited: string;
     };
   };
 };
@@ -94,6 +103,15 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       description: {
         visitors: 'Visiteurs',
         createdAt: 'Créée le',
+        you: 'vous',
+        year: 'années',
+        month: 'mois',
+        day: 'jour',
+      },
+      selectPage: {
+        title: 'Choisissez une salle',
+        owner: 'Vos salles',
+        visited: 'Celles que vous avez visité',
       },
     },
   },
@@ -141,6 +159,15 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       description: {
         visitors: 'Visitors',
         createdAt: 'Created At',
+        you: 'you',
+        year: 'years',
+        month: 'months',
+        day: 'days',
+      },
+      selectPage: {
+        title: 'Select a room',
+        owner: 'Your rooms',
+        visited: 'The ones you visited',
       },
     },
   },
