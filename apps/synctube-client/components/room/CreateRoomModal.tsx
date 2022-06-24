@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { useTranslation } from '../../hooks/useTranslation';
 import { IClose } from '../icons/IClose';
 import { IRoom } from '../icons/IRoom';
@@ -20,9 +21,23 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
   const [roomName, setRoomName] = useState('');
   const [roomDescription, setRoomDescription] = useState('');
 
+  const [roomNameError, setRoomNameError] = useState('');
+  const [roomDescriptionError, setRoomDescriptionError] = useState('');
+
   const onFormSubmit = () => {
-    console.log(roomName);
-    console.log(roomDescription);
+    if (!roomName.trim()) {
+      setRoomNameError(modal.error);
+      return;
+    }
+    setRoomNameError('');
+
+    if (!roomDescription.trim()) {
+      setRoomDescriptionError(modal.error);
+      return;
+    }
+    setRoomDescriptionError('');
+
+    toast.success(modal.created);
     onClose();
   };
 
@@ -30,7 +45,7 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
     <Modal onClose={onClose}>
       <FormContainer Icon={IRoom} onSubmit={onFormSubmit}>
         <div
-          className="text-zinc-200 w-5 absolute top-4 right-5 cursor-pointer"
+          className="text-zinc-200 w-4 absolute top-4 right-5 cursor-pointer"
           onClick={onClose}
         >
           <IClose />
@@ -43,12 +58,14 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
             value={roomName}
             type="text"
             title={modal.name}
+            error={roomNameError}
           />
           <TextArea
             label={modal.description}
             onChange={(e) => setRoomDescription(e.target.value)}
             value={roomDescription}
             type="text"
+            error={roomDescriptionError}
             title={modal.description}
           />
           <Button

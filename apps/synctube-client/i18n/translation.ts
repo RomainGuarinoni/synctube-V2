@@ -38,6 +38,8 @@ export type translationKeys = {
       name: string;
       description: string;
       button: string;
+      created: string;
+      error: string;
     };
   };
 };
@@ -82,6 +84,8 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
         name: 'Nom de la salle',
         description: 'Description',
         button: 'Créer',
+        created: 'La salle a été créée',
+        error: 'Veuillez remplir ce champ',
       },
     },
   },
@@ -123,6 +127,8 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
         name: 'Name of the room',
         description: 'Description',
         button: 'Create',
+        created: 'The room has been created',
+        error: 'Please fill in this field',
       },
     },
   },
