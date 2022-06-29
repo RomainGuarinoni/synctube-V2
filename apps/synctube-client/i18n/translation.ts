@@ -6,13 +6,15 @@ export type translationKeys = {
   profil: {
     logout: string;
   };
+  errors: {
+    internal: string;
+  };
   login: {
     welcome: string;
     explanation: string;
     googleText: string;
     errors: {
       scope: string;
-      internal: string;
     };
   };
   searchLocation: {
@@ -43,11 +45,14 @@ export type translationKeys = {
     };
     description: {
       visitors: string;
+      createdBy: string;
       createdAt: string;
       you: string;
       year: string;
       month: string;
       day: string;
+      hour: string;
+      minutes: string;
     };
     selectPage: {
       title: string;
@@ -62,6 +67,10 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
     search: 'Rechercher une vidéo',
     connection: 'connexions',
     profil: { logout: 'Se déconnecter' },
+    errors: {
+      internal:
+        "Une erreur interne s'est produite, veuillez réessayer plus tard.",
+    },
     login: {
       welcome: 'Bienvenue sur',
       explanation:
@@ -70,8 +79,6 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       errors: {
         scope:
           "Tous les champs d'application de l'application synctube n'ont pas été acceptés, veuillez vous connecter à nouveau.",
-        internal:
-          "Une erreur interne s'est produite, veuillez réessayer plus tard.",
       },
     },
     searchLocation: {
@@ -101,17 +108,20 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
         error: 'Veuillez remplir ce champ',
       },
       description: {
+        createdBy: 'Créée par',
         visitors: 'Visiteurs',
-        createdAt: 'Créée le',
+        createdAt: 'Créée depuis',
         you: 'vous',
         year: 'années',
         month: 'mois',
-        day: 'jour',
+        day: 'jours',
+        hour: 'heures',
+        minutes: 'minutes',
       },
       selectPage: {
         title: 'Choisissez une salle',
         owner: 'Vos salles',
-        visited: 'Celles que vous avez visité',
+        visited: 'Salles que vous avez visité',
       },
     },
   },
@@ -119,6 +129,9 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
     search: 'Search for a video',
     connection: 'connections',
     profil: { logout: 'Logout' },
+    errors: {
+      internal: 'An internal error has occurred, please try again later',
+    },
     login: {
       welcome: 'Welcome to',
       explanation:
@@ -127,7 +140,6 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       errors: {
         scope:
           'All scopes of the synctube application have not been accepted, please log in again',
-        internal: 'An internal error has occurred, please try again later',
       },
     },
     searchLocation: {
@@ -158,16 +170,19 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
       },
       description: {
         visitors: 'Visitors',
-        createdAt: 'Created At',
+        createdBy: 'Created by',
+        createdAt: 'Created since',
         you: 'you',
         year: 'years',
         month: 'months',
         day: 'days',
+        hour: 'hours',
+        minutes: 'minutes',
       },
       selectPage: {
         title: 'Select a room',
         owner: 'Your rooms',
-        visited: 'The ones you visited',
+        visited: 'Rooms that you visited',
       },
     },
   },

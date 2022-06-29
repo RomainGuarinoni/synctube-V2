@@ -1,3 +1,4 @@
+import axios from 'axios';
 import useSWR from 'swr';
 import { Room } from '@synctube-v2/types';
 import { fetcher, useSwrResponse } from './fetcher';
@@ -31,4 +32,12 @@ export function useGetUserRoomsVisited(
     isError: error,
     isValidating,
   };
+}
+
+export async function createRoom(
+  name: string,
+  description: string,
+  userId: string,
+): Promise<void> {
+  await axios.post(routes.rooms.createRoom, { name, description, userId });
 }

@@ -10,5 +10,6 @@ export const routes = {
   rooms: {
     getUserRoomsOwner: (userId: string) => `/api/room/user/${userId}/owner`,
     getUserRoomsVisited: (userId: string) => `/api/room/user/${userId}/visited`,
+    createRoom: '/api/room/create',
   },
 };

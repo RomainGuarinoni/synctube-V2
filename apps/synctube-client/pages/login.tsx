@@ -9,7 +9,10 @@ import { useAuth } from '../context/AuthContext';
 import { LoginErrors } from '../errors/LoginErrors';
 
 export default function Login() {
-  const { login: loginTranslation } = useTranslation();
+  const {
+    login: loginTranslation,
+    errors: { internal },
+  } = useTranslation();
   const { openOAuthPrompt, login, isAuthenticated } = useAuth();
 
   const router = useRouter();
@@ -45,7 +48,7 @@ export default function Login() {
           case LoginErrors.tokenMissing:
           case LoginErrors.apiError:
           default:
-            setGoogleError(loginTranslation.errors.internal);
+            setGoogleError(internal);
             break;
         }
         setGoogleLoading(false);
@@ -67,7 +70,7 @@ export default function Login() {
     }
 
     loginUser(code);
-  }, [router, login, loginTranslation, isAuthenticated]);
+  }, [router, login, loginTranslation, isAuthenticated, internal]);
 
   return (
     <div className=" w-full h-full flex flex-col items-center justify-center text-zinc-400 text-xl">

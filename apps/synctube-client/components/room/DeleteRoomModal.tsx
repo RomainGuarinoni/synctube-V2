@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Room } from '@synctube-v2/types';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
 import { createRoom } from '../../api/rooms';
@@ -6,6 +7,7 @@ import { routes } from '../../api/routes';
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../hooks/useTranslation';
 import { IClose } from '../icons/IClose';
+import { IDelete } from '../icons/IDelete';
 import { IRoom } from '../icons/IRoom';
 import { Button } from '../shared/Button';
 import { FormContainer } from '../shared/FormContainer';
@@ -16,9 +18,10 @@ import { TextArea } from '../shared/TextArea';
 
 interface Props {
   onClose: () => void;
+  room: Room;
 }
 
-export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
+export const DeleteRoomModal: React.FC<Props> = ({ onClose, room }) => {
   const {
     room: { modal },
     errors: { internal },
@@ -28,34 +31,22 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
     authState: { profil },
   } = useAuth();
 
-  const { mutate } = useSWRConfig();
-
-  const [roomName, setRoomName] = useState('');
-  const [roomDescription, setRoomDescription] = useState('');
-
+  const [nameValidation, setNameValidation] = useState('');
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onFormSubmit = async () => {
-    if (!profil) return;
-
-    try {
-      setLoading(true);
-      await createRoom(roomName, roomDescription, profil.id);
-
-      mutate(routes.rooms.getUserRoomsOwner(profil.id));
-
-      toast.success(modal.created);
-      onClose();
-    } catch (err) {
-      toast.error(internal);
-      onClose();
+  const onFormSubmit = () => {
+    if (nameValidation !== room.name) {
+      console.log('pas le bon inpujt de name');
+      setError(true);
+      return;
     }
-    setLoading(false);
+    console.log('suppresiion validé');
   };
 
   return (
     <Modal onClose={onClose}>
-      <FormContainer Icon={IRoom} onSubmit={onFormSubmit}>
+      <FormContainer Icon={IDelete} onSubmit={onFormSubmit}>
         <div
           className="text-zinc-200 w-4 absolute top-4 right-5 cursor-pointer"
           onClick={onClose}
@@ -63,21 +54,20 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
           <IClose />
         </div>
         <div className="w-[30rem] h-[27rem] flex flex-col items-center justify-start text-zinc-200 px-10 gap-5 overflow-auto">
-          <h3 className="font-bold text-xl">{modal.title}</h3>
+          <h3 className="font-bold text-xl">Supprimer la salle</h3>
+          <p>
+            Cette action ne peut pas être annulée. Cette action supprimera
+            définitivement la salle {room.name}
+            Veuillez taper <strong>{room.name}</strong> pour confirmer.
+          </p>
           <Input
-            label={modal.name}
-            onChange={(e) => setRoomName(e.target.value)}
-            value={roomName}
+            label={'Nom de la salle'}
+            onChange={(e) => setNameValidation(e.target.value)}
+            value={nameValidation}
             type="text"
             title={modal.name}
+            error={error ? "Le nom de la salle n'est pas bon" : undefined}
             required
-          />
-          <TextArea
-            label={modal.description}
-            onChange={(e) => setRoomDescription(e.target.value)}
-            value={roomDescription}
-            type="text"
-            title={modal.description}
           />
           {loading ? (
             <div className="relative top-5">
