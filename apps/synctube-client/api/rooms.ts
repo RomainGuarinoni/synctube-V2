@@ -41,3 +41,7 @@ export async function createRoom(
 ): Promise<void> {
   await axios.post(routes.rooms.createRoom, { name, description, userId });
 }
+
+export async function deleteRoom(roomId: string): Promise<void> {
+  await axios.delete(routes.rooms.deleteRoom(roomId));
+}

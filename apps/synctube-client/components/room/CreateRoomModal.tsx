@@ -48,7 +48,7 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
       onClose();
     } catch (err) {
       toast.error(internal);
-      onClose();
+      setLoading(false);
     }
     setLoading(false);
   };
@@ -78,6 +78,7 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
             value={roomDescription}
             type="text"
             title={modal.description}
+            maxLength={12}
           />
           {loading ? (
             <div className="relative top-5">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Room } from '@synctube-v2/types';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
-import { createRoom } from '../../api/rooms';
+import { createRoom, deleteRoom } from '../../api/rooms';
 import { routes } from '../../api/routes';
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -31,17 +31,31 @@ export const DeleteRoomModal: React.FC<Props> = ({ onClose, room }) => {
     authState: { profil },
   } = useAuth();
 
+  const { mutate } = useSWRConfig();
+
   const [nameValidation, setNameValidation] = useState('');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onFormSubmit = () => {
+  const onFormSubmit = async () => {
     if (nameValidation !== room.name) {
       console.log('pas le bon inpujt de name');
       setError(true);
       return;
     }
-    console.log('suppresiion validé');
+    setLoading(true);
+
+    try {
+      if (!profil) throw new Error('Profil is undefined');
+
+      await deleteRoom(room._id);
+      mutate(routes.rooms.getUserRoomsOwner(profil.id));
+      setLoading(false);
+      onClose();
+    } catch (err) {
+      toast.error(internal);
+      setLoading(false);
+    }
   };
 
   return (
@@ -53,12 +67,16 @@ export const DeleteRoomModal: React.FC<Props> = ({ onClose, room }) => {
         >
           <IClose />
         </div>
-        <div className="w-[30rem] h-[27rem] flex flex-col items-center justify-start text-zinc-200 px-10 gap-5 overflow-auto">
+        <div className="w-[30rem] py-8 flex flex-col items-center justify-start text-zinc-200 px-10 gap-5 overflow-auto">
           <h3 className="font-bold text-xl">Supprimer la salle</h3>
-          <p>
+          <p className="w-full">
             Cette action ne peut pas être annulée. Cette action supprimera
             définitivement la salle {room.name}
-            Veuillez taper <strong>{room.name}</strong> pour confirmer.
+          </p>
+          <p className="w-full">
+            Veuillez taper{' '}
+            <strong className="text-emerald-500">{room.name}</strong> pour
+            confirmer.
           </p>
           <Input
             label={'Nom de la salle'}

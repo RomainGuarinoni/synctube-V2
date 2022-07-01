@@ -1,5 +1,4 @@
 import { FormEvent } from 'react';
-import { IHearth } from '../icons/IHearth';
 
 interface Props {
   Icon: React.FC;
