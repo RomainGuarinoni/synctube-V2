@@ -34,6 +34,19 @@ export function useGetUserRoomsVisited(
   };
 }
 
+export function useGetRoom(roomId: string | undefined): useSwrResponse<Room> {
+  const { data, error, isValidating } = useSWR<Room[]>(
+    roomId ? routes.rooms.room(roomId) : null,
+    fetcher,
+  );
+
+  return {
+    data,
+    isError: error,
+    isValidating,
+  };
+}
+
 export async function createRoom(
   name: string,
   description: string,
@@ -43,7 +56,7 @@ export async function createRoom(
 }
 
 export async function deleteRoom(roomId: string): Promise<void> {
-  await axios.delete(routes.rooms.deleteRoom(roomId));
+  await axios.delete(routes.rooms.room(roomId));
 }
 
 export async function modifyRoom(
@@ -51,5 +64,5 @@ export async function modifyRoom(
   name: string,
   description?: string,
 ): Promise<void> {
-  await axios.patch(routes.rooms.modifyRoom(roomId), { name, description });
+  await axios.patch(routes.rooms.room(roomId), { name, description });
 }

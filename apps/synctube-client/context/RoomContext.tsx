@@ -15,7 +15,7 @@ const RoomContext = createContext<RoomContextValue>({
   getCurrentRoom: () => null,
   isUserRoomOwner: () => false,
   getCurrentVideo: () => null,
-  joinRoom: () => {
+  joinRoom: (room: Room) => {
     return;
   },
   setVideo: () => {
@@ -35,12 +35,12 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const getCurrentRoom = () => room;
 
-  const isUserRoomOwner = (user: Profil) => room?.owner.id === user.id;
+  const isUserRoomOwner = (user: Profil) => room?.ownerProfil?.id === user.id;
 
   const getCurrentVideo = () => video;
 
-  const joinRoom = () => {
-    return;
+  const joinRoom = (room: Room) => {
+    setRoom(room);
   };
 
   return (

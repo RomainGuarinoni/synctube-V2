@@ -1,4 +1,5 @@
 import { useState, MouseEvent as ReactMouseEvent } from 'react';
+import { useRouter } from 'next/router';
 import { Room } from '@synctube-v2/types';
 import { CreateRoomModal } from '../components/room/modal/CreateRoomModal';
 import { authenticatedRoute } from '../guard/authenticatedRoute';
@@ -18,6 +19,8 @@ function Index(): JSX.Element {
   const {
     room: { selectPage },
   } = useTranslation();
+
+  const { push } = useRouter();
 
   const { data: userRoomsOwner, isError: userRoomsErrorOwner } =
     useGetUserRoomsOwner(profil?.id);
@@ -39,7 +42,7 @@ function Index(): JSX.Element {
   };
 
   const handleRoomSelection = (room: Room) => () => {
-    console.log(room);
+    push(`room/${room._id}`);
   };
 
   const handleRoomDelete =
