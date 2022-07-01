@@ -72,8 +72,10 @@ export const RoomDescription: React.FC<Props> = ({ room, onDelete }) => {
           </div>
         </div>
         <div className="flex-1">
-          <h3 className="font-bold text-lg">{room.name}</h3>
-          <p className="text-zinc-400 description">{room.description}</p>
+          <h3 className="font-bold text-lg text-left">{room.name}</h3>
+          <p className="text-zinc-400 description text-left">
+            {room.description}
+          </p>
         </div>
         <div className="flex flex-col items-center justify-around h-full">
           <div className="flex flex-col items-center leading-3">
