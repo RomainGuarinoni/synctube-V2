@@ -41,6 +41,7 @@ export const DeleteRoomModal: React.FC<Props> = ({ onClose, room }) => {
       return;
     }
     setLoading(true);
+    setError(false);
 
     try {
       if (!profil) throw new Error('Profil is undefined');
@@ -59,23 +60,22 @@ export const DeleteRoomModal: React.FC<Props> = ({ onClose, room }) => {
     <Modal onClose={onClose}>
       <FormContainer Icon={IDelete} onSubmit={onFormSubmit} onClose={onClose}>
         <div className="w-[30rem] py-8 flex flex-col items-center justify-start text-zinc-200 px-10 gap-5 overflow-auto">
-          <h3 className="font-bold text-xl">Supprimer la salle</h3>
+          <h3 className="font-bold text-xl">{modal.delete.title}</h3>
           <p className="w-full">
-            Cette action ne peut pas être annulée. Cette action supprimera
-            définitivement la salle {room.name}
+            {modal.delete.explanation} <strong>{room.name}</strong>
           </p>
           <p className="w-full">
-            Veuillez taper{' '}
-            <strong className="text-emerald-500">{room.name}</strong> pour
-            confirmer.
+            {modal.delete.typing}{' '}
+            <strong className="text-emerald-500">{room.name}</strong>{' '}
+            {modal.delete.confirm}
           </p>
           <Input
             label={'Nom de la salle'}
             onChange={(e) => setNameValidation(e.target.value)}
             value={nameValidation}
             type="text"
-            title={modal.name}
-            error={error ? "Le nom de la salle n'est pas bon" : undefined}
+            title={room.name}
+            error={error ? modal.delete.error : undefined}
             required
           />
           {loading ? (
@@ -89,7 +89,7 @@ export const DeleteRoomModal: React.FC<Props> = ({ onClose, room }) => {
               bgClass="green-gradient"
               className="mt-2"
             >
-              <span className="font-bold">{modal.button}</span>
+              <span className="font-bold">{modal.delete.button}</span>
             </Button>
           )}
         </div>

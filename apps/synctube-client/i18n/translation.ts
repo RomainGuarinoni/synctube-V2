@@ -36,12 +36,22 @@ export type translationKeys = {
   };
   room: {
     modal: {
-      title: string;
-      name: string;
-      description: string;
-      button: string;
-      created: string;
-      error: string;
+      create: {
+        title: string;
+        name: string;
+        description: string;
+        button: string;
+        created: string;
+        error: string;
+      };
+      delete: {
+        title: string;
+        explanation: string;
+        typing: string;
+        confirm: string;
+        button: string;
+        error: string;
+      };
     };
     description: {
       visitors: string;
@@ -100,12 +110,23 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
     },
     room: {
       modal: {
-        title: 'Créer une nouvelle salle',
-        name: 'Nom de la salle',
-        description: 'Description',
-        button: 'Créer',
-        created: 'La salle a été créée',
-        error: 'Veuillez remplir ce champ',
+        create: {
+          title: 'Créer une nouvelle salle',
+          name: 'Nom de la salle',
+          description: 'Description',
+          button: 'Créer',
+          created: 'La salle a été créée',
+          error: 'Veuillez remplir ce champ',
+        },
+        delete: {
+          title: 'Supprimer la salle',
+          explanation:
+            'Cette action ne peut pas être annulée. Cette action supprimera définitivement la salle',
+          typing: 'Veuillez taper',
+          confirm: 'confirmer.',
+          button: 'Supprimer',
+          error: "Le nom de la salle n'est pas bon",
+        },
       },
       description: {
         createdBy: 'Créée par',
@@ -161,12 +182,23 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
     },
     room: {
       modal: {
-        title: 'Create a new room',
-        name: 'Name of the room',
-        description: 'Description',
-        button: 'Create',
-        created: 'The room has been created',
-        error: 'Please fill in this field',
+        create: {
+          title: 'Create a new room',
+          name: 'Name of the room',
+          description: 'Description',
+          button: 'Create',
+          created: 'The room has been created',
+          error: 'Please fill in this field',
+        },
+        delete: {
+          title: 'Delete the room',
+          explanation:
+            'This action cannot be undone. This action will permanently delete the room',
+          typing: 'Please type',
+          confirm: 'Confirm.',
+          button: 'Delete',
+          error: 'The name of the room is not good',
+        },
       },
       description: {
         visitors: 'Visitors',
