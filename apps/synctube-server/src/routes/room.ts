@@ -11,6 +11,8 @@ router.get('/:id', RoomController.getRoom);
 router.get('/user/:id/owner', RoomController.getUserRooms);
 router.get('/user/:id/visited', RoomController.getUserVisitedRooms);
 
+router.patch('/:id', RoomController.modifyRoom);
+
 router.delete('/:id', RoomController.deleteRoom);
 
 export { router as roomRouter };

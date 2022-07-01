@@ -1,13 +1,14 @@
 import { useState, MouseEvent as ReactMouseEvent } from 'react';
 import { Room } from '@synctube-v2/types';
-import { CreateRoomModal } from '../components/room/CreateRoomModal';
+import { CreateRoomModal } from '../components/room/modal/CreateRoomModal';
 import { authenticatedRoute } from '../guard/authenticatedRoute';
 import { useGetUserRoomsOwner, useGetUserRoomsVisited } from '../api/rooms';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { RoomList } from '../components/room/RoomList';
 import { Button } from '../components/shared/Button';
-import { DeleteRoomModal } from '../components/room/DeleteRoomModal';
+import { DeleteRoomModal } from '../components/room/modal/DeleteRoomModal';
+import { ModifyRoomModal } from '../components/room/modal/ModifyRoomModal';
 
 function Index(): JSX.Element {
   const {
@@ -25,7 +26,9 @@ function Index(): JSX.Element {
 
   const [isRoomCreateModalOpen, setIsRoomCreateModalOpen] = useState(false);
   const [isRoomDeleteModalOpen, setIsRoomDeleteModalOpen] = useState(false);
-  const [roomToDelete, setRoomToDelete] = useState<Room>();
+  const [isRoomModifyModalOpen, setIsRoomModifyModalOpen] = useState(false);
+
+  const [selectedRoom, setSelectedRoom] = useState<Room>();
 
   const handleCreateRoomOpen = (
     e: ReactMouseEvent<HTMLButtonElement, MouseEvent>,
@@ -35,11 +38,22 @@ function Index(): JSX.Element {
     setIsRoomCreateModalOpen(true);
   };
 
+  const handleRoomSelection = (room: Room) => () => {
+    console.log(room);
+  };
+
   const handleRoomDelete =
     (room: Room) => (e: ReactMouseEvent<HTMLDivElement, MouseEvent>) => {
       e.stopPropagation();
-      setRoomToDelete(room);
+      setSelectedRoom(room);
       setIsRoomDeleteModalOpen(true);
+    };
+
+  const handleRoomModify =
+    (room: Room) => (e: ReactMouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.stopPropagation();
+      setSelectedRoom(room);
+      setIsRoomModifyModalOpen(true);
     };
 
   return (
@@ -55,6 +69,8 @@ function Index(): JSX.Element {
             rooms={userRoomsOwner}
             error={userRoomsErrorOwner}
             onDelete={handleRoomDelete}
+            onClick={handleRoomSelection}
+            onModify={handleRoomModify}
           />
           {userRoomsOwner && userRoomsOwner?.length < 5 && (
             <Button size="large" onClick={handleCreateRoomOpen}>
@@ -69,16 +85,24 @@ function Index(): JSX.Element {
           rooms={userRoomsVisited}
           error={userRoomsErrorVisited}
           onDelete={handleRoomDelete}
+          onClick={handleRoomSelection}
+          onModify={handleRoomModify}
         />
       </div>
 
       {isRoomCreateModalOpen && (
         <CreateRoomModal onClose={() => setIsRoomCreateModalOpen(false)} />
       )}
-      {isRoomDeleteModalOpen && roomToDelete && (
+      {isRoomDeleteModalOpen && selectedRoom && (
         <DeleteRoomModal
-          room={roomToDelete}
+          room={selectedRoom}
           onClose={() => setIsRoomDeleteModalOpen(false)}
+        />
+      )}
+      {isRoomModifyModalOpen && selectedRoom && (
+        <ModifyRoomModal
+          room={selectedRoom}
+          onClose={() => setIsRoomModifyModalOpen(false)}
         />
       )}
     </div>

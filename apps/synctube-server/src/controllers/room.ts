@@ -35,6 +35,20 @@ export class RoomController {
     }
   }
 
+  static async modifyRoom(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      const { name, description } = await validateBody('modifyRoom', req.body);
+
+      await RoomService.modifyRoom(id, name, description);
+
+      return res.sendStatus(200);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
+
   static async getUserRooms(req: Request, res: Response) {
     try {
       const { id } = req.params;

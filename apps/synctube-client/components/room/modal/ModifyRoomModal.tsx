@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
+import { Room } from '@synctube-v2/types';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
-import { createRoom } from '../../api/rooms';
-import { routes } from '../../api/routes';
-import { useAuth } from '../../context/AuthContext';
-import { useTranslation } from '../../hooks/useTranslation';
-import { IRoom } from '../icons/IRoom';
-import { Button } from '../shared/Button';
-import { FormContainer } from '../shared/FormContainer';
-import { Input } from '../shared/Input';
-import { Loader } from '../shared/Loader';
-import { Modal } from '../shared/Modal';
-import { TextArea } from '../shared/TextArea';
+import { routes } from '../../../api/routes';
+import { useAuth } from '../../../context/AuthContext';
+import { useTranslation } from '../../../hooks/useTranslation';
+import { Button } from '../../shared/Button';
+import { FormContainer } from '../../shared/FormContainer';
+import { Input } from '../../shared/Input';
+import { Loader } from '../../shared/Loader';
+import { Modal } from '../../shared/Modal';
+import { TextArea } from '../../shared/TextArea';
+import { IPen } from '../../icons/IPen';
+import { modifyRoom } from '../../../api/rooms';
 
 interface Props {
+  room: Room;
   onClose: () => void;
 }
 
-export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
+export const ModifyRoomModal: React.FC<Props> = ({ onClose, room }) => {
   const {
     room: { modal },
     errors: { internal },
@@ -29,8 +31,10 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
 
   const { mutate } = useSWRConfig();
 
-  const [roomName, setRoomName] = useState('');
-  const [roomDescription, setRoomDescription] = useState('');
+  const [roomName, setRoomName] = useState(room.name);
+  const [roomDescription, setRoomDescription] = useState(
+    room.description || '',
+  );
 
   const [loading, setLoading] = useState(false);
 
@@ -39,11 +43,10 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
 
     try {
       setLoading(true);
-      await createRoom(roomName, roomDescription, profil.id);
-
+      await modifyRoom(room._id, roomName, roomDescription);
       mutate(routes.rooms.getUserRoomsOwner(profil.id));
 
-      toast.success(modal.created);
+      toast.success(modal.modify.success);
       onClose();
     } catch (err) {
       toast.error(internal);
@@ -54,24 +57,23 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
 
   return (
     <Modal onClose={onClose}>
-      <FormContainer Icon={IRoom} onSubmit={onFormSubmit} onClose={onClose}>
+      <FormContainer Icon={IPen} onSubmit={onFormSubmit} onClose={onClose}>
         <div className="w-[30rem] h-[27rem] flex flex-col items-center justify-start text-zinc-200 px-10 gap-5 overflow-auto">
-          <h3 className="font-bold text-xl">{modal.title}</h3>
+          <h3 className="font-bold text-xl">{modal.modify.title}</h3>
           <Input
-            label={modal.name}
+            label={modal.create.name}
             onChange={(e) => setRoomName(e.target.value)}
             value={roomName}
             type="text"
-            title={modal.name}
+            title={modal.create.name}
             required
           />
           <TextArea
-            label={modal.description}
+            label={modal.create.description}
             onChange={(e) => setRoomDescription(e.target.value)}
             value={roomDescription}
             type="text"
-            title={modal.description}
-            maxLength={12}
+            title={modal.create.description}
           />
           {loading ? (
             <div className="relative top-5">
@@ -84,7 +86,7 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
               bgClass="green-gradient"
               className="mt-2"
             >
-              <span className="font-bold">{modal.button}</span>
+              <span className="font-bold">{modal.modify.button}</span>
             </Button>
           )}
         </div>

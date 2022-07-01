@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Room } from '@synctube-v2/types';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
-import { deleteRoom } from '../../api/rooms';
-import { routes } from '../../api/routes';
-import { useAuth } from '../../context/AuthContext';
-import { useTranslation } from '../../hooks/useTranslation';
-import { IDelete } from '../icons/IDelete';
-import { Button } from '../shared/Button';
-import { FormContainer } from '../shared/FormContainer';
-import { Input } from '../shared/Input';
-import { Loader } from '../shared/Loader';
-import { Modal } from '../shared/Modal';
+import { deleteRoom } from '../../../api/rooms';
+import { routes } from '../../../api/routes';
+import { useAuth } from '../../../context/AuthContext';
+import { useTranslation } from '../../../hooks/useTranslation';
+import { IDelete } from '../../icons/IDelete';
+import { Button } from '../../shared/Button';
+import { FormContainer } from '../../shared/FormContainer';
+import { Input } from '../../shared/Input';
+import { Loader } from '../../shared/Loader';
+import { Modal } from '../../shared/Modal';
 
 interface Props {
   onClose: () => void;

@@ -7,7 +7,13 @@ interface Props {
   title: string;
   rooms: Room[] | undefined;
   error: boolean | undefined;
+  onClick: (
+    room: Room,
+  ) => (e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => void;
   onDelete: (
+    room: Room,
+  ) => (e: ReactMouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onModify: (
     room: Room,
   ) => (e: ReactMouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
@@ -17,6 +23,8 @@ export const RoomList: React.FC<Props> = ({
   rooms,
   error,
   onDelete,
+  onClick,
+  onModify,
 }) => {
   return (
     <div className=" max-h-full  flex flex-col items-center justify-start ">
@@ -27,7 +35,13 @@ export const RoomList: React.FC<Props> = ({
       {rooms ? (
         <div className="w-full h-full flex flex-col justify-start items-start gap-5 overflow-y-auto overflow-x-hidden">
           {rooms.map((room) => (
-            <RoomDescription key={room._id} room={room} onDelete={onDelete} />
+            <RoomDescription
+              key={room._id}
+              room={room}
+              onDelete={onDelete}
+              onClick={onClick}
+              onModify={onModify}
+            />
           ))}
         </div>
       ) : (

@@ -52,6 +52,11 @@ export type translationKeys = {
         button: string;
         error: string;
       };
+      modify: {
+        title: string;
+        success: string;
+        button: string;
+      };
     };
     description: {
       visitors: string;
@@ -127,6 +132,11 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
           button: 'Supprimer',
           error: "Le nom de la salle n'est pas bon",
         },
+        modify: {
+          title: 'Modifier la salle',
+          success: 'La salle a été modifiée',
+          button: 'Modifier',
+        },
       },
       description: {
         createdBy: 'Créée par',
@@ -198,6 +208,11 @@ export const translation: Record<typeof LOCALES[number], translationKeys> = {
           confirm: 'Confirm.',
           button: 'Delete',
           error: 'The name of the room is not good',
+        },
+        modify: {
+          title: 'Modify the room',
+          success: 'The room has been modify',
+          button: 'Modify',
         },
       },
       description: {

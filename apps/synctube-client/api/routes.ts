@@ -12,5 +12,6 @@ export const routes = {
     getUserRoomsVisited: (userId: string) => `/api/room/user/${userId}/visited`,
     createRoom: '/api/room/create',
     deleteRoom: (roomId: string) => `/api/room/${roomId}`,
+    modifyRoom: (roomId: string) => `/api/room/${roomId}`,
   },
 };

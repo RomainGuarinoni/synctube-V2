@@ -6,6 +6,11 @@ export const createRoomValidator = Yup.object({
   userId: Yup.string().required(),
 });
 
+export const modifyRoomValidator = Yup.object({
+  name: Yup.string().required().max(255),
+  description: Yup.string().notRequired(),
+});
+
 export const roomIdValidator = Yup.object({
   id: Yup.string().required().max(255),
 });

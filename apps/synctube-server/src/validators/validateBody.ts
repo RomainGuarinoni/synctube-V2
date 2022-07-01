@@ -5,13 +5,18 @@ import {
   addFavouriteVideoValidator,
 } from './favourite';
 import { userProfilValidator, userIdValidator } from './user';
-import { createRoomValidator, roomIdValidator } from './room';
+import {
+  createRoomValidator,
+  roomIdValidator,
+  modifyRoomValidator,
+} from './room';
 
 const VALIDATORS = {
   getFavouriteVideo: getFavouriteVideoValidator,
   addFavouriteVideo: addFavouriteVideoValidator,
   loginUser: userProfilValidator,
   createRoom: createRoomValidator,
+  modifyRoom: modifyRoomValidator,
   getUserRooms: userIdValidator,
   getUserVisitedRooms: userIdValidator,
   getRoom: roomIdValidator,
@@ -33,6 +38,8 @@ type SchemaType<T> = T extends 'getFavouriteVideo'
   ? Yup.InferType<typeof VALIDATORS['getUserVisitedRooms']>
   : T extends 'getRoom'
   ? Yup.InferType<typeof VALIDATORS['getRoom']>
+  : T extends 'modifyRoom'
+  ? Yup.InferType<typeof VALIDATORS['modifyRoom']>
   : never;
 
 export async function validateBody<T extends ValidateBodySchemaParam>(

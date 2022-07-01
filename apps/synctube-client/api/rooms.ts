@@ -45,3 +45,11 @@ export async function createRoom(
 export async function deleteRoom(roomId: string): Promise<void> {
   await axios.delete(routes.rooms.deleteRoom(roomId));
 }
+
+export async function modifyRoom(
+  roomId: string,
+  name: string,
+  description?: string,
+): Promise<void> {
+  await axios.patch(routes.rooms.modifyRoom(roomId), { name, description });
+}

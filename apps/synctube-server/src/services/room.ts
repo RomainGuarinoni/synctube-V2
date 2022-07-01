@@ -32,6 +32,17 @@ export class RoomService {
     await RoomModel.deleteOne({ _id: new Mongoose.Types.ObjectId(roomId) });
   }
 
+  static async modifyRoom(
+    roomId: string,
+    name: string,
+    description?: string,
+  ): Promise<void> {
+    await RoomModel.updateOne(
+      { _id: new Mongoose.Types.ObjectId(roomId) },
+      { name, description: description || '' },
+    );
+  }
+
   static async getUserRooms(userId: string): Promise<Room[]> {
     const userRooms = await RoomModel.find({ owner: userId }).populate(
       'ownerProfil',
