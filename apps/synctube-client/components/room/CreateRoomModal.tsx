@@ -5,7 +5,6 @@ import { createRoom } from '../../api/rooms';
 import { routes } from '../../api/routes';
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../hooks/useTranslation';
-import { IClose } from '../icons/IClose';
 import { IRoom } from '../icons/IRoom';
 import { Button } from '../shared/Button';
 import { FormContainer } from '../shared/FormContainer';
@@ -55,13 +54,7 @@ export const CreateRoomModal: React.FC<Props> = ({ onClose }) => {
 
   return (
     <Modal onClose={onClose}>
-      <FormContainer Icon={IRoom} onSubmit={onFormSubmit}>
-        <div
-          className="text-zinc-200 w-4 absolute top-4 right-5 cursor-pointer"
-          onClick={onClose}
-        >
-          <IClose />
-        </div>
+      <FormContainer Icon={IRoom} onSubmit={onFormSubmit} onClose={onClose}>
         <div className="w-[30rem] h-[27rem] flex flex-col items-center justify-start text-zinc-200 px-10 gap-5 overflow-auto">
           <h3 className="font-bold text-xl">{modal.title}</h3>
           <Input

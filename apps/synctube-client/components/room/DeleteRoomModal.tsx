@@ -2,19 +2,16 @@ import React, { useState } from 'react';
 import { Room } from '@synctube-v2/types';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
-import { createRoom, deleteRoom } from '../../api/rooms';
+import { deleteRoom } from '../../api/rooms';
 import { routes } from '../../api/routes';
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../hooks/useTranslation';
-import { IClose } from '../icons/IClose';
 import { IDelete } from '../icons/IDelete';
-import { IRoom } from '../icons/IRoom';
 import { Button } from '../shared/Button';
 import { FormContainer } from '../shared/FormContainer';
 import { Input } from '../shared/Input';
 import { Loader } from '../shared/Loader';
 import { Modal } from '../shared/Modal';
-import { TextArea } from '../shared/TextArea';
 
 interface Props {
   onClose: () => void;
@@ -60,13 +57,7 @@ export const DeleteRoomModal: React.FC<Props> = ({ onClose, room }) => {
 
   return (
     <Modal onClose={onClose}>
-      <FormContainer Icon={IDelete} onSubmit={onFormSubmit}>
-        <div
-          className="text-zinc-200 w-4 absolute top-4 right-5 cursor-pointer"
-          onClick={onClose}
-        >
-          <IClose />
-        </div>
+      <FormContainer Icon={IDelete} onSubmit={onFormSubmit} onClose={onClose}>
         <div className="w-[30rem] py-8 flex flex-col items-center justify-start text-zinc-200 px-10 gap-5 overflow-auto">
           <h3 className="font-bold text-xl">Supprimer la salle</h3>
           <p className="w-full">
