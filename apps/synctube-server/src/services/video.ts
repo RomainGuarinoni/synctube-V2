@@ -14,9 +14,9 @@ export class VideoService {
       ...(searchInput
         ? {
             $or: [
-              { 'video.title': { $regex: searchInput } },
-              { 'video.description': { $regex: searchInput } },
-              { 'video.channelTitle': { $regex: searchInput } },
+              { 'video.title': { $regex: searchInput, $options: 'i' } },
+              { 'video.description': { $regex: searchInput, $options: 'i' } },
+              { 'video.channelTitle': { $regex: searchInput, $options: 'i' } },
             ],
           }
         : {}),
@@ -27,9 +27,9 @@ export class VideoService {
       ...(searchInput
         ? {
             $or: [
-              { 'video.title': { $regex: searchInput } },
-              { 'video.description': { $regex: searchInput } },
-              { 'video.channelTitle': { $regex: searchInput } },
+              { 'video.title': { $regex: searchInput, $options: 'i' } },
+              { 'video.description': { $regex: searchInput, $options: 'i' } },
+              { 'video.channelTitle': { $regex: searchInput, $options: 'i' } },
             ],
           }
         : {}),
