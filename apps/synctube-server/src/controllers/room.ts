@@ -10,7 +10,7 @@ export class RoomController {
         req.body,
       );
 
-      const rooms = await RoomService.getUserRooms(userId);
+      const rooms = await RoomService.getUserOwnerRooms(userId);
 
       if (rooms.length > 5)
         return res.status(403).json({ err: 'E_ALREADY_5_ROOMS_CREATED' });
@@ -49,11 +49,11 @@ export class RoomController {
     }
   }
 
-  static async getUserRooms(req: Request, res: Response) {
+  static async getUserOwnerRooms(req: Request, res: Response) {
     try {
       const { id } = req.params;
 
-      const rooms = await RoomService.getUserRooms(id);
+      const rooms = await RoomService.getUserOwnerRooms(id);
 
       return res.status(200).json(rooms);
     } catch (err) {
@@ -65,7 +65,17 @@ export class RoomController {
     try {
       const { id } = req.params;
 
-      const rooms = await RoomService.getUserVisitedRooms(id);
+      const { pageToken, limit, searchInput } = await validateBody(
+        'getUserVisitedRooms',
+        req.query,
+      );
+
+      const rooms = await RoomService.getUserVisitedRooms(
+        id,
+        parseInt(limit as unknown as string),
+        pageToken,
+        searchInput,
+      );
 
       return res.status(200).json(rooms);
     } catch (err) {

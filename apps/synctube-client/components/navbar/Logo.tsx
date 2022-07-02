@@ -1,10 +1,17 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useRoom } from '../../context/RoomContext';
 
 export const Logo: React.FC = () => {
   const router = useRouter();
 
+  const { isUserInRoom, leaveRoom } = useRoom();
+
   const handleLogoClick = () => {
+    console.log(isUserInRoom());
+    if (isUserInRoom()) {
+      leaveRoom();
+    }
     router.push('/');
   };
 

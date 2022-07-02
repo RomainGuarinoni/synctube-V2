@@ -49,7 +49,9 @@ export type YoutubeResponse = {
   };
 };
 
-type GetKeyResponse = [
+const PART = 'snippet';
+
+export type GetYoutubeKeyResponse = [
   url: string,
   params: {
     part: string;
@@ -60,13 +62,11 @@ type GetKeyResponse = [
   accessToken: string,
 ];
 
-const PART = 'snippet';
-
 function getKeyBuilder(searchInput: string, accessToken: string) {
   return function getKey(
     pageIndex: number,
     previousPageData: YoutubeResponse,
-  ): GetKeyResponse | null {
+  ): GetYoutubeKeyResponse | null {
     if (
       (previousPageData && !previousPageData.nextPageToken) ||
       !searchInput.trim().length

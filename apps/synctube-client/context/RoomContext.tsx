@@ -8,6 +8,7 @@ type RoomContextValue = {
   getCurrentVideo: () => Video | null;
   joinRoom: (room: Room) => void;
   setVideo: (video: Video) => void;
+  leaveRoom: () => void;
 };
 
 const RoomContext = createContext<RoomContextValue>({
@@ -19,6 +20,9 @@ const RoomContext = createContext<RoomContextValue>({
     return;
   },
   setVideo: () => {
+    return;
+  },
+  leaveRoom: () => {
     return;
   },
 });
@@ -43,6 +47,10 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
     setRoom(room);
   };
 
+  const leaveRoom = () => {
+    setRoom(null);
+  };
+
   return (
     <Provider
       value={{
@@ -52,6 +60,7 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
         getCurrentVideo,
         joinRoom,
         setVideo,
+        leaveRoom,
       }}
     >
       {children}

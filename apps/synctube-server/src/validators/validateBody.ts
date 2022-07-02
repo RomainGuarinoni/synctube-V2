@@ -9,6 +9,7 @@ import {
   createRoomValidator,
   roomIdValidator,
   modifyRoomValidator,
+  getVisitedRoomValidator,
 } from './room';
 
 const VALIDATORS = {
@@ -18,8 +19,8 @@ const VALIDATORS = {
   createRoom: createRoomValidator,
   modifyRoom: modifyRoomValidator,
   getUserRooms: userIdValidator,
-  getUserVisitedRooms: userIdValidator,
   getRoom: roomIdValidator,
+  getUserVisitedRooms: getVisitedRoomValidator,
 };
 
 type ValidateBodySchemaParam = keyof typeof VALIDATORS;
@@ -34,12 +35,12 @@ type SchemaType<T> = T extends 'getFavouriteVideo'
   ? Yup.InferType<typeof VALIDATORS['createRoom']>
   : T extends 'getUserRooms'
   ? Yup.InferType<typeof VALIDATORS['getUserRooms']>
-  : T extends 'getUserVisitedRooms'
-  ? Yup.InferType<typeof VALIDATORS['getUserVisitedRooms']>
   : T extends 'getRoom'
   ? Yup.InferType<typeof VALIDATORS['getRoom']>
   : T extends 'modifyRoom'
   ? Yup.InferType<typeof VALIDATORS['modifyRoom']>
+  : T extends 'getUserVisitedRooms'
+  ? Yup.InferType<typeof VALIDATORS['getUserVisitedRooms']>
   : never;
 
 export async function validateBody<T extends ValidateBodySchemaParam>(

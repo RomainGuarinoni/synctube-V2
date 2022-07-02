@@ -1,4 +1,4 @@
-import { useState, MouseEvent as ReactMouseEvent } from 'react';
+import { useState, MouseEvent as ReactMouseEvent, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Room } from '@synctube-v2/types';
 import { CreateRoomModal } from '../components/room/modal/CreateRoomModal';
@@ -10,6 +10,7 @@ import { RoomList } from '../components/room/RoomList';
 import { Button } from '../components/shared/Button';
 import { DeleteRoomModal } from '../components/room/modal/DeleteRoomModal';
 import { ModifyRoomModal } from '../components/room/modal/ModifyRoomModal';
+import { MAX_RESULT } from '../api/config';
 
 function Index(): JSX.Element {
   const {
@@ -22,16 +23,36 @@ function Index(): JSX.Element {
 
   const { push } = useRouter();
 
-  const { data: userRoomsOwner, isError: userRoomsErrorOwner } =
-    useGetUserRoomsOwner(profil?.id);
-  const { data: userRoomsVisited, isError: userRoomsErrorVisited } =
-    useGetUserRoomsVisited(profil?.id);
-
   const [isRoomCreateModalOpen, setIsRoomCreateModalOpen] = useState(false);
   const [isRoomDeleteModalOpen, setIsRoomDeleteModalOpen] = useState(false);
   const [isRoomModifyModalOpen, setIsRoomModifyModalOpen] = useState(false);
 
   const [selectedRoom, setSelectedRoom] = useState<Room>();
+
+  const [searchRoomInput, setSearchRoomInput] = useState('');
+
+  const { data: userRoomsOwner, isError: userRoomsErrorOwner } =
+    useGetUserRoomsOwner(profil?.id);
+
+  const {
+    data: userRoomsVisited,
+    isError: userRoomsErrorVisited,
+    setSize,
+    size,
+    isValidating,
+  } = useGetUserRoomsVisited(searchRoomInput);
+
+  const reachedEndUserRoomsVisited = useMemo(() => {
+    if (!userRoomsVisited) return false;
+
+    return (
+      userRoomsVisited[userRoomsVisited.length - 1].items.length != MAX_RESULT
+    );
+  }, [userRoomsVisited]);
+
+  const handleRoomSelection = (room: Room) => () => {
+    push(`room/${room._id}`);
+  };
 
   const handleCreateRoomOpen = (
     e: ReactMouseEvent<HTMLButtonElement, MouseEvent>,
@@ -39,10 +60,6 @@ function Index(): JSX.Element {
     e.stopPropagation();
 
     setIsRoomCreateModalOpen(true);
-  };
-
-  const handleRoomSelection = (room: Room) => () => {
-    push(`room/${room._id}`);
   };
 
   const handleRoomDelete =
@@ -58,6 +75,9 @@ function Index(): JSX.Element {
       setSelectedRoom(room);
       setIsRoomModifyModalOpen(true);
     };
+
+  const handleSearchRoomVisited = (searchInput: string) =>
+    setSearchRoomInput(searchInput);
 
   return (
     <div className="text-zinc-200 flex flex-col w-full h-full items-center justify-start">
@@ -85,11 +105,18 @@ function Index(): JSX.Element {
         {/* </div> */}
         <RoomList
           title={selectPage.visited}
-          rooms={userRoomsVisited}
+          rooms={userRoomsVisited?.map((rooms) => rooms.items).flat()}
           error={userRoomsErrorVisited}
           onDelete={handleRoomDelete}
           onClick={handleRoomSelection}
           onModify={handleRoomModify}
+          onSearch={handleSearchRoomVisited}
+          infinite={{
+            setSize,
+            size,
+            isValidating,
+            reachedEnd: reachedEndUserRoomsVisited,
+          }}
         />
       </div>
 

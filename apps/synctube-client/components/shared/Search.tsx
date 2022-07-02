@@ -4,11 +4,12 @@ import { ISearch } from '../icons/ISearch';
 interface Props {
   handleSubmit: (searchInput: string) => void;
   defaultSearchInput?: string;
+  withBorder?: boolean;
 }
 
 export const Search: React.FC<
-  Props & InputHTMLAttributes<HTMLInputElement>
-> = ({ handleSubmit, defaultSearchInput, ...props }) => {
+  Props & Omit<InputHTMLAttributes<HTMLInputElement>, 'onSubmit'>
+> = ({ handleSubmit, defaultSearchInput, withBorder, ...props }) => {
   const [searchInput, setSearchInput] = useState<string>(
     defaultSearchInput || '',
   );
@@ -24,7 +25,9 @@ export const Search: React.FC<
       className={`h-full w-full bg-zinc-900 text-zinc-400 font-bold flex items-center justify-start rounded-lg`}
     >
       <input
-        className="h-full flex-1 text-left bg-inherit px-2 rounded-lg focus:outline-none"
+        className={`h-full flex-1 text-left bg-inherit px-2 rounded-l-lg focus:outline-none ${
+          withBorder && 'border-2 border-zinc-600'
+        }`}
         type="text"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}

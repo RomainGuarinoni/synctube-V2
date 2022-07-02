@@ -8,7 +8,7 @@ router.post('/:id/join/:userId', RoomController.joinRoom);
 router.post('/:id/leave/:userId', RoomController.leaveRoom);
 
 router.get('/:id', RoomController.getRoom);
-router.get('/user/:id/owner', RoomController.getUserRooms);
+router.get('/user/:id/owner', RoomController.getUserOwnerRooms);
 router.get('/user/:id/visited', RoomController.getUserVisitedRooms);
 
 router.patch('/:id', RoomController.modifyRoom);
