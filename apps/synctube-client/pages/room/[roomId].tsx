@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { Room } from '@synctube-v2/types';
 import { useGetRoom } from '../../api/rooms';
 import { Loader } from '../../components/shared/Loader';
 import { useRoom } from '../../context/RoomContext';
@@ -22,11 +23,13 @@ const RoomPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(roomId);
+    const joinRoomFunc = async (room: Room) => {
+      await joinRoom(room);
+    };
 
     if (!room) return;
 
-    joinRoom(room);
+    joinRoomFunc(room);
 
     setLoading(false);
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
