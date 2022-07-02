@@ -22,12 +22,15 @@ const RoomPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!joinRoom || !room) return;
+    console.log(roomId);
+
+    if (!room) return;
 
     joinRoom(room);
 
     setLoading(false);
-  }, [joinRoom, room]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [room]);
 
   useEffect(() => {
     if (isError) {

@@ -11,6 +11,8 @@ export const Navbar: React.FC = () => {
   const { isUserInRoom } = useRoom();
   const connexions = 5; // TODO uopdate this with the server
 
+  console.log('navbart', isUserInRoom());
+
   return (
     <nav
       className={`w-full h-16 flex items-center lg:justify-between justify-center `}
