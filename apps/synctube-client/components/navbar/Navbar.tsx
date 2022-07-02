@@ -4,7 +4,7 @@ import { useRoom } from '../../context/RoomContext';
 import { Connexion } from './Connexion';
 import { Logo } from './Logo';
 import { Profil } from './Profil';
-import { SearchBar } from './SearchBar';
+import { VideoSearch } from './VideoSearch';
 
 export const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -22,7 +22,7 @@ export const Navbar: React.FC = () => {
 
       {isAuthenticated() && (
         <>
-          {isUserInRoom() && <SearchBar />}
+          {isUserInRoom() && <VideoSearch />}
           <Profil />
         </>
       )}

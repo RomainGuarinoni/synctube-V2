@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { SearchLocation } from '../components/navbar/SearchBar';
+import { SearchLocation } from '../components/navbar/VideoSearch';
 import { YoutubeSearch } from '../components/search/YoutubeSearch';
 import { FavouriteSearch } from '../components/search/FavouriteSearch';
 import { Tab } from '../components/shared/Tabs';

@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from '../../hooks/useTranslation';
 import { IChevron } from '../icons/IChevron';
-
-import { ISearch } from '../icons/ISearch';
+import { Search } from '../shared/Search';
 import { Select } from '../select/Select';
 
 export enum SearchLocation {
@@ -13,9 +12,8 @@ export enum SearchLocation {
   favourite = 'favourite',
 }
 
-export const SearchBar: React.FC = () => {
+export const VideoSearch: React.FC = () => {
   const {
-    search: searchText,
     searchLocation: { history, youtube, favourite },
     toast: { emptySearch },
   } = useTranslation();
@@ -26,11 +24,9 @@ export const SearchBar: React.FC = () => {
     SearchLocation.youtube,
   );
   const [isSearchLocationOpen, SetIsSearchLocationOpen] = useState(false);
-  const [searchInput, setSearchInput] = useState('');
+  const [defaultSearchInput, setDefaultSearchInput] = useState('');
 
-  const handleSearch = (e: FormEvent) => {
-    e.preventDefault();
-
+  const handleSearch = (searchInput: string) => {
     if (!searchInput.trim().length) {
       toast.warn(emptySearch);
       return;
@@ -39,7 +35,7 @@ export const SearchBar: React.FC = () => {
     push({
       pathname: '/search',
       query: {
-        q: searchInput,
+        q: searchInput.trim(),
         location: searchLocation,
       },
     });
@@ -47,7 +43,7 @@ export const SearchBar: React.FC = () => {
 
   useEffect(() => {
     if (query.q) {
-      setSearchInput(query.q as string);
+      setDefaultSearchInput(query.q as string);
     }
 
     if (query.location) {
@@ -56,9 +52,8 @@ export const SearchBar: React.FC = () => {
   }, [query]);
 
   return (
-    <form
+    <div
       className={`h-12  bg-zinc-900 text-zinc-700 font-bold flex items-center justify-start rounded-lg`}
-      onSubmit={handleSearch}
     >
       <Select
         items={[
@@ -111,17 +106,12 @@ export const SearchBar: React.FC = () => {
           </div>
         </div>
       </Select>
-      <input
-        type="text"
-        placeholder={searchText}
-        title={searchText}
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        className="h-full lg:w-[25em] w-10/12 flex-1 text-left bg-inherit px-2 rounded-lg text-zinc-400 focus:outline-none"
-      />
-      <button className="cursor-pointer bg-zinc-600 w-10 h-full flex items-center justify-center rounded-r-lg text-zinc-400">
-        <ISearch />
-      </button>
-    </form>
+      <div className="lg:w-[25em] w-10/12 h-full">
+        <Search
+          handleSubmit={handleSearch}
+          defaultSearchInput={defaultSearchInput}
+        />
+      </div>
+    </div>
   );
 };
