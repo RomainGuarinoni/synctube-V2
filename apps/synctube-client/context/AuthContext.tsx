@@ -113,7 +113,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       isSession: false,
     });
 
-    console.log(profil);
     localStorage.setItem(PROFIL_LOCATION, JSON.stringify(profil));
 
     setAuthState({

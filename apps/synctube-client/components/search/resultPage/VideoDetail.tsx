@@ -23,6 +23,7 @@ const Component: React.FC<VideoProps> = ({
   const {
     videoDetail: { description: descriptionText, watch, favourite },
     toast: { videoAddedToFavourite },
+    errors: { internal },
   } = useTranslation();
 
   const decodeHtml = (text: string) => {
@@ -53,8 +54,7 @@ const Component: React.FC<VideoProps> = ({
         });
         toast.success(videoAddedToFavourite);
       } catch (err) {
-        console.log(err);
-        //ADD TOAST HERE
+        toast.error(internal);
       }
     }
   };

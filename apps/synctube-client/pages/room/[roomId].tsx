@@ -12,7 +12,7 @@ const RoomPage: React.FC = () => {
   const router = useRouter();
   const { roomId } = router.query as { roomId: string | undefined };
 
-  const { joinRoom } = useRoom();
+  const { joinRoom, isUserInRoom } = useRoom();
 
   const { data: room, isError } = useGetRoom(roomId);
 
@@ -28,6 +28,11 @@ const RoomPage: React.FC = () => {
     };
 
     if (!room) return;
+
+    if (isUserInRoom()) {
+      setLoading(false);
+      return;
+    }
 
     joinRoomFunc(room);
 

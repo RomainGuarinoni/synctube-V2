@@ -36,7 +36,6 @@ export const DeleteRoomModal: React.FC<Props> = ({ onClose, room }) => {
 
   const onFormSubmit = async () => {
     if (nameValidation !== room.name) {
-      console.log('pas le bon inpujt de name');
       setError(true);
       return;
     }

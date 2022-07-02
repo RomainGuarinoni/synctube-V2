@@ -18,7 +18,6 @@ export function useYoutubeSearchMock(
 
     const newItems = data[0].items.map((item) => {
       const id = idGenerator();
-      console.log(id);
       item.id.videoId = id;
       return item;
     });

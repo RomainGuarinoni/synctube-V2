@@ -22,7 +22,6 @@ function getKeyBuilder(profil: Profil | null, searchInput?: string) {
     previousPageData: Paginate<Video>,
   ): GetKeyResponse | null {
     if ((previousPageData && !previousPageData.items.length) || !profil) {
-      console.log('no more items');
       return null;
     }
 
