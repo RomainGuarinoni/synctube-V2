@@ -12,9 +12,11 @@ type RoomContextValue = {
   joinRoom: (room: Room) => Promise<void>;
   setVideo: (video: Video) => void;
   leaveRoom: () => void;
+  newUserInRoom: (newUser: Profil) => void;
+  userLeaveRoom: (newUser: Profil) => void;
 };
 
-const RoomContext = createContext<RoomContextValue>({
+const roomContext = createContext<RoomContextValue>({
   isUserInRoom: () => false,
   getCurrentRoom: () => null,
   isUserRoomOwner: () => false,
@@ -28,9 +30,15 @@ const RoomContext = createContext<RoomContextValue>({
   leaveRoom: () => {
     return;
   },
+  newUserInRoom: () => {
+    return;
+  },
+  userLeaveRoom: () => {
+    return;
+  },
 });
 
-const { Provider } = RoomContext;
+const { Provider } = roomContext;
 
 export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -59,11 +67,36 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
       await axios.post(routes.rooms.joinRoom(room._id, profil.id));
     }
 
-    setRoom(room);
+    setRoom({
+      ...room,
+      connectedUsers: [...room.connectedUsers, profil.id],
+      connectedUsersList: [...room.connectedUsersList!, profil],
+    });
   };
 
   const leaveRoom = () => {
     setRoom(null);
+  };
+
+  const newUserInRoom = (newUser: Profil) => {
+    if (!room || !room.connectedUsersList) return;
+
+    setRoom({
+      ...room,
+      connectedUsersList: [...room.connectedUsersList, newUser],
+      connectedUsers: [...room.connectedUsers, newUser.id],
+    });
+  };
+
+  const userLeaveRoom = (user: Profil) => {
+    if (!room || !room.connectedUsersList) return;
+
+    setRoom({
+      ...room,
+      connectedUsersList: room.connectedUsersList.filter(
+        (user) => user.id !== user.id,
+      ),
+    });
   };
 
   return (
@@ -76,6 +109,8 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
         joinRoom,
         setVideo,
         leaveRoom,
+        newUserInRoom,
+        userLeaveRoom,
       }}
     >
       {children}
@@ -83,4 +118,4 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const useRoom = () => useContext(RoomContext);
+export const useRoom = () => useContext(roomContext);
