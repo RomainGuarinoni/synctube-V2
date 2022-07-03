@@ -1,18 +1,18 @@
 import { Profil } from '@synctube-v2/types';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRoom } from '../../../context/RoomContext';
 import { useOnclickOutside } from '../../../hooks/useOnClickOutside';
 import { Button } from '../../shared/Button';
 
-interface Props {
-  users: Profil[];
-}
-
 const TRANSLATE_VALUE_PX = 10;
 
-export const ConnectedUsers: React.FC<Props> = ({ users }) => {
+export const ConnectedUsers: React.FC = () => {
+  const { getCurrentRoom } = useRoom();
   const [selectedUser, setSelectedUser] = useState<Profil | null>(null);
   const [userListOpen, setUserListOpen] = useState(false);
+
+  const users = getCurrentRoom()?.connectedUsersList || [];
 
   const ref = useOnclickOutside<HTMLDivElement>(() => {
     setSelectedUser(null);
@@ -84,6 +84,7 @@ export const ConnectedUsers: React.FC<Props> = ({ users }) => {
         bg-zinc-800 px-5 py-2 min-w-[144px] flex flex-col items-center overflow-hidden`}
           style={{
             width: `${getWithFunction()}px`,
+            right: `${TRANSLATE_VALUE_PX * users.length}px`,
           }}
         >
           <div className="leading-3 text-center mb-5">

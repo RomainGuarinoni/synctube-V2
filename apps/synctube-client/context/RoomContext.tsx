@@ -63,9 +63,7 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
       throw new Error('No profil set');
     }
 
-    if (!room.visitors.includes(profil.id)) {
-      await axios.post(routes.rooms.joinRoom(room._id, profil.id));
-    }
+    await axios.post(routes.rooms.joinRoom(room._id, profil.id));
 
     setRoom({
       ...room,
@@ -74,12 +72,29 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
 
-  const leaveRoom = () => {
+  const leaveRoom = async () => {
+    if (!profil || !room) {
+      throw new Error('No profil set');
+    }
+
+    await axios.post(routes.rooms.leaveRoom(room._id, profil.id));
+
     setRoom(null);
   };
 
   const newUserInRoom = (newUser: Profil) => {
-    if (!room || !room.connectedUsersList) return;
+    console.log('a  user enter the room');
+    console.log(newUser);
+
+    if (!room || !room.connectedUsersList) {
+      return;
+    }
+
+    console.log({
+      ...room,
+      connectedUsersList: [...room.connectedUsersList, newUser],
+      connectedUsers: [...room.connectedUsers, newUser.id],
+    });
 
     setRoom({
       ...room,
@@ -90,6 +105,8 @@ export const RoomProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const userLeaveRoom = (user: Profil) => {
     if (!room || !room.connectedUsersList) return;
+
+    console.log('a user leave room', user);
 
     setRoom({
       ...room,

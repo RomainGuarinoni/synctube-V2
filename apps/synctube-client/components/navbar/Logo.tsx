@@ -1,14 +1,17 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useRoom } from '../../context/RoomContext';
+import { useSocket } from '../../context/SocketContext';
 
 export const Logo: React.FC = () => {
   const router = useRouter();
 
-  const { isUserInRoom, leaveRoom } = useRoom();
+  const { isUserInRoom, leaveRoom, getCurrentRoom } = useRoom();
+  const { leaveRoom: leaveRoomSocket } = useSocket();
 
   const handleLogoClick = () => {
     if (isUserInRoom()) {
+      leaveRoomSocket(getCurrentRoom()!._id);
       leaveRoom();
     }
     router.push('/');

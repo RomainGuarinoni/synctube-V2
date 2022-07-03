@@ -47,7 +47,6 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
-    console.log(socket);
     socket.on('newUserInRoom', newUserInRoom);
     socket.on('userLeaveRoom', userLeaveRoom);
 
@@ -55,7 +54,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
       socket.off('newUserInRoom', newUserInRoom);
       socket.off('userLeaveRoom', userLeaveRoom);
     };
-  }, [newUserInRoom, userLeaveRoom]);
+  }, []);
 
   return <Provider value={{ joinRoom, leaveRoom }}>{children}</Provider>;
 };

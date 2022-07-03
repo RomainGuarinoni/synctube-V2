@@ -14,5 +14,7 @@ export const routes = {
     room: (roomId: string) => `/api/room/${roomId}`,
     joinRoom: (roomId: string, userId: string) =>
       `/api/room/${roomId}/join/${userId}`,
+    leaveRoom: (roomId: string, userId: string) =>
+      `/api/room/${roomId}/leave/${userId}`,
   },
 };
