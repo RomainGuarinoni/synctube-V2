@@ -1,6 +1,7 @@
 import { Profil } from '@synctube-v2/types';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useAuth } from '../../../context/AuthContext';
 import { useRoom } from '../../../context/RoomContext';
 import { useOnclickOutside } from '../../../hooks/useOnClickOutside';
 import { Button } from '../../shared/Button';
@@ -9,6 +10,9 @@ const TRANSLATE_VALUE_PX = 10;
 
 export const ConnectedUsers: React.FC = () => {
   const { getCurrentRoom } = useRoom();
+
+  const { authState } = useAuth();
+
   const [selectedUser, setSelectedUser] = useState<Profil | null>(null);
   const [userListOpen, setUserListOpen] = useState(false);
 
@@ -95,13 +99,15 @@ export const ConnectedUsers: React.FC = () => {
               {selectedUser.familyName}{' '}
             </p>
           </div>
-          <Button
-            onClick={excludeUser(selectedUser)}
-            className="text-zinc-200"
-            size="small"
-          >
-            Exclure
-          </Button>
+          {authState.profil!.id !== selectedUser.id && (
+            <Button
+              onClick={excludeUser(selectedUser)}
+              className="text-zinc-200"
+              size="small"
+            >
+              Exclure
+            </Button>
+          )}
         </div>
       )}
       {userListOpen && (
