@@ -13,7 +13,16 @@ export function authenticatedRoute(Component: FC) {
     useEffect(() => {
       if (isLoading()) return;
 
-      if (!isAuthenticated()) router.push('/login');
+      if (!isAuthenticated()) {
+        const pathName = window.location.pathname;
+        const query = window.location.search;
+        const redirectTo = `${pathName}?${query}`;
+
+        router.push({
+          pathname: '/login',
+          query: { redirectTo },
+        });
+      }
 
       setShowLoadingScreen(false);
     }, [isAuthenticated, isLoading, router]);

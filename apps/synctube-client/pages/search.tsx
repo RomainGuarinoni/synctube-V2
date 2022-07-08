@@ -9,9 +9,12 @@ import { HistorySearch } from '../components/search/HistorySearch';
 import { roomRoute } from '../guard/roomRoute';
 import { Button } from '../components/shared/Button';
 import { useRoom } from '../context/RoomContext';
+import { useAuth } from '../context/AuthContext';
 
-function Search(): JSX.Element {
+const Search: React.FC = () => {
   const { query, push } = useRouter();
+
+  const { isAuthenticated } = useAuth();
 
   const searchInput = query.q as string;
   const [searchLocation, setSearchLocation] = useState<SearchLocation | null>(
@@ -60,6 +63,10 @@ function Search(): JSX.Element {
     }
   }, [setSearchLocation, query]);
 
+  if (!isAuthenticated()) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col justify-start items-center flex-wrap text-zinc-400 w-full h-full">
       <div className="w-full flex flex-wrap items-center">
@@ -89,6 +96,6 @@ function Search(): JSX.Element {
       )}
     </div>
   );
-}
+};
 
 export default authenticatedRoute(roomRoute(Search));
